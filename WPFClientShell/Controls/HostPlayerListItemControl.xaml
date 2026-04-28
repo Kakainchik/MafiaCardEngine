@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="WPFClientShell.Controls.HostPlayerListItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFClientShell.Controls"
+             xmlns:conv="clr-namespace:WPFClientShell.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="200">
+    <UserControl.Resources>
+        <conv:BoolVisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="{Binding Player, RelativeSource={RelativeSource AncestorType=local:HostPlayerListItemControl}}"
+                   d:Text="SampleNickname"
+                   VerticalAlignment="Center"
+                   TextWrapping="NoWrap"
+                   TextAlignment="Justify"
+                   FontWeight="Bold"
+                   FontSize="14">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsReady}" Value="True">
+                            <Setter Property="Foreground" Value="LawnGreen"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <TextBlock Grid.Column="1"
+                   Text="50ms"
+                   TextDecorations="Strikethrough"
+                   VerticalAlignment="Center"
+                   TextWrapping="NoWrap"
+                   TextAlignment="Justify"/>
+
+        <Button Grid.Column="2"
+                Width="20"
+                Content="✕"
+                ToolTip="Kick"
+                Command="{Binding KickCommand, RelativeSource={RelativeSource AncestorType=local:HostPlayerListItemControl}}"
+                CommandParameter="{Binding PlayerId, RelativeSource={RelativeSource AncestorType=local:HostPlayerListItemControl}}"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="WPFClientShell.UI.DayScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFClientShell.UI"
+             xmlns:cvr="clr-namespace:WPFClientShell.Converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cvr:ColorBrushConverter x:Key="ColorBrushConverter"/>
+        <cvr:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        <sys:Int64 x:Key="PenguinId">0</sys:Int64>
+    </UserControl.Resources>
+    <Grid IsEnabled="{Binding IsOwnAlive}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+
+        <!-- Players at the meeting -->
+        <ScrollViewer Grid.Row="0"
+                      VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding AllPlayers}"
+                          IsEnabled="{Binding IsBallotActive}"
+                          d:ItemsSource="{d:SampleData}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding VoteClickCommand, RelativeSource={RelativeSource Mode=PreviousData}}"
+                                CommandParameter="{Binding Path=Key}">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                    <Setter Property="Opacity" Value="1"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border x:Name="BorderTemplate"
+                                                        CornerRadius="50"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{Binding Path=Value.NColor, Converter={StaticResource ColorBrushConverter}}"
+                                                        BorderThickness="2.5"
+                                                        Padding="10">
+                                                    <StackPanel HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                MinHeight="30"
+                                                                MinWidth="30">
+                                                        <!-- Own Nickname -->
+                                                        <TextBlock x:Name="NicknameBlock"
+                                                                   Text="{Binding Path=Value.Nickname}"
+                                                                   TextWrapping="WrapWithOverflow"
+                                                                   Foreground="{Binding Path=Value.NColor, Converter={StaticResource ColorBrushConverter}}"
+                                                                   TextAlignment="Center"/>
+                                                        
+                                                        <!-- Own Votes -->
+                                                        <TextBlock Text="{Binding Path=Value.OwnVotes}"
+                                                                   FontWeight="ExtraBold"
+                                                                   TextAlignment="Center"
+                                                                   Margin="0,5,0,0"/>
+                                                        
+                                                        <!-- Votes For -->
+                                                        <TextBlock Text="{Binding Path=Value.VoteFor, StringFormat=Votes For {0}, TargetNullValue={x:Null}}"
+                                                                   Foreground="{Binding Path=Value.TargetColor, Converter={StaticResource ColorBrushConverter}, FallbackValue={x:Static Colors.Black}}"
+                                                                   FontStyle="Oblique"
+                                                                   TextAlignment="Center"
+                                                                   TextWrapping="WrapWithOverflow"
+                                                                   Margin="0, 5, 0, 0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <ControlTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=Value.IsAlive}"
+                                                                 Value="False">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                        <Setter TargetName="NicknameBlock" Property="TextDecorations" Value="Strikethrough"/>
+                                                        <Setter TargetName="BorderTemplate" Property="BorderBrush" Value="Gray"/>
+                                                        <Setter Property="Opacity" Value="0.6"/>
+                                                    </DataTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightPink"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <DockPanel Grid.Row="1">
+            <!-- Penguin Button -->
+            <Button DockPanel.Dock="Left"
+                    Width="160"
+                    Height="70"
+                    Content="{Binding VotesForNonLynch, StringFormat=I do not want to lynch: {0}}"
+                    Command="{Binding VoteClickCommand}"
+                    CommandParameter="{StaticResource PenguinId}"
+                    d:Content="I do not want to lynch: 0"/>
+
+            <!-- Timer -->
+            <TextBlock DockPanel.Dock="Right"
+                       Text="{Binding RemainedTime, StringFormat={}{0:mm\\:SS}}"
+                       TextWrapping="NoWrap"
+                       MinWidth="40"
+                       MaxWidth="140"
+                       Margin="0, 0, 5, 0"
+                       VerticalAlignment="Bottom"
+                       FontWeight="ExtraBold"
+                       FontSize="16"
+                       d:Text="21:43"/>
+
+            <!-- Story Log -->
+            <FlowDocumentScrollViewer Document="{Binding StoryLog}"
+                                      Margin="10, 0"
+                                      IsSelectionEnabled="False"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Disabled"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

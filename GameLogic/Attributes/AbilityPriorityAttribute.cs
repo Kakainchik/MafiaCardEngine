@@ -1,0 +1,27 @@
+﻿namespace GameLogic.Attributes
+{
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class AbilityPriorityAttribute : Attribute
+    {
+        private APriority priority;
+
+        public APriority Priority => priority;
+
+        public AbilityPriorityAttribute(APriority priority)
+        {
+            this.priority = priority;
+        }
+    }
+
+    public enum APriority : byte
+    {
+        B1 = 0b_0000_0001, //1
+        B2 = 0b_0000_0010, //2
+        B4 = 0b_0000_0100, //4
+        B8 = 0b_0000_1000, //8
+        B16 = 0b_0001_0000, //16
+        B32 = 0b_0010_0000, //32
+        B64 = 0b_0100_0000, //64
+        B128 = 0b_1000_0000  //128
+    }
+}

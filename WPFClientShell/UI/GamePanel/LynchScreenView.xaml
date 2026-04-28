@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="WPFClientShell.UI.LynchScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFClientShell.UI"
+             xmlns:cvr="clr-namespace:WPFClientShell.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cvr:ColorBrushConverter x:Key="ColorBrushConverter"/>
+        <cvr:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+        <!-- Elected Player -->
+        <Border Grid.Column="0"
+                Grid.Row="0"
+                CornerRadius="90"
+                BorderBrush="{Binding ElectedPlayer.NColor, Converter={StaticResource ColorBrushConverter}, TargetNullValue={x:Static Colors.White}}"
+                BorderThickness="2.5"
+                Padding="10"
+                Height="120"
+                Width="120"
+                d:BorderBrush="Blue">
+            <TextBlock Text="{Binding ElectedPlayer.Nickname}"
+                       TextWrapping="WrapWithOverflow"
+                       Foreground="{Binding ElectedPlayer.NColor, Converter={StaticResource ColorBrushConverter}, TargetNullValue={x:Static Colors.White}}"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       d:Text="SampleNickname"
+                       d:Foreground="Blue">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElectedPlayer.IsAlive}" Value="False">
+                                <Setter Property="TextDecorations" Value="Strikethrough"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Border>
+
+        <StackPanel Grid.Column="1"
+                    Grid.Row="0"
+                    Margin="20, 0"
+                    Visibility="{Binding IsMessageBoxVisible, Converter={StaticResource BoolVisibilityConverter}}"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Type your last message here:"
+                       TextAlignment="Center"
+                       FontSize="16"/>
+            
+            <TextBox Height="100"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding LastMessageText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="100"
+                     MaxLines="3"
+                     Margin="0, 10, 0, 0"/>
+        </StackPanel>
+
+        
+
+        <FlowDocumentScrollViewer Grid.Column="0"
+                                  Grid.Row="1"
+                                  Grid.ColumnSpan="2"
+                                  Document="{Binding StoryLog}"
+                                  IsSelectionEnabled="False"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  HorizontalContentAlignment="Center"/>
+    </Grid>
+</UserControl>

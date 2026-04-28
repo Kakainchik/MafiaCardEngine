@@ -1,0 +1,48 @@
+﻿<Window x:Class="WPFClientShell.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFClientShell"
+        xmlns:ui="clr-namespace:WPFClientShell.UI"
+        mc:Ignorable="d"
+        Title="WPF Client Shell" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ui:MainMenuViewModel}">
+            <ui:MainMenuView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:HallViewModel}">
+            <ui:HallView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:CreateLobbyViewModel}">
+            <ui:CreateLobbyView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:HostWaitingRoomViewModel}">
+            <ui:HostWaitingRoomView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:PlayerWaitingRoomViewModel}">
+            <ui:PlayerWaitingRoomView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:GamePanelViewModel}">
+            <ui:GamePanelView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:IntroScreenViewModel}">
+            <ui:IntroScreenView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:DayScreenViewModel}">
+            <ui:DayScreenView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:LynchScreenViewModel}">
+            <ui:LynchScreenView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:NightScreenViewModel}">
+            <ui:NightScreenView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ui:MorningScreenViewModel}">
+            <ui:MorningScreenView/>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <ContentControl Content="{Binding CurrentViewModel}"
+                    Margin="5"/>
+</Window>

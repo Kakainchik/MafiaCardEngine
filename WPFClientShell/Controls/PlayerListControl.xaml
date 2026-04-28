@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="WPFClientShell.Controls.PlayerListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFClientShell.Controls"
+             xmlns:design="clr-namespace:WPFClientShell.Controls.Design"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance design:PlayerListControlDesign, IsDesignTimeCreatable=True}">
+    <ItemsControl ItemsSource="{Binding Players, RelativeSource={RelativeSource AncestorType=local:PlayerListControl}}"
+                  d:ItemsSource="{Binding Players}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <local:PlayerListItemControl Player="{Binding Path=Username}"
+                                             IsReady="{Binding Path=IsReady}"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

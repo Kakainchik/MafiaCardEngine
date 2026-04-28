@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="WPFClientShell.UI.HallView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFClientShell.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:busy="https://github.com/moh3ngolshani/BusyIndicator"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:Background="White">
+    <UserControl.Resources>
+        <!-- Busy Indicator Sizes -->
+        <sys:Double x:Key="IndicatorScaleX">0.3</sys:Double>
+        <sys:Double x:Key="IndicatorScaleY">0.3</sys:Double>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Hall Navigation -->
+        <DockPanel Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2">
+            <Border DockPanel.Dock="Bottom"
+                    Margin="0, 2"
+                    BorderThickness="1"
+                    BorderBrush="Moccasin"/>
+
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Content="Back to Menu"
+                        Command="{Binding NavigateToMenuCommand}"/>
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+
+                    <busy:BusyMask IsBusy="{Binding IsBusy}"
+                                   IndicatorType="Ellipse"
+                                   BusyContent="{x:Null}"/>
+
+                    <Button Content="Create New Game"
+                            Command="{Binding OpenCreateLobbyCommand}"/>
+
+                    <Button Content="Refresh"
+                            Margin="10, 0"
+                            Command="{Binding RefreshPageCommand}"/>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        
+        <!-- List of Lobbies -->
+        <ScrollViewer Grid.Column="0"
+                      Grid.Row="1"
+                      VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding Lobbies}"
+                          Background="WhiteSmoke"
+                          d:ItemsSource="{d:SampleData}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1"
+                                BorderBrush="AliceBlue"
+                                Padding="3">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="0.3*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           TextWrapping="WrapWithOverflow">
+                                    <TextBlock.Inlines>
+                                        <Run Text="{Binding Title}"/>
+                                        <LineBreak/>
+                                        <Run Text="{Binding Description}"
+                                             FontSize="8"/>
+                                    </TextBlock.Inlines>
+                                </TextBlock>
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Path=Host.Username, StringFormat=Host: {0}}"/>
+
+                                <TextBlock Grid.Column="2"
+                                           d:Text="0\6">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}\{1}">
+                                            <Binding Path="Fullness"/>
+                                            <Binding Path="MaxSeats"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+
+                                <Button Grid.Column="3"
+                                        Content="Join"
+                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HallView}}, Path=DataContext.JoinCommand}"
+                                        CommandParameter="{Binding Id}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

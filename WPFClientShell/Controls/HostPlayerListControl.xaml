@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="WPFClientShell.Controls.HostPlayerListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFClientShell.Controls"
+             xmlns:design="clr-namespace:WPFClientShell.Controls.Design"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance design:PlayerListControlDesign, IsDesignTimeCreatable=True}">
+    <ItemsControl ItemsSource="{Binding Players, RelativeSource={RelativeSource AncestorType=local:HostPlayerListControl}}"
+                  d:ItemsSource="{Binding Players}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <local:HostPlayerListItemControl PlayerId="{Binding Id}"
+                                                 Player="{Binding Username}"
+                                                 IsReady="{Binding IsReady}"
+                                                 KickCommand="{Binding PlayerKickedCommand, RelativeSource={RelativeSource AncestorType=local:HostPlayerListControl}}"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

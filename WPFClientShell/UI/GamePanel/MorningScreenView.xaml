@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="WPFClientShell.UI.MorningScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFClientShell.UI"
+             xmlns:cvr="clr-namespace:WPFClientShell.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cvr:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        <cvr:ColorBrushConverter x:Key="ColorBrushConverter"/>
+        <cvr:RoleColorConverter x:Key="RoleColorConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="90"
+                Height="150"
+                Width="150"
+                BorderBrush="{Binding Path=Victim.NColor, Converter={StaticResource ColorBrushConverter}}"
+                BorderThickness="2.5"
+                Padding="10"
+                d:BorderBrush="Blue">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <!-- Own Nickname -->
+                <TextBlock x:Name="NicknameBlock"
+                           Text="{Binding Path=Victim.Nickname}"
+                           TextWrapping="WrapWithOverflow"
+                           Foreground="{Binding Path=Victim.NColor, Converter={StaticResource ColorBrushConverter}}"
+                           TextAlignment="Center"
+                           d:Text="SampleNickname"
+                           d:Foreground="Blue"/>
+
+                <!-- Own Role -->
+                <TextBlock Text="{Binding Path=Victim.Role}"
+                           Foreground="{Binding Path=Victim.Role, Converter={StaticResource RoleColorConverter}}"
+                           FontWeight="ExtraBold"
+                           TextAlignment="Center"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <FlowDocumentScrollViewer Grid.Row="1"
+                                  Document="{Binding StoryLog}"
+                                  IsSelectionEnabled="False"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  HorizontalContentAlignment="Center"/>
+    </Grid>
+</UserControl>

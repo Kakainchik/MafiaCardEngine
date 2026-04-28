@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="WPFClientShell.UI.NightScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cvr="clr-namespace:WPFClientShell.Converters"
+             xmlns:local="clr-namespace:WPFClientShell.UI"
+             mc:Ignorable="d" 
+             IsEnabled="{Binding IsAlive, Converter={DynamicResource BoolVisibilityConverter}}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <cvr:ColorBrushConverter x:Key="ColorBrushConverter"/>
+        <cvr:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid IsEnabled="{Binding IsNightBegan}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="170"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0"
+                      VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding PossibleTargets}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding ClickTargetCommand, RelativeSource={RelativeSource Mode=PreviousData}}"
+                                CommandParameter="{Binding .}">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform x:Name="AnimatedScaleTransform"
+                                                            ScaleX="1"
+                                                            ScaleY="1"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border x:Name="BorderTemplate"
+                                                        BorderBrush="{Binding Path=NColor, Converter={StaticResource ColorBrushConverter}}"
+                                                        BorderThickness="2.5"
+                                                        Padding="{StaticResource MediumPadding}">
+                                                    <StackPanel HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                MinHeight="30"
+                                                                MinWidth="30">
+                                                        <TextBlock x:Name="NicknameBlock"
+                                                                   Text="{Binding Path=Nickname}"
+                                                                   TextWrapping="WrapWithOverflow"
+                                                                   Foreground="{Binding Path=NColor, Converter={StaticResource ColorBrushConverter}}"
+                                                                   TextAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsAlive}"
+                                                                 Value="False">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                        <Setter TargetName="BorderTemplate" Property="BorderBrush" Value="Gray"/>
+                                                        <Setter TargetName="NicknameBlock" Property="TextDecorations" Value="Strikethrough"/>
+                                                        <DataTrigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                     Duration="0:0:2"
+                                                                                     To="0.6"
+                                                                                     AutoReverse="False"
+                                                                                     FillBehavior="HoldEnd"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </DataTrigger.EnterActions>
+                                                    </DataTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="AntiqueWhite"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <DockPanel Grid.Row="1">
+            <!-- Target Picker -->
+            <ScrollViewer DockPanel.Dock="Left"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Disabled"
+                          MaxWidth="400"
+                          MinWidth="200">
+                <ItemsControl ItemsSource="{Binding OwnTargets}"
+                              d:ItemsSource="{d:SampleData}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="160">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="3*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Grid.Row="0"
+                                           Text="{Binding Number, StringFormat=Target: [{0}]}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                                
+                                <Button Grid.Column="1"
+                                        Grid.Row="0"
+                                        Content="Cancel"
+                                        Command="{Binding ClearTargetCommand, RelativeSource={RelativeSource Mode=PreviousData}}"
+                                        CommandParameter="{Binding .}"/>
+
+                                <Button Grid.Row="1"
+                                        Grid.ColumnSpan="2"
+                                        Content="{Binding Nickname, FallbackValue=Click then pick a target}"
+                                        Foreground="{Binding NColor, FallbackValue={x:Static Colors.Black}}"
+                                        Command="{Binding ActivateFlagCommand, RelativeSource={RelativeSource Mode=PreviousData}}"
+                                        CommandParameter="{Binding Number}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- Timer -->
+            <TextBlock DockPanel.Dock="Right"
+                       Text="{Binding RemainedTime, StringFormat={}{0:mm\\:ss}}"
+                       TextWrapping="Wrap"
+                       MinWidth="40"
+                       MaxWidth="200"
+                       Margin="0,0,5,0"
+                       VerticalAlignment="Bottom"
+                       FontSize="16"
+                       FontWeight="ExtraBold"/>
+
+            <FlowDocumentScrollViewer Document="{Binding StoryLog}"
+                                      IsSelectionEnabled="False"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Disabled"/>
+        </DockPanel>
+    </Grid>
+</UserControl>
