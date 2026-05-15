@@ -50,7 +50,7 @@ namespace WebServer.Shared.GameObjects.Night
 
                 switch(l.Action)
                 {
-                    case ActionType.WITCH_CONTROL:
+                    case ActionType.CONTROL:
                     {
                         foreach(NightActionLogContext witch in HandleWitch(l))
                         {
@@ -58,7 +58,7 @@ namespace WebServer.Shared.GameObjects.Night
                         }
                         break;
                     }
-                    case ActionType.DRIVER_SWAP:
+                    case ActionType.SWAP:
                     {
                         foreach(NightActionLogContext driver in HandleDriver(l))
                         {

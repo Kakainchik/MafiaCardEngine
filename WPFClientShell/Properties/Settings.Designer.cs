@@ -48,9 +48,9 @@ namespace WPFClientShell.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public long UserId {
+        public ulong UserId {
             get {
-                return ((long)(this["UserId"]));
+                return ((ulong)(this["UserId"]));
             }
             set {
                 this["UserId"] = value;

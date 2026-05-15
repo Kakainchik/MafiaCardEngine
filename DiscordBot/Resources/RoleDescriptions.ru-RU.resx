@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlumniManager" xml:space="preserve">
+    <value>Может общаться в сверхурочные в чате "Клуба бывших коллег" (с уволенными игроками).
+Общается в сверхурочные в чате с фракцией Аутсорс.
+Не может быть переманен в Стартап.
+Уникальная должность.</value>
+  </data>
+  <data name="AnticrisisManager" xml:space="preserve">
+    <value>Подаёт Директору "Служебную записку о критической некомпетентности" на любую цель (работает как Компромат).
+Имеет ограниченное количество записок на игру. Формула: количество игроков / 4. Минимум 1.</value>
+  </data>
+  <data name="Auditor" xml:space="preserve">
+    <value>В сверхурочные изучает деятельность одного сотрудника. Следующую смену узнаёт его точную должность.
+Если цель Теневой Директор - система выдаёт любую существующую лояльную должность.</value>
+  </data>
+  <data name="Clerk" xml:space="preserve">
+    <value>Нет внеурочных полномочий (просто спит дома).</value>
+  </data>
+  <data name="Evangelist" xml:space="preserve">
+    <value>В сверхурочные может общаться с другими Евангелистами Стартапа.
+Не знает, кто является Основателем стартапа, и не может общаться с ним напрямую.</value>
+  </data>
+  <data name="GeneralDirector" xml:space="preserve">
+    <value>Обязательная, уникальная открытая роль.
+Не может быть выбран в качестве цели. Не имеет сверхурочных полномочий. Днём выносит единоличные решения об увольнениях.
+Имеет 2 "Права Вето" на игру.</value>
+  </data>
+  <data name="Hacker" xml:space="preserve">
+    <value>В сверхурочные может заблокировать учётную запись одной цели. Заблокированная цель отменяет все свои действия в эти сверхурочные. Не может взламывать одного и того же сотрудника две смены подряд.
+Может общаться в сверхурочные с Синдикатом.</value>
+  </data>
+  <data name="HRManager" xml:space="preserve">
+    <value>На каждых сверхурочных прячет личное дело одного сотрудника (защита). Если на эту цель в эти сверхурочные собирали Компромат, он утром не ложится на стол Директору.
+Если в эту смену цель пытались уволить более одного раза, то HR-менеджер не способен спасти от увольнения, независимо от количества HR-менеджеров, пытавшихся спасти сотрудника.</value>
+  </data>
+  <data name="Intern" xml:space="preserve">
+    <value>Нет внеурочных полномочий.
+Может быть переманен Теневым Директором и стать Шпионом.</value>
+  </data>
+  <data name="LayoffCandidate" xml:space="preserve">
+    <value>Нет внеурочных полномочий.
+Если во время сверхурочных на него фабрикуют Компромат, эта папка мистическим образом теряется и утром не ложится на стол Директору. Вместо этого Кандидат тайно переходит во фракцию Аутсорс и принимает роль Аутсорсер.
+Если за одни сверхурочные на него собирают компромат два и более раз - игрок успевает поменять роль, но компромат всё равно попадает на стол Директору.</value>
+  </data>
+  <data name="MasterOfCompromising" xml:space="preserve">
+    <value>На каждых сверхурочных может выбрать одну цель для фабрикации компромата. Утром эта цель попадёт в список на обязательное увольнение к Директору.
+Если в игре несколько Мастеров, цель определяется случайно среди предложенных ими.
+Может общаться в сверхурочные в зашифрованном чате со всеми членами Синдиката.</value>
+  </data>
+  <data name="Outsourcer" xml:space="preserve">
+    <value>В сверхурочные предлагает уволенному сотруднику контракт, независимо от того, сколько было попыток уволить данного сотрудника в течение смены.
+Если выбранную цель увольняют в эту же смену, она становится Аутсорсером.
+Если Аутсорсеров несколько, они выбирают только одну цель на всех. Не может нанять уволенного из фракции Аутсорс.
+Общается в сверхурочные в чате с фракцией Аутсорс.</value>
+  </data>
+  <data name="PoliticalStrategist" xml:space="preserve">
+    <value>В сверхурочные может выбрать двух сотрудников и заставить первого применить свои должностные полномочия на второго (даже если первый собирался пропустить ход).
+Первая цель и вторая цель могут совпадать (сотрудник применяет навык на себя).
+Может выбрать себя в качестве второй цели.
+Если Мастеров Компромата несколько и Политтехнолог заставляет одного из них уволить кого-то, в эту смену могут уволить более одного человека (этот Мастер Компромата действует вне случайного выбора цели Синдиката).</value>
+  </data>
+  <data name="Raider" xml:space="preserve">
+    <value>В сверхурочные применяет к цели либо блокировку, либо увольнение. Результат определяется случайно.</value>
+  </data>
+  <data name="ScrumMaster" xml:space="preserve">
+    <value>В сверхурочные меняет задачи двух сотрудников местами. В результате все внеурочные действия, направленные на них, перенаправляются друг на друга.</value>
+  </data>
+  <data name="SecuritySpecialist" xml:space="preserve">
+    <value>В сверхурочные пробивает одного сотрудника по базам. В эту же смену узнает его лояльность (фракцию).
+Если цель Теневой Директор или Основатель Стартапа - система показывает его как лояльного Корпорации.</value>
+  </data>
+  <data name="ShadowDirector" xml:space="preserve">
+    <value>В сверхурочные может выбрать цель для переманивания (вербовки) в Синдикат. Переход совершается к утру.
+Если цель Стажёр - становится Шпионом.
+Если цель Системный администратор - становится Хакером.
+Остальные цели остаются на своих местах, но получают уведомление на почту о заманчивом контракте (попытка вербовки).
+У него золотой парашют: попытка сфабриковать компромат в сверхурочные обернётся провалом.
+Не может быть переманен в Стартап.
+Может общаться в сверхурочные с Синдикатом.
+Уникальная должность.</value>
+  </data>
+  <data name="Shareholder" xml:space="preserve">
+    <value>Нет внеурочных полномочий.
+Имеет доступ к закрытому чату с другими Акционерами Корпорации.</value>
+  </data>
+  <data name="Spy" xml:space="preserve">
+    <value>В сверхурочные проникает в базы данных и изучает деятельность одного сотрудника. В конце сверхурочных узнаёт точную должность выбранного игрока.
+Может общаться  в сверхурочные в зашифрованном чате со всеми членами Синдиката.</value>
+  </data>
+  <data name="StartupFounder" xml:space="preserve">
+    <value>В сверхурочные завлекает одного сотрудника опционами, переманивая его в Стартап.
+Видит рабочий чат всех своих Евангелистов, но сам туда не пишет. Знает всех переманенных.
+Уникальная должность.</value>
+  </data>
+  <data name="SystemAdministrator" xml:space="preserve">
+    <value>В сверхурочные может заблокировать доступ к серверам одной цели. Цель отменяет все свои действия.
+Может быть переманен Теневым Директором и стать Хакером.</value>
+  </data>
+</root>

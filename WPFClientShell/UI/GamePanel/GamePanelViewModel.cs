@@ -16,7 +16,7 @@ namespace WPFClientShell.UI
     {
         private readonly LobbyDomain lobbyDomain;
 
-        private ConcurrentObservableDictionary<long, PlayerEntity> allPlayers;
+        private ConcurrentObservableDictionary<ulong, PlayerEntity> allPlayers;
         private PlayerEntity ownPlayer;
         private ScreenViewModel screen;
         private StageType stageType;
@@ -28,7 +28,7 @@ namespace WPFClientShell.UI
         private string deadChatMessage = string.Empty;
         private int dayNumber = 0;
 
-        public ConcurrentObservableDictionary<long, PlayerEntity> AllPlayers
+        public ConcurrentObservableDictionary<ulong, PlayerEntity> AllPlayers
         {
             get => allPlayers;
             set
@@ -127,7 +127,7 @@ namespace WPFClientShell.UI
         public GamePanelViewModel(LobbyDomain lobbyDomain)
         {
             this.lobbyDomain = lobbyDomain;
-            allPlayers = new ConcurrentObservableDictionary<long, PlayerEntity>();
+            allPlayers = new ConcurrentObservableDictionary<ulong, PlayerEntity>();
             ownPlayer = new PlayerEntity(default, string.Empty, default, default, default);
             screen = new IntroScreenViewModel(lobbyDomain, ownPlayer);
             stageType = StageType.INTRO;

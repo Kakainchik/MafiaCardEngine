@@ -22,7 +22,7 @@ namespace WebServer.Model.Game
         private readonly IHubIdCommand sendUserCommand;
         private readonly int roomId;
 
-        private ISet<long> executorsSet;
+        private ISet<ulong> executorsSet;
 
         public NightStage(NightCycle night,
             IReadOnlyList<Player> players,
@@ -36,7 +36,7 @@ namespace WebServer.Model.Game
             this.sendUserCommand = sendUserCommand;
             this.roomId = roomId;
 
-            executorsSet = new HashSet<long>();
+            executorsSet = new HashSet<ulong>();
 
             TimeSpan span = TimeSpan.FromSeconds(STEP_INTERVAL);
             timer = new Timer(span);
@@ -50,7 +50,7 @@ namespace WebServer.Model.Game
             timer.Start();
         }
 
-        public void ConfirmFlag(long executorId, int ability = 1, params long[] targetIds)
+        public void ConfirmFlag(ulong executorId, int ability = 1, params ulong[] targetIds)
         {
             IRoleOwner executor = players.Single(p => p.Id == executorId);
 

@@ -14,7 +14,7 @@ namespace WebServer.Model.Room
         public string Title { get; }
         public DateTime Created { get; }
         public DateTime Expires { get; }
-        public IDictionary<long, UserRoomDomain> Players { get; }
+        public IDictionary<ulong, UserRoomDomain> Players { get; }
         public IDictionary<RoleSignature, int> Roles { get; }
 
         public string? Description { get; set; }
@@ -36,7 +36,7 @@ namespace WebServer.Model.Room
 
             Created = DateTime.UtcNow;
             Expires = DateTime.UtcNow.AddHours(1);
-            Players = new ConcurrentDictionary<long, UserRoomDomain>();
+            Players = new ConcurrentDictionary<ulong, UserRoomDomain>();
             Roles = new ConcurrentDictionary<RoleSignature, int>();
         }
     }

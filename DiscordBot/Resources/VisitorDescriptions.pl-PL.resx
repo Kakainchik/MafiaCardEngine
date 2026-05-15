@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ExecutorControl" xml:space="preserve">
+    <value>Wysłano fałszywy list od kierownictwa. Zobaczmy, jak wykonują polecenia innych...</value>
+  </data>
+  <data name="ExecutorFireImmune" xml:space="preserve">
+    <value>Przygotowałeś niezbite dowody obciążające cel, ale prawnicy je odrzucili z powodu „złotej spadochronowej” zawartej w kontrakcie celu.</value>
+  </data>
+  <data name="ExecutorInvestigateRole" xml:space="preserve">
+    <value>Zgodnie z zamkniętą tabelą personelu, ta osoba to {0}</value>
+  </data>
+  <data name="ExecutorSecurityDetectDangerous" xml:space="preserve">
+    <value>Dzienniki nie kłamią. Ten pracownik albo pracuje dla konkurencji, albo realizuje osobiste cele.</value>
+  </data>
+  <data name="ExecutorSecurityDetectPeaceful" xml:space="preserve">
+    <value>Weryfikacja przebiegła pomyślnie. Pracownik jest lojalny wobec Korporacji.</value>
+  </data>
+  <data name="ExecutorShadowDirectorFail" xml:space="preserve">
+    <value>Kandydat okazał się zbyt zasadniczy i odmówił przyjęcia „brudnych” pieniędzy. Móże stać się problemem.</value>
+  </data>
+  <data name="ExecutorShadowDirectorSuccess" xml:space="preserve">
+    <value>Oferta Syndykatu została przyjęta. Mamy nowego agenta w Korporacji.</value>
+  </data>
+  <data name="ExecutorStartupFounderFail" xml:space="preserve">
+    <value>Kandydat okazał się zbyt przywiązany do stabilnego wynagrodzenia i premii.</value>
+  </data>
+  <data name="ExecutorStartupFounderSuccess" xml:space="preserve">
+    <value>Udało Ci się sprzedać pomysł „jednorożca”. Kolejny trybik w systemie stał się niezależnym twórcą.</value>
+  </data>
+  <data name="AllSuicide" xml:space="preserve">
+    <value>Dziś rano wszyscy zobaczyli pożegnalną wiadomość na czacie firmowym. Jeden z kolegów stracił panowanie nad sobą i odszedł z pracy.</value>
+  </data>
+  <data name="AllSwapIncident" xml:space="preserve">
+    <value>Jira doświadczyła poważnej awarii. Ktoś zwolnił się z powodu ogromnego zamieszania w zgłoszeniach!</value>
+  </data>
+  <data name="TargetControl" xml:space="preserve">
+    <value>Otrzymałeś pilny i niezwykle dziwny rozkaz od przełożonych za pośrednictwem posłańca. Nie mogłeś go zignorować, więc musiałeś odłożyć wszystko, co zaplanowałeś, i go zrealizować.</value>
+  </data>
+  <data name="TargetShadowDirectorFail" xml:space="preserve">
+    <value>Na Twój służbowy adres e-mail przyszła bardzo dziwna i całkowicie nielegalna propozycja współpracy, którą od razu oznaczyłeś jako spam.</value>
+  </data>
+  <data name="TargetShadowDirectorSuccess" xml:space="preserve">
+    <value>Złożono ci ofertę nie do odrzucenia. Duże sumy pieniędzy w zamian za drobną przysługę. Jesteś teraz członkiem Syndykatu.</value>
+  </data>
+  <data name="TargetStartupFounderFail" xml:space="preserve">
+    <value>Zaoferowano ci pracę za „pomysł” i iluzoryczne opcje na akcje, ale ty wolałeś stabilność.</value>
+  </data>
+  <data name="TargetStartupFounderSuccess" xml:space="preserve">
+    <value>Podpisałeś ofertę w startupie na udziały w firmie i koktajle w piątki. Ideały korporacyjne poszły w zapomnienie. Teraz zostałeś Ewangelistą</value>
+  </data>
+  <data name="TargetSuicide" xml:space="preserve">
+    <value>Sam nie rozumiesz jak, ale z jakiegoś powodu z własnej woli podpisałeś list rezygnacyjny i przekazałeś go do działu kadr.</value>
+  </data>
+  <data name="TargetSwap" xml:space="preserve">
+    <value>Nagle Twoje priorytetowe zadania w systemie śledzenia zadań zostały przypisane do zupełnie innego projektu.</value>
+  </data>
+  <data name="TargetBlackmailMasterFire" xml:space="preserve">
+    <value>Rano odkrywasz, że ktoś włamał się na twoją pocztę i ujawnił twoją prywatną korespondencję kierownictwu... Zostaniesz wezwany do biura dyrektora.</value>
+  </data>
+  <data name="AllBlackmailMasterFire" xml:space="preserve">
+    <value>Wygląda na to, że wkrótce ktoś zostanie wezwany na rozmowę z dyrektorem...</value>
+  </data>
+  <data name="TargetRaiderFire" xml:space="preserve">
+    <value>Rano odkrywasz, że Twój wskaźnik KPI w systemie jest znacznie niższy niż powinien. Jesteś pewien, że to sprawka konkurencji. Przygotuj się, bo wkrótce Cię zwolnią.</value>
+  </data>
+  <data name="AllRaiderFire" xml:space="preserve">
+    <value>W biurze krążą plotki o zbliżającej się restrukturyzacji.</value>
+  </data>
+  <data name="TargetAnticrisisManagerFire" xml:space="preserve">
+    <value>Otwierasz swoją pocztę i widzisz: „Nie pasujesz do nowego paradygmatu firmy”. Dotknęły cię nagłe cięcia budżetowe.</value>
+  </data>
+  <data name="AllAnticrisisFire" xml:space="preserve">
+    <value>Zarząd wydał memorandum dotyczące optymalizacji zatrudnienia. Prawdopodobnie straciliśmy jednego pracownika.</value>
+  </data>
+  <data name="TargetResurrect" xml:space="preserve">
+    <value>Korporacja pokazała ci drzwi, ale ty od razu podpisałeś podejrzaną umowę B2B. Wracasz do biznesu, ale tym razem już nieoficjalny. Teraz zostałem Outsourcerem.</value>
+  </data>
+  <data name="AllResurrect" xml:space="preserve">
+    <value>Na liście zewnętrznych kontrahentów pojawiło się nazwisko, które brzmiało boleśnie znajomo...</value>
+  </data>
+  <data name="ExecutorProtect" xml:space="preserve">
+    <value>Oczyściłeś akta osobowe pracownika i zniszczyłeś wszystkie jego podejrzane działania zanim ktokolwiek je zobaczył a przekazał je Dyrektorowi.</value>
+  </data>
+  <data name="TargetProtect" xml:space="preserve">
+    <value>Twoja konkurencja z dnia na dzień Cię osłabiała, ale ktoś z działu HR usunął obciążające Cię wpisy. Twoja reputacja jest nieskazitelna.</value>
+  </data>
+  <data name="TargetBlock" xml:space="preserve">
+    <value>Twoje konto zostało zablokowane z powodu „podejrzanej aktywności”. Czekałeś całą noc na pomoc techniczną, nic nie robiąc.</value>
+  </data>
+  <data name="TargetBlockBlocker" xml:space="preserve">
+    <value>Próbowałeś uzyskać dostęp do zdalnego serwera, ale jeden z administratorów systemu przejął już kontrolę i zresetował wszystkie Twoje hasła!</value>
+  </data>
+  <data name="TargetBlockSelf" xml:space="preserve">
+    <value>Przez głupi błąd przypadkowo zablokowałeś swój własny token dostępu i zostałeś pozbawiony praw administratora na całą noc.</value>
+  </data>
+</root>

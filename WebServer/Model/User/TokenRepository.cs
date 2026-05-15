@@ -20,7 +20,7 @@ namespace WebServer.Model.User
             return await tokens.AnyAsync(containedToken => containedToken.Equals(expectedToken));
         }
 
-        public async Task AttachTokenToUser(long userId, RefreshTokenEntity refreshToken)
+        public async Task AttachTokenToUser(ulong userId, RefreshTokenEntity refreshToken)
         {
             UserEntity? user = await db.Users.FindAsync(userId);
             if(user != null)
@@ -32,7 +32,7 @@ namespace WebServer.Model.User
             }
         }
 
-        public async Task RemoveUserOldTokens(long userId)
+        public async Task RemoveUserOldTokens(ulong userId)
         {
             UserEntity? user = await db.Users.FindAsync(userId);
             if(user != null)

@@ -11,7 +11,7 @@ namespace WebServer.Model.Game
 
         public bool StartedGame { get; set; }
 
-        public long Id => GameRepresentation.Id;
+        public ulong Id => GameRepresentation.Id;
 
         public PlayerDomain(string nickname, RGB ncolor, Player representation)
         {

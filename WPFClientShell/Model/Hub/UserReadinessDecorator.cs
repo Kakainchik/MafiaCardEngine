@@ -14,12 +14,12 @@
             }
         }
 
-        public UserReadinessDecorator(long id, string username) : base(id, username)
+        public UserReadinessDecorator(ulong id, string username) : base(id, username)
         {
 
         }
 
-        public UserReadinessDecorator(long id, string username, bool isReady) : base(id, username)
+        public UserReadinessDecorator(ulong id, string username, bool isReady) : base(id, username)
         {
             this.isReady = isReady;
         }

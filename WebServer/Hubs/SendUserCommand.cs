@@ -15,12 +15,12 @@ namespace WebServer.Hubs
             this.jsonSettings = jsonSettings;
         }
 
-        public void Execute(Context con, params long[] userIds)
+        public void Execute(Context con, params ulong[] userIds)
         {
             ExecuteAsync(con, userIds).Wait();
         }
 
-        public async Task ExecuteAsync(Context con, params long[] userIds)
+        public async Task ExecuteAsync(Context con, params ulong[] userIds)
         {
             string json = JsonConvert.SerializeObject(con, jsonSettings);
 

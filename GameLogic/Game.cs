@@ -42,11 +42,6 @@ namespace GameLogic
         /// </summary>
         public bool Started { get; private set; }
 
-        /// <summary>
-        /// The number of current alive players.
-        /// </summary>
-        public int AlivePlayersNumber => AlivePlayers.Count;
-
         public Game(Player[] players)
         {
             //Check on unique roles

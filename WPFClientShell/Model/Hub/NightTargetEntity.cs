@@ -5,13 +5,13 @@ namespace WPFClientShell.Model.Hub
 {
     public class NightTargetEntity : ObservableObject
     {
-        private long? targetId;
+        private ulong? targetId;
         private string? nickname;
         private Color? nColor;
 
         public int Number { get; }
 
-        public long? TargetId
+        public ulong? TargetId
         {
             get => targetId;
             set

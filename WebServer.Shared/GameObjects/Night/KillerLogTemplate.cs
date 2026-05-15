@@ -64,7 +64,7 @@ namespace WebServer.Shared.GameObjects.Night
                         if(l.Target == l.Executor)
                         {
                             //Figure out why the killer killed themself
-                            bool driverActed = desiredRoles.Any(driverLog => driverLog.Action == ActionType.DRIVER_SWAP
+                            bool driverActed = desiredRoles.Any(driverLog => driverLog.Action == ActionType.SWAP
                                 && driverLog.Target == l.Executor);
 
                             if(driverActed)
@@ -112,7 +112,7 @@ namespace WebServer.Shared.GameObjects.Night
                         }
 
                         //Find healer
-                        bool hasHealed = desiredRoles.Any(healerLog => healerLog.Action == ActionType.HEAL
+                        bool hasHealed = desiredRoles.Any(healerLog => healerLog.Action == ActionType.PROTECT
                             && healerLog.Target == l.Target
                             && healerLog.Success);
 

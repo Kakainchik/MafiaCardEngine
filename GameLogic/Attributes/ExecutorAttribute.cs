@@ -25,6 +25,6 @@
         NONE,
         TARGET,
         TARGET_TARGET,
-        EXECUTOR_TARGER
+        TARGET_ANYTARGET
     }
 }

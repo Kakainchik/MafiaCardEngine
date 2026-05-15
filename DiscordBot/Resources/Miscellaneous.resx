@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionIntroReadyButton" xml:space="preserve">
+    <value>Collect Badge and Confirm Attendance</value>
+  </data>
+  <data name="ActiveGameSessionExistsError" xml:space="preserve">
+    <value>There is an active game session for this guild. Please wait until it ends.</value>
+  </data>
+  <data name="AddRoleToListTitle" xml:space="preserve">
+    <value>Add Position to Pool (Host Only)</value>
+  </data>
+  <data name="AttentionTitle" xml:space="preserve">
+    <value>⚠️ Attention!</value>
+  </data>
+  <data name="CheckPMForContractInfo" xml:space="preserve">
+    <value>Check your private messages to sign the employment contract.</value>
+  </data>
+  <data name="ClearRolesButton" xml:space="preserve">
+    <value>Clear Role Pool</value>
+  </data>
+  <data name="DirectoryRolesTitle" xml:space="preserve">
+    <value>Directory of job positions</value>
+  </data>
+  <data name="DontShowDocumentWarning" xml:space="preserve">
+    <value>Do not show this document to anyone!</value>
+  </data>
+  <data name="EmptyTitle" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="EnterLobbyButton" xml:space="preserve">
+    <value>Enter the Office</value>
+  </data>
+  <data name="FailedStartGameError" xml:space="preserve">
+    <value>❌ Failed to Start the Game</value>
+  </data>
+  <data name="HostLeftLobbyInfo" xml:space="preserve">
+    <value>The host has left the lobby. The meeting is cancelled.</value>
+  </data>
+  <data name="IntroDayMessageInfo" xml:space="preserve">
+    <value>👋 **Welcome to Paranoia Corp!** The introductory day is starting. Introductory Day is about to begin. Please collect your job badge and confirm your attendance.</value>
+  </data>
+  <data name="LaunchError" xml:space="preserve">
+    <value>**Launch Error:**</value>
+  </data>
+  <data name="LeaveLobbyButton" xml:space="preserve">
+    <value>Leave the Office</value>
+  </data>
+  <data name="LobbyDispandedInfo" xml:space="preserve">
+    <value>🚫 Lobby disbanded</value>
+  </data>
+  <data name="MorningCoffeeLobbyTitle" xml:space="preserve">
+    <value>☕ Morning Coffee (Lobby)</value>
+  </data>
+  <data name="NoPlayersInLobbyInfo" xml:space="preserve">
+    <value>No players in the office.</value>
+  </data>
+  <data name="ObservePlayerNumberEqualsRolesWarning" xml:space="preserve">
+    <value>Observe: The number of players must match the number of roles in the pool.</value>
+  </data>
+  <data name="OnlyHostCanConfigureRoleError" xml:space="preserve">
+    <value>Only the host can configure the role pool</value>
+  </data>
+  <data name="OnlyHostCanStartGameError" xml:space="preserve">
+    <value>Only the host can start the game.</value>
+  </data>
+  <data name="OpenDMWarning" xml:space="preserve">
+    <value>The HR department was unable to deliver contracts to the following individuals: {0}. **Please allow the server to send you Direct Messages in your privacy settings!**</value>
+  </data>
+  <data name="ParanoiaCorpSessionTitle" xml:space="preserve">
+    <value>🏢 Paranoia Corp - Session</value>
+  </data>
+  <data name="PlayerAlreadyInLobbyError" xml:space="preserve">
+    <value>You are already in the lobby.</value>
+  </data>
+  <data name="PlayerIsNotInLobbyError" xml:space="preserve">
+    <value>You are not in the lobby.</value>
+  </data>
+  <data name="PlayersInLobbyInfo" xml:space="preserve">
+    <value>Players in the office: {0}.</value>
+  </data>
+  <data name="PositionTitle" xml:space="preserve">
+    <value>**Position:**</value>
+  </data>
+  <data name="PrepareGameUnexpectedError" xml:space="preserve">
+    <value>An unexpected error occurred while preparing the game session</value>
+  </data>
+  <data name="ResponsobilityTitle" xml:space="preserve">
+    <value>**Responsibilities:**</value>
+  </data>
+  <data name="RoleListTitle" xml:space="preserve">
+    <value>Role Pool</value>
+  </data>
+  <data name="RolesInListTitle" xml:space="preserve">
+    <value>Positions in the pool</value>
+  </data>
+  <data name="ActionMorningStartBoardButton" xml:space="preserve">
+    <value>Start The Board Meeting</value>
+  </data>
+  <data name="StartGameButton" xml:space="preserve">
+    <value>🚀 START THE WORKDAY</value>
+  </data>
+  <data name="UniqueRolePresentError" xml:space="preserve">
+    <value>There can be only one unique role.</value>
+  </data>
+  <data name="ViewRolesButton" xml:space="preserve">
+    <value>View Roles</value>
+  </data>
+  <data name="WaitingForEmployeesInfo" xml:space="preserve">
+    <value>Waiting for employees to start the workday.</value>
+  </data>
+  <data name="WorkingDayStartTitle" xml:space="preserve">
+    <value>🏢 Working Day Has Started!</value>
+  </data>
+  <data name="YourContractInfo" xml:space="preserve">
+    <value>📄 Your Employment Contract</value>
+  </data>
+  <data name="MorningReadyMessageInfo" xml:space="preserve">
+    <value>☕ **Morning Briefing:** Review the nightly events and prepare for the board meeting.</value>
+  </data>
+  <data name="VetoReminderMessage" xml:space="preserve">
+    <value>The General Director has {0} vetoes remaining.</value>
+  </data>
+  <data name="BoardMeetingStartTitle" xml:space="preserve">
+    <value>☀️ **Board meeting is starting:** Please proceed to the meeting room.</value>
+  </data>
+  <data name="CandidateForFireExistInfo" xml:space="preserve">
+    <value>We have candidates for firing!</value>
+  </data>
+  <data name="NoCandidatesForFireInfo" xml:space="preserve">
+    <value>No candidates for firing this round!</value>
+  </data>
+  <data name="GeneralDirectorCanSelectCandidateReminder" xml:space="preserve">
+    <value>Everyone is safe... for now. The General Director now can choose anyone to fire on their will... or do not choose at all.</value>
+  </data>
+  <data name="DirectorBoardOverTitle" xml:space="preserve">
+    <value>**Board is over.** The fired employee has time to say their final words.</value>
+  </data>
+  <data name="EmployeeMustRevealRoleInfo" xml:space="preserve">
+    <value>The employee &lt;@{0}&gt; must reveal their identity.</value>
+  </data>
+  <data name="TheirPositionTitle" xml:space="preserve">
+    <value>**Their Position:**</value>
+  </data>
+  <data name="ActionFinishEveningButton" xml:space="preserve">
+    <value>Finish This Day</value>
+  </data>
+  <data name="PostMessageInfo" xml:space="preserve">
+    <value>📬 **You got a post message:**</value>
+  </data>
+  <data name="TokenNotificationInfo" xml:space="preserve">
+    <value>📢 **Token Notification** You have {0} reports left to write.</value>
+  </data>
+  <data name="ActionOpenTerminalButton" xml:space="preserve">
+    <value>💻 Open Terminal</value>
+  </data>
+  <data name="WorkdayOverTitle" xml:space="preserve">
+    <value>🌙 **Workday is over.** Overtime begins. The office is closed. Open the terminal to perform action you want to and click -Ready-.</value>
+  </data>
+  <data name="ActionDirectorTargetSelect" xml:space="preserve">
+    <value>Choose a player to fire...</value>
+  </data>
+  <data name="FirePlayerButton" xml:space="preserve">
+    <value>Fire Player</value>
+  </data>
+  <data name="UseVetoButton" xml:space="preserve">
+    <value>Use Veto</value>
+  </data>
+  <data name="DontFireButton" xml:space="preserve">
+    <value>Don't Fire Anyone</value>
+  </data>
+  <data name="YourPositionTitle" xml:space="preserve">
+    <value>**Your Position:**</value>
+  </data>
+  <data name="AttendanceConfirmMessage" xml:space="preserve">
+    <value>✅ Attendance confirmed.</value>
+  </data>
+  <data name="YouNotInGameError" xml:space="preserve">
+    <value>You are not registered for this game.</value>
+  </data>
+  <data name="OnlyDirectorStartBoardError" xml:space="preserve">
+    <value>❌ **Access Denied:** Only the General Director has the right to open the Board meeting.</value>
+  </data>
+  <data name="YouOpenBoardMessage" xml:space="preserve">
+    <value>✅ You have successfully opened the board. Employees are invited to the meeting.</value>
+  </data>
+  <data name="OnlyDirectorMakeDecision" xml:space="preserve">
+    <value>❌ Only the General Director can make personnel decisions.</value>
+  </data>
+  <data name="CandidateRegisteredToFireInfo" xml:space="preserve">
+    <value>Candidate registered in the system. Click -Fire- to confirm.</value>
+  </data>
+  <data name="UseVetoDeniedError" xml:space="preserve">
+    <value>❌ Only the General Director can use the Veto power.</value>
+  </data>
+  <data name="YouNotHaveVetoError" xml:space="preserve">
+    <value>❌ You have no more Veto power or it has already been used in this cycle.</value>
+  </data>
+  <data name="VetoUsedWarning" xml:space="preserve">
+    <value>⚠️ Board Meeting (Veto Used!)</value>
+  </data>
+  <data name="VetoUsedInfo" xml:space="preserve">
+    <value>**General Director** used the Veto power.\n The list of candidates for dismissal has been expanded to all living employees. The Director can also decide not to dismiss anyone.</value>
+  </data>
+  <data name="NoPlayerChosenToFireError" xml:space="preserve">
+    <value>❌ First, choose an employee from the list.</value>
+  </data>
+  <data name="DecisionMadeTitle" xml:space="preserve">
+    <value>⚖️ Decision Made</value>
+  </data>
+  <data name="DirectorMadeDesicionInfo" xml:space="preserve">
+    <value>The General Director has made their decision. Employee &lt;@{0}&gt; has been terminated from the corporation.</value>
+  </data>
+  <data name="CannotSkipBoardError" xml:space="preserve">
+    <value>❌ This option is only available after using the Veto Right or if there is no candidates for firing.</value>
+  </data>
+  <data name="DirectorDecisionMercyInfo" xml:space="preserve">
+    <value>The General Director has decided to show mercy. No one will be terminated today.</value>
+  </data>
+  <data name="OnlyDirectorOrFiredPlayerEndDayError" xml:space="preserve">
+    <value>❌ **Access Denied:** Only the General Director or the fired employee can end the day.</value>
+  </data>
+  <data name="FinalWordRecorderTitle" xml:space="preserve">
+    <value>✅ Your final words have been recorded. The workday is complete.</value>
+  </data>
+  <data name="DirectorInterruptDebateInfo" xml:space="preserve">
+    <value>✅ You have interrupted the debates and concluded the workday.</value>
+  </data>
+  <data name="NoAccessTerminalError" xml:space="preserve">
+    <value>You do not have access to the terminal.</value>
+  </data>
+  <data name="TerminalTitle" xml:space="preserve">
+    <value>💻 Corporate Terminal (Overtime)</value>
+  </data>
+  <data name="SelectTargetMessage" xml:space="preserve">
+    <value>Select a target to exercise your authority, or simply skip turn.</value>
+  </data>
+  <data name="SelectFirstTargetMessage" xml:space="preserve">
+    <value>Choose the first target to exercise your authority...</value>
+  </data>
+  <data name="ClearTargetSelectionButton" xml:space="preserve">
+    <value>Clear Selection</value>
+  </data>
+  <data name="SelectSecondTargetMessage" xml:space="preserve">
+    <value>Choose the second target to exercise your authority...</value>
+  </data>
+  <data name="ReadyButton" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="YouCanSelectYourselfInfo" xml:space="preserve">
+    <value>You can choose yourself or the same target!</value>
+  </data>
+  <data name="TerminalSessionExpiredWarning" xml:space="preserve">
+    <value>Your session has expired. Please close and reopen the terminal.</value>
+  </data>
+  <data name="TargetSelectionClearedMessage" xml:space="preserve">
+    <value>All target selections have been cleared. Click -Ready- if you want to skip your turn.</value>
+  </data>
+  <data name="TargetSelectionNotFinishedError" xml:space="preserve">
+    <value>❌ **Warning:** You haven't finished your selection! Please select ALL required targets, or clear selection and then skip your turn.</value>
+  </data>
+  <data name="TargetNotFoundError" xml:space="preserve">
+    <value>Selected target not found.</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>**Unexpected Error**</value>
+  </data>
+  <data name="OvertimeReadyMessage" xml:space="preserve">
+    <value>✅ You have finished working in the terminal. The system has recorded your input. Wait for your colleagues.</value>
+  </data>
+  <data name="GameOverTitle" xml:space="preserve">
+    <value>🏆 GAME OVER!</value>
+  </data>
+  <data name="DrawTitle" xml:space="preserve">
+    <value>🤝 DRAW!</value>
+  </data>
+  <data name="WinnerFactionTitle" xml:space="preserve">
+    <value>The Corporate War is over. The winning faction is: **{0}**</value>
+  </data>
+  <data name="DrawWinnerTitle" xml:space="preserve">
+    <value>The market collapsed. No winner was identified, and the corporation was declared bankrupt.</value>
+  </data>
+  <data name="TurnNumberTitle" xml:space="preserve">
+    <value>📅 Day {0}</value>
+  </data>
+  <data name="DirectorBoardTitle" xml:space="preserve">
+    <value>Director Board</value>
+  </data>
+  <data name="CandidatesTitle" xml:space="preserve">
+    <value>**Candidates:**</value>
+  </data>
+  <data name="FiredTitle" xml:space="preserve">
+    <value>**Fired:**</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>SUCCESS</value>
+  </data>
+  <data name="FailTitle" xml:space="preserve">
+    <value>FAIL</value>
+  </data>
+  <data name="OvertimeTitle" xml:space="preserve">
+    <value>Overtime</value>
+  </data>
+  <data name="OvertimeNoActionHappenedInfo" xml:space="preserve">
+    <value>*Silent night. No activity recorded.*</value>
+  </data>
+  <data name="EndGameSessionDeleteTitle" xml:space="preserve">
+    <value>🔒 **The game session has been deleted from the system's memory.** Any interaction with terminals and buttons is blocked. You can discuss the game results here. The organizer can manually delete this channel.</value>
+  </data>
+</root>

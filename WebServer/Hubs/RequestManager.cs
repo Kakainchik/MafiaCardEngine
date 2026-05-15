@@ -118,7 +118,7 @@ namespace WebServer.Hubs
 
                     unorderedRoles.Clear();
 
-                    long[] ids = room.Players.Keys.ToArray();
+                    ulong[] ids = room.Players.Keys.ToArray();
                     Player[] players = new Player[rolesAmount];
                     PlayerDomain[] domains = new PlayerDomain[rolesAmount];
                     RGB[] rgbs = ColorBank.GetRandomColors(rolesAmount);

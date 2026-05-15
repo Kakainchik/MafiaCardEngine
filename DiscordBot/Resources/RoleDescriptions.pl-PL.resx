@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlumniManager" xml:space="preserve">
+    <value>Może komunikować sie w nadgodzinach na czacie „Klubu Byłych Kolegów” (z graczami zwolnionymi).
+Możliwość komunikacji w godzinach nadliczbowych na czacie frakcji Outsource.
+Nie można zwabić do Startupu.
+Unikalna pozycja.</value>
+  </data>
+  <data name="AnticrisisManager" xml:space="preserve">
+    <value>Przesyła Dyrektorowi „Notatkę o Krytycznej Niekompetencji” dotyczącą dowolnego celu (działa jak Materiał Kompromitujący).
+Ma ograniczoną liczbę notatek na grę. Wzór: liczba graczy / 4. Minimum 1.</value>
+  </data>
+  <data name="Auditor" xml:space="preserve">
+    <value>Analizuje działania jednego pracownika w godzinach nadliczbowych. Następna zmiana pozna jego dokładne stanowisko.
+Jeśli celem jest Dyrektor Cienia, system przypisze mu dowolne istniejące, lojalne stanowisko.</value>
+  </data>
+  <data name="Clerk" xml:space="preserve">
+    <value>Nie ma uprawnień (po prostu śpi w domu).</value>
+  </data>
+  <data name="Evangelist" xml:space="preserve">
+    <value>W nadgodzinach może komunikować się z innymi ewangelistami startupów.
+Nie wie, kim jest założyciel startupu i nie może się z nim bezpośrednio komunikować.</value>
+  </data>
+  <data name="GeneralDirector" xml:space="preserve">
+    <value>Obowiązkowa, unikalna, otwarta rola.
+Nie można jej przypisać do konkretnego celu. Nie ma uprawnień do gry w nadgodzinach. W ciągu dnia podejmuje samodzielne decyzje o zwolnieniach.
+Ma dwa „uprawnienia weta” na grę.</value>
+  </data>
+  <data name="Hacker" xml:space="preserve">
+    <value>W czasie nadgodzin można zablokować konto jednego celu. Zablokowany cel anuluje wszystkie swoje akcje w czasie nadgodzin. Nie można zhakować tego samego pracownika na dwóch kolejnych zmianach.
+Można komunikować się z Syndykatem w czasie nadgodzin.</value>
+  </data>
+  <data name="HRManager" xml:space="preserve">
+    <value>Podczas każdej nadgodziny ukrywa akta osobowe jednego pracownika (ochrona). Jeśli podczas nadgodziny zebrano kompromitujące informacje na temat tego celu, nie zostaną one przekazane Dyrektorowi rano.
+Jeśli podczas tej zmiany doszło do więcej niż jednej próby zwolnienia celu, HR nie będzie mógł go uratować przed zwolnieniem, niezależnie od liczby HR-ów, którzy próbowali go uratować.</value>
+  </data>
+  <data name="Intern" xml:space="preserve">
+    <value>Nie ma uprawnień.
+Może zostać zwabiony przez Dyrektora Cienia, aby został Szpiegiem.</value>
+  </data>
+  <data name="LayoffCandidate" xml:space="preserve">
+    <value>Nie ma uprawnień.
+Jeśli w trakcie nadgodzin zostaną sfabrykowane obciążające dowody przeciwko niemu, akta w tajemniczy sposób giną i rano nie pojawiają się na biurku Dyrektora. Zamiast tego Kandydat potajemnie przechodzi do frakcji Outsourcerów i przyjmuje rolę Outsourcera.
+Jeśli obciążające dowody zostaną zebrane na niego dwa lub więcej razy w trakcie jednej nadgodziny, graczowi udaje się zmienić rolę, ale obciążające dowody i tak lądują na biurku Dyrektora.</value>
+  </data>
+  <data name="MasterOfCompromising" xml:space="preserve">
+    <value>Może wybrać jeden cel, aby sfabrykować obciążające dowody. Rano ten cel zostanie umieszczony na liście Dyrektora do obowiązkowego zwolnienia.
+Jeśli w grze jest wielu Mistrzów, cel jest wybierany losowo spośród zaproponowanych przez nich.
+Może komunikować się ze wszystkimi członkami Syndykatu na zaszyfrowanym czacie w trakcie dogrywki.</value>
+  </data>
+  <data name="Outsourcer" xml:space="preserve">
+    <value>W nadgodzinach oferuje umowę zwolnionemu pracownikowi, niezależnie od liczby prób zwolnienia pracownika podjętych podczas zmiany.
+Jeśli wybrany cel zostanie zwolniony podczas tej samej zmiany, staje się on outsourcerem.
+Jeśli jest wielu outsourcerów, wybierają oni tylko jeden cel dla wszystkich. Nie można zatrudniać zwolnionych pracowników z frakcji outsourcerów.
+Czatuje z frakcją outsourcerów podczas nadgodzin.</value>
+  </data>
+  <data name="PoliticalStrategist" xml:space="preserve">
+    <value>Może wybrać dwóch pracowników i zmusić pierwszego do użycia uprawnień na drugim (nawet jeśli pierwszy zamierzał pominąć turę).
+Pierwszy i drugi cel mogą być tym samym (pracownik używa uprawnienia na sobie).
+Może wybrać siebie jako drugi cel.
+Jeśli jest wielu Mistrzów Kompromitacji, a Konsultant Polityczny zmusi jednego z nich do zwolnienia kogoś, podczas tej zmiany może zostać zwolnionych więcej niż jedna osoba (ten Mistrz działa poza losowym wyborem celu przez Syndykat).</value>
+  </data>
+  <data name="Raider" xml:space="preserve">
+    <value>Może wybrać jeden cel, aby sfabrykować obciążające dowody albo zablokować. Wynik jest ustalany losowo.</value>
+  </data>
+  <data name="ScrumMaster" xml:space="preserve">
+    <value>W nadgodzinach zamienia się zadaniami dwóch pracowników. W rezultacie wszystkie zadania w nadgodzinach, do których są przypisani, są przekierowywane na siebie nawzajem.</value>
+  </data>
+  <data name="SecuritySpecialist" xml:space="preserve">
+    <value>Weryfikuje jednego pracownika w bazie danych podczas nadgodzin. Podczas tej samej zmiany określana jest również jego lojalność (frakcja).
+Jeśli celem jest Dyrektor ds. Cienia lub Założyciel Startupu, system wyświetla go jako lojalnego wobec korporacji.</value>
+  </data>
+  <data name="ShadowDirector" xml:space="preserve">
+    <value>W nadgodzinach może wybrać cel rekrutacji do Syndykatu. Przejście następuje rano.
+Jeśli celem jest stażysta, staje się szpiegiem.
+Jeśli celem jest administrator systemu, staje się hakerem.
+Inni kandydaci pozostają na swoich stanowiskach, ale otrzymują powiadomienie e-mail o kuszącym kontrakcie (próba rekrutacji).
+Ma złotą spadochron: próba sfabrykowania obciążających dowodów w godzinach nadliczbowych zakończy się niepowodzeniem.
+Nie można go zrekrutować do Startupu.
+Możliwość komunikacji z Syndykatem w godzinach nadliczbowych.
+Unikalne stanowisko.</value>
+  </data>
+  <data name="Shareholder" xml:space="preserve">
+    <value>Nie ma uprawnień.
+Ma dostęp do prywatnego czatu z innymi akcjonariuszami spółki.</value>
+  </data>
+  <data name="Spy" xml:space="preserve">
+    <value>W nadgodzinach infiltruje bazy danych i analizuje działania pojedynczego pracownika. Pod koniec godzin nadliczbowych poznaje dokładną lokalizację wybranego gracza.
+W nadgodzinach może komunikować się ze wszystkimi członkami Syndykatu za pośrednictwem szyfrowanego czatu.</value>
+  </data>
+  <data name="StartupFounder" xml:space="preserve">
+    <value>W nadgodzinach kusi jednego pracownika opcjami na akcje, wabiąc go do Startupu.
+Widzi rozmowy na czacie służbowym wszystkich swoich Ewangelistów, ale sam tam nie pisze. Zna wszystkich, których zwabił.
+Unikalne stanowisko.</value>
+  </data>
+  <data name="SystemAdministrator" xml:space="preserve">
+    <value>W nadgodzinach może zablokować dostęp do serwerów pojedynczego celu. Cel anuluje wszystkie swoje akcje.
+Może zostać zwabiony przez Dyrektora Cienia i stać się hakerem.</value>
+  </data>
+</root>

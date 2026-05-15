@@ -40,7 +40,7 @@ namespace WebServer.Shared.GameObjects.Night
 
                 switch(l.Action)
                 {
-                    case ActionType.TERRORIST_BLOW:
+                    case ActionType.BLOW:
                     {
                         NightActionLogContext exContext = new NightActionLogContext
                         {

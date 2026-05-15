@@ -48,7 +48,7 @@ namespace WebServer.Controllers.Hall
         [HttpPost("new_lobby")]
         public IActionResult CreateNewLobby([FromBody] CreateRoomDTO request)
         {
-            long hostId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            ulong hostId = ulong.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             string username = User.FindFirstValue(ClaimTypes.Name)!;
             UserDTO host = new UserDTO(hostId, username);
 

@@ -33,7 +33,7 @@ namespace WPFClientShell.UI
         }
 
         public ObservableCollection<NightTargetEntity> OwnTargets { get; set; }
-        public ConcurrentObservableDictionary<long, PlayerEntity> PossibleTargets { get; set; }
+        public ConcurrentObservableDictionary<ulong, PlayerEntity> PossibleTargets { get; set; }
 
         public ICommand ClickTargetCommand { get; set; }
         public ICommand ClearTargetCommand { get; set; }
@@ -41,15 +41,15 @@ namespace WPFClientShell.UI
 
         public NightScreenViewModel(LobbyDomain lobbyDomain,
             PlayerEntity ownPlayer,
-            IDictionary<long, PlayerEntity> possibleTargets)
+            IDictionary<ulong, PlayerEntity> possibleTargets)
             : base(lobbyDomain, ownPlayer)
         {
             nightFacade = new NightLogScreenFacade(this);
 
             OwnTargets = new ObservableCollection<NightTargetEntity>();
-            PossibleTargets = new ConcurrentObservableDictionary<long, PlayerEntity>();
+            PossibleTargets = new ConcurrentObservableDictionary<ulong, PlayerEntity>();
 
-            foreach(KeyValuePair<long, PlayerEntity> p in possibleTargets)
+            foreach(KeyValuePair<ulong, PlayerEntity> p in possibleTargets)
             {
                 PossibleTargets[p.Key] = p.Value;
             }
@@ -79,7 +79,7 @@ namespace WPFClientShell.UI
                         OwnTargets.Add(new NightTargetEntity(2));
                         break;
                     }
-                    case ExecutorType.EXECUTOR_TARGER:
+                    case ExecutorType.TARGET_ANYTARGET:
                     {
                         //We can pick two targets
                         OwnTargets.Add(new NightTargetEntity(1));
@@ -173,7 +173,7 @@ namespace WPFClientShell.UI
                 {
                     IsNightBegan = false;
 
-                    IEnumerable<long?> targetIds = OwnTargets.Select(t => t.TargetId);
+                    IEnumerable<ulong?> targetIds = OwnTargets.Select(t => t.TargetId);
 
                     if(targetIds.Any(i => !i.HasValue))
                     {
@@ -184,7 +184,7 @@ namespace WPFClientShell.UI
                     NightActionConfirmation confirmation = new NightActionConfirmation
                     {
                         AbilityFlag = 1,
-                        TargetIds = targetIds.Cast<long>().ToArray<long>()
+                        TargetIds = targetIds.Cast<ulong>().ToArray<ulong>()
                     };
                     await lobbyDomain.SendContextAsync(confirmation);
                     break;

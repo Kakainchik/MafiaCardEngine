@@ -166,7 +166,7 @@ namespace GameLogic.Cycles.Day
         {
             public ICollection<IVoter> Voters { get; set; }
 
-            public long Id => 0L;
+            public ulong Id => 0L;
             public int Votes => Voters.Count;
 
             public string? LastMessage { get; set; } = null;
@@ -191,7 +191,7 @@ namespace GameLogic.Cycles.Day
                 Voters.Remove(voter);
             }
 
-            public void Lynch()
+            public void Kill()
             {
                 throw new NotSupportedException();
             }

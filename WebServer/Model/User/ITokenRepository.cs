@@ -3,7 +3,7 @@
     public interface ITokenRepository
     {
         Task<bool> IsTokenExist(string expectedToken);
-        Task AttachTokenToUser(long userId, RefreshTokenEntity refreshToken);
-        Task RemoveUserOldTokens(long userId);
+        Task AttachTokenToUser(ulong userId, RefreshTokenEntity refreshToken);
+        Task RemoveUserOldTokens(ulong userId);
     }
 }

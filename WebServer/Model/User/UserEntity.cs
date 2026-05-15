@@ -7,7 +7,7 @@ namespace WebServer.Model.User
     public class UserEntity
     {
         [Key]
-        public long Id { get; set; }
+        public ulong Id { get; set; }
 
         public string Username { get; set; } = null!;
 

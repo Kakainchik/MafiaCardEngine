@@ -5,9 +5,9 @@ using GameLogic.Roles;
 
 namespace GameLogic.Cycles.Night.Visitors
 {
-    public class RessurectVisitor : BaseVisitor
+    public class ResurrectVisitor : BaseVisitor
     {
-        public RessurectVisitor(ITarget visitor) : base(visitor)
+        public ResurrectVisitor(ITarget visitor) : base(visitor)
         {
 
         }

@@ -10,7 +10,7 @@ namespace WebServer.Hubs
 
     public interface IHubIdCommand
     {
-        void Execute(Context con, params long[] userIds);
-        Task ExecuteAsync(Context con, params long[] userIds);
+        void Execute(Context con, params ulong[] userIds);
+        Task ExecuteAsync(Context con, params ulong[] userIds);
     }
 }

@@ -6,7 +6,7 @@
 
         public sealed record NightPlayerInstance
         {
-            public required long Id { get; init; }
+            public required ulong Id { get; init; }
             public required bool IsAlive { get; init; }
         }
     }

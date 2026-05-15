@@ -16,7 +16,7 @@ namespace GameLogic.Cycles.Night.Visitors
             Success = true;
             return new ActionLog
             {
-                Action = ActionType.WITCH_CONTROL,
+                Action = ActionType.CONTROL,
                 Executor = this.Visitor,
                 Target = target,
                 Success = this.Success

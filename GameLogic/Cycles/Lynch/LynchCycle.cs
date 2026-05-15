@@ -17,7 +17,7 @@ namespace GameLogic.Cycles.Lynch
         public void Lynch(string message)
         {
             Elected.LastMessage = message;
-            Elected.Lynch();
+            Elected.Kill();
         }
     }
 }

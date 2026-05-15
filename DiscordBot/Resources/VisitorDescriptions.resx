@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ExecutorControl" xml:space="preserve">
+    <value>A fake letter from management has been sent. Let's see how they carry out someone else's orders...</value>
+  </data>
+  <data name="ExecutorFireImmune" xml:space="preserve">
+    <value>You prepared irrefutable incriminating evidence against the target, but the lawyers rejected it because of the "golden parachute" in the target's contract.</value>
+  </data>
+  <data name="ExecutorInvestigateRole" xml:space="preserve">
+    <value>According to the closed staffing table, this person is {0}</value>
+  </data>
+  <data name="ExecutorSecurityDetectDangerous" xml:space="preserve">
+    <value>The logs don't lie. This employee is either working for competitors or pursuing personal agendas.</value>
+  </data>
+  <data name="ExecutorSecurityDetectPeaceful" xml:space="preserve">
+    <value>The verification has been passed. The employee is loyal to the Corporation.</value>
+  </data>
+  <data name="ExecutorShadowDirectorFail" xml:space="preserve">
+    <value>The candidate proved too principled and refused "dirty" money. He might become a problem.</value>
+  </data>
+  <data name="ExecutorShadowDirectorSuccess" xml:space="preserve">
+    <value>The Syndicate's offer has been accepted. We have a new agent within the Corporation.</value>
+  </data>
+  <data name="ExecutorStartupFounderFail" xml:space="preserve">
+    <value>The candidate turned out to be too attached to a stable salary and bonuses.</value>
+  </data>
+  <data name="ExecutorStartupFounderSuccess" xml:space="preserve">
+    <value>You've successfully sold the "unicorn" idea. Another cog in the system has become a freelance creator.</value>
+  </data>
+  <data name="AllSuicide" xml:space="preserve">
+    <value>This morning, everyone saw a farewell message in the company chat. One of the colleagues had lost their temper and quit overnight.</value>
+  </data>
+  <data name="AllSwapIncident" xml:space="preserve">
+    <value>Jira experienced a massive outage. Someone fired themselves due to the incredible confusion in tickets!</value>
+  </data>
+  <data name="TargetControl" xml:space="preserve">
+    <value>You received an urgent and extremely strange order from your superiors via messenger. You couldn't disobey, so you had to put everything you had planned aside and carry it out.</value>
+  </data>
+  <data name="TargetShadowDirectorFail" xml:space="preserve">
+    <value>A very strange and highly illegal collaboration proposal arrived in your work email, which you immediately marked as spam.</value>
+  </data>
+  <data name="TargetShadowDirectorSuccess" xml:space="preserve">
+    <value>You've been made an offer you can't refuse. Large sums of money in exchange for a small favor. You're now a member of the Syndicate.</value>
+  </data>
+  <data name="TargetStartupFounderFail" xml:space="preserve">
+    <value>You were offered a job for an "idea" and illusory stock options, but you preferred stability.</value>
+  </data>
+  <data name="TargetStartupFounderSuccess" xml:space="preserve">
+    <value>You signed an offer at a startup for a stake in the company and smoothies on Fridays. Corporate ideals are forgotten.</value>
+  </data>
+  <data name="TargetSuicide" xml:space="preserve">
+    <value>You yourself don’t understand how, but for some reason you signed a letter of resignation of your own free will and gave it to the HR department. Now you are Evangelist.</value>
+  </data>
+  <data name="TargetSwap" xml:space="preserve">
+    <value>Suddenly, your priority tasks in the task tracker have been reassigned to a completely different project.</value>
+  </data>
+  <data name="TargetBlackmailMasterFire" xml:space="preserve">
+    <value>In the morning you discover that someone has hacked your email and leaked your personal correspondence to management... You will be called to the director's office.</value>
+  </data>
+  <data name="AllBlackmailMasterFire" xml:space="preserve">
+    <value>Looks like someone's going to be called in to speak to the principal soon...</value>
+  </data>
+  <data name="TargetRaiderFire" xml:space="preserve">
+    <value>In the morning, you discover that your KPI in the system is significantly lower than it should be. You're sure it's the competitors' doing. Get ready, you'll soon be laid off.</value>
+  </data>
+  <data name="AllRaiderFire" xml:space="preserve">
+    <value>There are rumors going around the office about an upcoming restructuring.</value>
+  </data>
+  <data name="TargetAnticrisisManagerFire" xml:space="preserve">
+    <value>You open your email and see: "You don't fit into the company's new paradigm." You've been hit with emergency budget cuts.</value>
+  </data>
+  <data name="AllAnticrisisFire" xml:space="preserve">
+    <value>Management issued a memorandum on staff optimization. We're likely down one employee.</value>
+  </data>
+  <data name="TargetResurrect" xml:space="preserve">
+    <value>The corporation showed you the door, but you immediately signed a shady B2B contract. You're back in business, but this time off-the-books. Now you are Outsourcer.</value>
+  </data>
+  <data name="AllResurrect" xml:space="preserve">
+    <value>A painfully familiar name appeared on the list of external contractors...</value>
+  </data>
+  <data name="ExecutorProtect" xml:space="preserve">
+    <value>You cleaned up the employee's personnel file and destroyed all of his questionable activity before anyone saw it and forwarded it to the Director.</value>
+  </data>
+  <data name="TargetProtect" xml:space="preserve">
+    <value>Your competitors were undermining you overnight, but someone in HR deleted the incriminating logs. Your reputation is clear.</value>
+  </data>
+  <data name="TargetBlock" xml:space="preserve">
+    <value>Your account was blocked due to "suspicious activity." You spent all night waiting for support, without doing anything.</value>
+  </data>
+  <data name="TargetBlockBlocker" xml:space="preserve">
+    <value>You tried to access a remote server, but one of the system administrators had already taken control and reset all your passwords!</value>
+  </data>
+  <data name="TargetBlockSelf" xml:space="preserve">
+    <value>Due to a stupid mistake, you accidentally banned your own access token and were left without admin rights for the entire night.</value>
+  </data>
+</root>

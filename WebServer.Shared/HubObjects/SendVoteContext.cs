@@ -2,6 +2,6 @@
 {
     public record class SendVoteContext : Context
     {
-        public required long? TargetId { get; init; }
+        public required ulong? TargetId { get; init; }
     }
 }

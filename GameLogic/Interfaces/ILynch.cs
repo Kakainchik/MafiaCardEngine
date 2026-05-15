@@ -4,6 +4,6 @@
     {
         string? LastMessage { get; set; }
 
-        void Lynch();
+        void Kill();
     }
 }

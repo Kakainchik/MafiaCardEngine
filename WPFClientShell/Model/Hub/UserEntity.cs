@@ -4,10 +4,10 @@ namespace WPFClientShell.Model.Hub
 {
     public class UserEntity : ObservableObject
     {
-        public long Id { get; }
+        public ulong Id { get; }
         public string Username { get; }
 
-        public UserEntity(long id, string username)
+        public UserEntity(ulong id, string username)
         {
             Id = id;
             Username = username;

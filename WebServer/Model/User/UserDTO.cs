@@ -2,10 +2,10 @@
 {
     public class UserDTO
     {
-        public long Id { get; init; }
+        public ulong Id { get; init; }
         public string Username { get; init; }
 
-        public UserDTO(long id, string username)
+        public UserDTO(ulong id, string username)
         {
             Id = id;
             Username = username;
@@ -29,8 +29,8 @@
             return Id.GetHashCode();
         }
 
-        public static implicit operator long(UserDTO dto) => dto.Id;
+        public static implicit operator ulong(UserDTO dto) => dto.Id;
 
-        public static explicit operator UserDTO(long id) => new UserDTO(id, string.Empty);
+        public static explicit operator UserDTO(ulong id) => new UserDTO(id, string.Empty);
     }
 }

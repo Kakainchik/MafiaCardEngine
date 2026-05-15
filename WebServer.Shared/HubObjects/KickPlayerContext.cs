@@ -2,6 +2,6 @@
 {
     public record class KickPlayerContext : Context
     {
-        public required long UserToKickId { get; init; }
+        public required ulong UserToKickId { get; init; }
     }
 }

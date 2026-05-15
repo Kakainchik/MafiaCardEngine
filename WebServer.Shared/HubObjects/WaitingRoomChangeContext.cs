@@ -4,7 +4,7 @@ namespace WebServer.Shared.HubObjects
 {
     public record class WaitingRoomReadyChangeContext : Context
     {
-        public required long UserId { get; init; }
+        public required ulong UserId { get; init; }
         public required bool IsReady { get; init; }
     }
 

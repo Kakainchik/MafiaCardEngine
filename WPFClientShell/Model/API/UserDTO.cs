@@ -2,10 +2,10 @@
 {
     public record class UserDTO
     {
-        public long Id { get; init; }
+        public ulong Id { get; init; }
         public string Username { get; init; }
 
-        public UserDTO(long id, string username)
+        public UserDTO(ulong id, string username)
         {
             Id = id;
             Username = username;

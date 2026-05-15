@@ -2,6 +2,6 @@
 {
     public record class WarningVoteContext : Context
     {
-        public long? VotedId { get; init; }
+        public ulong? VotedId { get; init; }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IIdentifiable
     {
-        long Id { get; }
+        ulong Id { get; }
     }
 }

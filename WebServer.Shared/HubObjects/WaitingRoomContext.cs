@@ -10,7 +10,7 @@ namespace WebServer.Shared.HubObjects
 
         public sealed record class WaitingRoomUser
         {
-            public required long Id { get; init; }
+            public required ulong Id { get; init; }
             public required string Username { get; init; }
             public required bool IsReady { get; init; }
         }

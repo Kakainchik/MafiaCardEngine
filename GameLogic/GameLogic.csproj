@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ParanoiaCorp\Cycles\Abilities\" />
+    <Folder Include="ParanoiaCorp\Cycles\Visitors\" />
+  </ItemGroup>
+
 </Project>

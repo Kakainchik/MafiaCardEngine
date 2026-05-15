@@ -10,7 +10,7 @@ namespace WPFClientShell.Model.Hub
         private bool isAlive;
         private RoleVisual role;
 
-        public long Id { get; }
+        public ulong Id { get; }
 
         public string Nickname
         {
@@ -52,7 +52,7 @@ namespace WPFClientShell.Model.Hub
             }
         }
 
-        public PlayerEntity(long id, string nickname, Color ncolor, bool isAlive, RoleVisual role)
+        public PlayerEntity(ulong id, string nickname, Color ncolor, bool isAlive, RoleVisual role)
         {
             this.Id = id;
             this.nickname = nickname;

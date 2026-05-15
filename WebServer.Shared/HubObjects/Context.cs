@@ -7,9 +7,9 @@
         public readonly record struct ContextPresenter
         {
             public int RoomId { get; init; }
-            public long Sender { get; init; }
-            public long Receiver { get; init; }
-            public long Except { get; init; }
+            public ulong Sender { get; init; }
+            public ulong Receiver { get; init; }
+            public ulong Except { get; init; }
         }
     }
 }

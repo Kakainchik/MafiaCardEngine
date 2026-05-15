@@ -8,7 +8,7 @@ namespace WPFClientShell.Model.Hub
         private Color? targetColor;
         private int ownVotes;
 
-        public long? VoteForId { get; set; }
+        public ulong? VoteForId { get; set; }
 
         public string? VoteFor
         {
@@ -40,7 +40,7 @@ namespace WPFClientShell.Model.Hub
             }
         }
 
-        public PlayerVotableDecorator(long id, string nickname,
+        public PlayerVotableDecorator(ulong id, string nickname,
             Color ncolor,
             bool isAlive,
             RoleVisual role) 

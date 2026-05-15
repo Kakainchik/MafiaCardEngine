@@ -45,7 +45,7 @@ namespace WebServer.Model.Game
             timer.Start();
         }
 
-        public async Task VoteFromToAsync(long voter, long votable)
+        public async Task VoteFromToAsync(ulong voter, ulong votable)
         {
             Player voterP = players.Single(p => p.Id == voter);
             Player votableP = players.Single(p => p.Id == votable);
@@ -91,7 +91,7 @@ namespace WebServer.Model.Game
             }
         }
 
-        public async Task VoteForNonLynchAsync(long voter)
+        public async Task VoteForNonLynchAsync(ulong voter)
         {
             Player voterP = players.Single(p => p.Id == voter);
 
@@ -136,7 +136,7 @@ namespace WebServer.Model.Game
             }
         }
 
-        public async Task CancelVoteAsync(long voter)
+        public async Task CancelVoteAsync(ulong voter)
         {
             Player voterP = players.Single(p => p.Id == voter);
 

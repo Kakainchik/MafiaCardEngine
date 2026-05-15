@@ -16,7 +16,7 @@ namespace WPFClientShell.Model.Hub
             }
         }
 
-        public PlayerVictimDecorator(long id,
+        public PlayerVictimDecorator(ulong id,
             string nickname,
             Color ncolor,
             bool isAlive,

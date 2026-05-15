@@ -13,11 +13,11 @@ namespace WPFClientShell.UI
     {
         private readonly int dayNumber;
 
-        private ConcurrentObservableDictionary<long, PlayerVotableDecorator> allPlayers;
+        private ConcurrentObservableDictionary<ulong, PlayerVotableDecorator> allPlayers;
         private bool isBallotActive;
         private int votesForNonLynch;
 
-        public ConcurrentObservableDictionary<long, PlayerVotableDecorator> AllPlayers
+        public ConcurrentObservableDictionary<ulong, PlayerVotableDecorator> AllPlayers
         {
             get => allPlayers;
             set
@@ -53,14 +53,14 @@ namespace WPFClientShell.UI
 
         public DayScreenViewModel(LobbyDomain lobbyDomain,
             PlayerEntity ownPlayer,
-            IReadOnlyDictionary<long, PlayerEntity> allPlayers,
+            IReadOnlyDictionary<ulong, PlayerEntity> allPlayers,
             int dayNumber)
             : base(lobbyDomain, ownPlayer)
         {
             this.dayNumber = dayNumber;
-            this.allPlayers = new ConcurrentObservableDictionary<long, PlayerVotableDecorator>();
+            this.allPlayers = new ConcurrentObservableDictionary<ulong, PlayerVotableDecorator>();
 
-            foreach(KeyValuePair<long, PlayerEntity> p in allPlayers)
+            foreach(KeyValuePair<ulong, PlayerEntity> p in allPlayers)
             {
                 this.allPlayers[p.Key] = new PlayerVotableDecorator(p.Value.Id,
                     p.Value.Nickname,
@@ -162,7 +162,7 @@ namespace WPFClientShell.UI
 
         private async void OnVoteClick(object? obj)
         {
-            long? votableId = (long?)obj!;
+            ulong? votableId = (ulong?)obj!;
 
             if(votableId == ownPlayer.Id)
             {
@@ -176,7 +176,7 @@ namespace WPFClientShell.UI
                 return;
             }
 
-            long? previousId = AllPlayers[ownPlayer.Id].VoteForId;
+            ulong? previousId = AllPlayers[ownPlayer.Id].VoteForId;
             if(votableId == previousId)
             {
                 //Click on the voted player by us - unvote

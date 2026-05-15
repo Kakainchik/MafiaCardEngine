@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ExecutorControl" xml:space="preserve">
+    <value>Фальшивое письмо от имени руководства отправлено. Посмотрим, как они выполнят чужой приказ...</value>
+  </data>
+  <data name="ExecutorFireImmune" xml:space="preserve">
+    <value>Вы подготовили неопровержимый компромат на цель, но юристы завернули его из-за "золотого парашюта" в контракте цели.</value>
+  </data>
+  <data name="ExecutorInvestigateRole" xml:space="preserve">
+    <value>Согласно закрытому штатному расписанию, этот человек - {0}</value>
+  </data>
+  <data name="ExecutorSecurityDetectDangerous" xml:space="preserve">
+    <value>Логи не врут. Этот сотрудник работает на конкурентов или преследует личные цели.</value>
+  </data>
+  <data name="ExecutorSecurityDetectPeaceful" xml:space="preserve">
+    <value>Проверка пройдена. Сотрудник верен Корпорации.</value>
+  </data>
+  <data name="ExecutorShadowDirectorFail" xml:space="preserve">
+    <value>Кандидат оказался слишком принципиален и отказался от "грязных" денег. Возможно, он станет проблемой.</value>
+  </data>
+  <data name="ExecutorShadowDirectorSuccess" xml:space="preserve">
+    <value>Оффер от Синдиката принят. У нас новый агент внутри Корпорации.</value>
+  </data>
+  <data name="ExecutorStartupFounderFail" xml:space="preserve">
+    <value>Кандидат оказался слишком привязан к стабильной зарплате и бонусам.</value>
+  </data>
+  <data name="ExecutorStartupFounderSuccess" xml:space="preserve">
+    <value>Вы успешно продали идею "единорога". Ещё один винтик системы стал свободным творцом.</value>
+  </data>
+  <data name="AllSuicide" xml:space="preserve">
+    <value>Утром все увидели в корпоративном чате прощальное сообщение. Кто-то из коллег психанул и уволился одним днём.</value>
+  </data>
+  <data name="AllSwapIncident" xml:space="preserve">
+    <value>В Jira произошёл масштабный сбой. Кто-то уволил сам себя из-за невероятной путаницы в тикетах!</value>
+  </data>
+  <data name="TargetControl" xml:space="preserve">
+    <value>Вам в мессенджер пришло срочное и крайне странное распоряжение от начальства. Вы не могли ослушаться, пришлось отложить все свои планы и выполнить его.</value>
+  </data>
+  <data name="TargetShadowDirectorFail" xml:space="preserve">
+    <value>На вашу рабочую почту пришло очень странное и крайне нелегальное предложение о сотрудничестве, которое вы немедленно отправили в спам.</value>
+  </data>
+  <data name="TargetShadowDirectorSuccess" xml:space="preserve">
+    <value>Вам сделали предложение, от которого невозможно отказаться. Большие деньги в обмен на небольшую услугу. Вы теперь в Синдикате.</value>
+  </data>
+  <data name="TargetStartupFounderFail" xml:space="preserve">
+    <value>Вам предлагали работу за "идею" и призрачные опционы, но вы предпочли стабильность.</value>
+  </data>
+  <data name="TargetStartupFounderSuccess" xml:space="preserve">
+    <value>Вы подписали оффер в Стартап за долю в компании и смузи по пятницам. Корпоративные идеалы забыты. Теперь вы Евангелист.</value>
+  </data>
+  <data name="TargetSuicide" xml:space="preserve">
+    <value>Вы сами не понимаете как, но вы зачем-то подписали заявление по собственному желанию и отдали его в отдел кадров.</value>
+  </data>
+  <data name="TargetSwap" xml:space="preserve">
+    <value>Внезапно ваши приоритетные задачи в таск-трекере были переназначены на совершенно другой проект.</value>
+  </data>
+  <data name="TargetBlackmailMasterFire" xml:space="preserve">
+    <value>Утром вы обнаруживаете, что кто-то взломал вашу почту и слил личные переписки руководству... Вас вызвали на ковёр.</value>
+  </data>
+  <data name="AllBlackmailMasterFire" xml:space="preserve">
+    <value>Похоже, кого-то скоро вызовут на ковёр…</value>
+  </data>
+  <data name="TargetRaiderFire" xml:space="preserve">
+    <value>Утром вы обнаруживаете, что ваш KPI в системе сильно занижен, чем должно быть. Вы уверены, это проделки конкурентов. Готовьтесь, скоро вас сократят.</value>
+  </data>
+  <data name="AllRaiderFire" xml:space="preserve">
+    <value>По офису ходит слух о намечающейся реструктуризации.</value>
+  </data>
+  <data name="TargetAnticrisisManagerFire" xml:space="preserve">
+    <value>Вы открываете почту и видите: "Вы не вписываетесь в новую парадигму компании." Вы попали под экстренное сокращение бюджетов.</value>
+  </data>
+  <data name="AllAnticrisisFire" xml:space="preserve">
+    <value>Руководство выпустило меморандум об оптимизации штата. Скорее всего, у нас минус один сотрудник.</value>
+  </data>
+  <data name="TargetResurrect" xml:space="preserve">
+    <value>Корпорация указала вам на дверь, но вы тут же подписали серый B2B-контракт. Вы снова в деле, но уже вне штата. Теперь вы Аутсорсер.</value>
+  </data>
+  <data name="AllResurrect" xml:space="preserve">
+    <value>В списке внешних подрядчиков появилось до боли знакомое имя...</value>
+  </data>
+  <data name="ExecutorProtect" xml:space="preserve">
+    <value>Вы почистили личное дело сотрудника и уничтожили всю его сомнительную активность до того, как это кто-то увидел и переслал Директору.</value>
+  </data>
+  <data name="TargetProtect" xml:space="preserve">
+    <value>Ночью под вас копали конкуренты, но кто-то из HR-отдела удалил компрометирующие логи. Ваша репутация чиста.</value>
+  </data>
+  <data name="TargetBlock" xml:space="preserve">
+    <value>Ваша учётная запись была заблокирована из-за "подозрительной активности". Вы просидели всю ночь, ожидая ответа техподдержки, так ничего и не сделав.</value>
+  </data>
+  <data name="TargetBlockBlocker" xml:space="preserve">
+    <value>Вы попытались зайти на удаленный сервер, но кто-то из сисадминов уже перехватил управление и сбросил все ваши пароли!</value>
+  </data>
+  <data name="TargetBlockSelf" xml:space="preserve">
+    <value>В результате нелепой ошибки вы случайно забанили собственный токен доступа и остались на всю ночь без админских прав.</value>
+  </data>
+</root>

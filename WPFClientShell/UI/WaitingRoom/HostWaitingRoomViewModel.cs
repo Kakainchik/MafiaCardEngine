@@ -169,7 +169,7 @@ namespace WPFClientShell.UI
 
         private async void OnPlayerKicked(object? obj)
         {
-            long playerId = (long)obj!;
+            ulong playerId = (ulong)obj!;
             if(CurrentLobbyData.Host.Id == playerId)
             {
                 return;

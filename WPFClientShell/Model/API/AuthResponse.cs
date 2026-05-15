@@ -2,11 +2,11 @@
 {
     public class AuthResponse
     {
-        public long Id { get; init; }
+        public ulong Id { get; init; }
         public string Username { get; init; }
         public string JwtToken { get; init; }
 
-        public AuthResponse(long id, string username, string jwtToken)
+        public AuthResponse(ulong id, string username, string jwtToken)
         {
             Id = id;
             Username = username;

@@ -35,7 +35,7 @@ namespace GameLogic.Cycles.Night.Visitors
 
             return new ActionLog
             {
-                Action = ActionType.HEAL,
+                Action = ActionType.PROTECT,
                 Executor = this.Visitor,
                 Target = target,
                 Success = this.Success

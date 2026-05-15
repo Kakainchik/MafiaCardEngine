@@ -9,7 +9,7 @@ namespace GameLogic.Roles
     /// Every night, can make someone perform their role action on a target
     /// of her choosing, even if they missed a turn.
     /// </summary>
-    [Executor(ExecutorType.EXECUTOR_TARGER)]
+    [Executor(ExecutorType.TARGET_ANYTARGET)]
     [Category(RoleCategory.GOVERMENT)]
     [Team(Team.WITCH)]
     public class WitchRole : Role, IExecutor

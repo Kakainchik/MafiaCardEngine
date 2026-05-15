@@ -9,7 +9,7 @@ namespace WebServer.Shared.HubObjects
 
         public sealed record class PlayerInstance
         {
-            public required long Id { get; init; }
+            public required ulong Id { get; init; }
             public required string Nickname { get; init; }
             public required RGB NColor { get; init; }
         }

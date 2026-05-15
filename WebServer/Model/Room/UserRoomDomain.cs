@@ -2,11 +2,11 @@
 {
     public class UserRoomDomain
     {
-        public long Id { get; init; }
+        public ulong Id { get; init; }
         public string Username { get; init; }
         public bool IsReady { get; set; }
 
-        public UserRoomDomain(long id, string username)
+        public UserRoomDomain(ulong id, string username)
         {
             Id = id;
             Username = username;
@@ -14,9 +14,9 @@
 
         public override bool Equals(object? obj)
         {
-            if(obj is long)
+            if(obj is ulong)
             {
-                return (long)obj == Id;
+                return (ulong)obj == Id;
             }
 
             UserRoomDomain? second = obj as UserRoomDomain;
@@ -35,6 +35,6 @@
             return Id.GetHashCode();
         }
 
-        public static implicit operator long(UserRoomDomain dto) => dto.Id;
+        public static implicit operator ulong(UserRoomDomain dto) => dto.Id;
     }
 }

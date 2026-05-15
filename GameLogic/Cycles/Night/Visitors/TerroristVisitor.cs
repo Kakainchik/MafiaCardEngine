@@ -36,7 +36,7 @@ namespace GameLogic.Cycles.Night.Visitors
             Success = true;
             return new ActionLog
             {
-                Action = ActionType.TERRORIST_BLOW,
+                Action = ActionType.BLOW,
                 Executor = this.Visitor,
                 Target = target,
                 Success = this.Success

@@ -10,7 +10,7 @@ namespace WPFClientShell.UI
 {
     public class MorningScreenViewModel : ScreenViewModel
     {
-        private readonly IReadOnlyDictionary<long, PlayerEntity> allPlayers;
+        private readonly IReadOnlyDictionary<ulong, PlayerEntity> allPlayers;
 
         private PlayerVictimDecorator? victim;
 
@@ -38,7 +38,7 @@ namespace WPFClientShell.UI
 
         public MorningScreenViewModel(LobbyDomain lobbyDomain,
             PlayerEntity ownPlayer,
-            IReadOnlyDictionary<long, PlayerEntity> allPlayers)
+            IReadOnlyDictionary<ulong, PlayerEntity> allPlayers)
             : base(lobbyDomain, ownPlayer)
         {
             this.allPlayers = allPlayers;

@@ -2,12 +2,12 @@
 {
     public record class JwtDTO
     {
-        public long Id { get; init; }
+        public ulong Id { get; init; }
         public string Username { get; init; }
         public string JwtToken { get; init; }
         public string RefreshToken { get; init; }
 
-        public JwtDTO(long id, string username, string jwtToken, string refreshToken)
+        public JwtDTO(ulong id, string username, string jwtToken, string refreshToken)
         {
             Id = id;
             Username = username;

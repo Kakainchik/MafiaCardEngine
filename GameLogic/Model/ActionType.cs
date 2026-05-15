@@ -3,13 +3,13 @@
     public enum ActionType : byte
     {
         KILL,
-        ESCORT_BLOCK,
-        WITCH_CONTROL,
-        DRIVER_SWAP,
+        BLOCK,
+        CONTROL,
+        SWAP,
         INVESTIGATE,
-        HEAL,
+        PROTECT,
         RECRUIT,
         RESSURECT,
-        TERRORIST_BLOW
+        BLOW
     }
 }

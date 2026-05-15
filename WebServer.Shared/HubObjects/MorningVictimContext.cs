@@ -4,7 +4,7 @@ namespace WebServer.Shared.HubObjects
 {
     public record class MorningVictimContext : Context
     {
-        public required long VictimId { get; init; }
+        public required ulong VictimId { get; init; }
         public required RoleSignature VictimRole { get; init; }
         public required DeathReason Reason { get; init; }
         public string? LastWill { get; init; }

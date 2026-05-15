@@ -32,7 +32,7 @@ namespace GameLogic.Cycles.Night.Abilities
 
         public void SendVisitor()
         {
-            RessurectVisitor visitor = new RessurectVisitor(Holder);
+            ResurrectVisitor visitor = new ResurrectVisitor(Holder);
             Targets[0].Visitors.Add(visitor);
             Holder.HasLeftHouse = true;
         }

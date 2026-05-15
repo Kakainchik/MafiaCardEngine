@@ -1,5 +1,6 @@
 ﻿using GameLogic.Interfaces;
 using GameLogic.Model;
+using GameLogic.ParanoiaCorp.Roles;
 
 namespace GameLogic.Cycles.Night.Visitors
 {
@@ -12,11 +13,18 @@ namespace GameLogic.Cycles.Night.Visitors
 
         public override ActionLog VisitTarget(ITarget target)
         {
-            //No restrictions
+            //No restriction
             Success = true;
+
+            if(Visitor is HackerRole hacker)
+            {
+                hacker.PreviousTarget = target;
+                hacker.DidActionPreviousTurn = true;
+            }
+
             return new ActionLog
             {
-                Action = ActionType.ESCORT_BLOCK,
+                Action = ActionType.BLOCK,
                 Executor = this.Visitor,
                 Target = target,
                 Success = this.Success

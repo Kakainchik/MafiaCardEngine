@@ -15,7 +15,7 @@ namespace WebServer.Shared.HubObjects
 
         public sealed record class EndGamePlayerState
         {
-            public required long Id { get; init; }
+            public required ulong Id { get; init; }
             public required string Nickname {  get; init; }
             public required RGB NColor { get; init; }
             public required RoleSignature Role { get; init; }

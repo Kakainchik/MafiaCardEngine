@@ -23,7 +23,7 @@ namespace GameLogic.Roles
             //If got dead - ressurect
             if(!IsAlive)
             {
-                RessurectVisitor ressurect = new RessurectVisitor(this);
+                ResurrectVisitor ressurect = new ResurrectVisitor(this);
                 yield return ressurect.VisitTarget(this);
             }
         }

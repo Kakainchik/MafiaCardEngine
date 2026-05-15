@@ -23,7 +23,7 @@ namespace WebServer.Services
         /// Gets random token sized 40 bytes.
         /// </summary>
         /// <returns>Token string.</returns>
-        public string GenerateJwtToken(long userId, string username)
+        public string GenerateJwtToken(ulong userId, string username)
         {
             //Generate token that is valid for 20 day
             byte[] key = Encoding.ASCII.GetBytes(jwtSettings.Secret);

@@ -16,7 +16,7 @@ namespace GameLogic.Cycles.Night.Visitors
             Success = true;
             return new ActionLog
             {
-                Action = ActionType.DRIVER_SWAP,
+                Action = ActionType.SWAP,
                 Executor = this.Visitor,
                 Target = target,
                 Success = this.Success

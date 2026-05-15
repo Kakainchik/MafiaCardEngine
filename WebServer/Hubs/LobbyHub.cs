@@ -137,7 +137,7 @@ namespace WebServer.Hubs
 
         private UserDTO UnboxClaims()
         {
-            long userId = long.Parse(Context.User!.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            ulong userId = ulong.Parse(Context.User!.FindFirstValue(ClaimTypes.NameIdentifier)!);
             string username = Context.User!.FindFirstValue(ClaimTypes.Name)!;
             return new UserDTO(userId, username);
         }

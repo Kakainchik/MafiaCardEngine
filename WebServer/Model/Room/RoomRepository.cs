@@ -35,7 +35,7 @@ namespace WebServer.Model.Room
             return rooms.ContainsKey(roomId);
         }
 
-        public int? GetRoomIdByPlayer(long userId)
+        public int? GetRoomIdByPlayer(ulong userId)
         {
             return rooms.Values.SingleOrDefault(l => l.Players.Keys.Any(u => u == userId))?.Id;
         }
@@ -52,12 +52,12 @@ namespace WebServer.Model.Room
             return true;
         }
 
-        public bool IsPlayerExist(long userId)
+        public bool IsPlayerExist(ulong userId)
         {
             return rooms.Any(l => l.Value.Players.Keys.Any(u => u == userId));
         }
 
-        public bool IsPlayerExist(int roomId, long userId)
+        public bool IsPlayerExist(int roomId, ulong userId)
         {
             WaitRoomDomain? domain;
             if(rooms.TryGetValue(roomId, out domain))
@@ -88,7 +88,7 @@ namespace WebServer.Model.Room
             domain.Players.Add(player, player);
         }
 
-        public void KickPlayerFromRoom(int roomId, long userId)
+        public void KickPlayerFromRoom(int roomId, ulong userId)
         {
             WaitRoomDomain? domain;
             if(rooms.TryGetValue(roomId, out domain))
@@ -146,7 +146,7 @@ namespace WebServer.Model.Room
             return rooms[roomId].Players.Values;
         }
 
-        public void SetReadiness(int roomId, long playerId, bool value)
+        public void SetReadiness(int roomId, ulong playerId, bool value)
         {
             rooms[roomId].Players[playerId].IsReady = value;
         }

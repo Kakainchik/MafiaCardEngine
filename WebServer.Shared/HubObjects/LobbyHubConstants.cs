@@ -21,7 +21,7 @@
             };
         }
 
-        public static Context.ContextPresenter ServerToUserPresenter(int roomId, long user)
+        public static Context.ContextPresenter ServerToUserPresenter(int roomId, ulong user)
         {
             return new Context.ContextPresenter()
             {
@@ -31,7 +31,7 @@
             };
         }
 
-        public static Context.ContextPresenter ServerExceptPresenter(int roomId, long user)
+        public static Context.ContextPresenter ServerExceptPresenter(int roomId, ulong user)
         {
             return new Context.ContextPresenter()
             {

@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Reflection;
+﻿using System.Reflection;
 using WebServer.Shared.GameObjects;
 
 namespace WebServer.Shared.Extensions
