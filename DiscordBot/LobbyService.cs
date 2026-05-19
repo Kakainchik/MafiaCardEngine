@@ -1,4 +1,5 @@
 ﻿using DiscordBot.Model;
+using GameLogic.ParanoiaCorp;
 using System.Collections.Concurrent;
 
 namespace DiscordBot
@@ -31,9 +32,9 @@ namespace DiscordBot
 
         public (bool IsValid, string ErrorMessage) ValidateLobby(LobbySession lobby)
         {
-            if(lobby.Players.Count < 6)
+            if(lobby.Players.Count < GameEngine.MIN_PLAYERS)
             {
-                return (false, "For the game to start, at least 6 employees are required.");
+                return (false, $"For the game to start, at least {GameEngine.MIN_PLAYERS} employees are required.");
             }
 
             if(lobby.TotalRolesCount != lobby.Players.Count)

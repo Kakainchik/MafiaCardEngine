@@ -179,6 +179,16 @@ namespace DiscordBot.Modules
                 return;
             }
 
+            await component.UpdateAsync(x =>
+            {
+                x.Embed = new EmbedBuilder()
+                    .WithTitle("⏳ Preparing contracts...")
+                    .WithDescription("Please wait. Distributing employment contracts to employees...")
+                    .WithColor(Color.Orange)
+                    .Build();
+                x.Components = new ComponentBuilder().Build();
+            });
+
             //Delete the lobby to prevent further interactions
             lobbyService.RemoveLobby(component.Message.Id);
 
@@ -203,17 +213,6 @@ namespace DiscordBot.Modules
                 });
                 return;
             }
-            
-
-            await component.UpdateAsync(x =>
-            {
-                x.Embed = new EmbedBuilder()
-                    .WithTitle(Miscellaneous.WorkingDayStartTitle)
-                    .WithDescription(Miscellaneous.CheckPMForContractInfo)
-                    .WithColor(Color.Green)
-                    .Build();
-                x.Components = new ComponentBuilder().Build();
-            });
 
             //Send private messages to players with their assigned roles
             List<ulong> failedDMs = new List<ulong>();
@@ -250,22 +249,25 @@ namespace DiscordBot.Modules
             }
 
             //Update the lobby message with information about failed DMs, if any
-            await component.UpdateAsync(x =>
+            EmbedBuilder finalEmbed = new EmbedBuilder()
+                .WithTitle(Miscellaneous.WorkingDayStartTitle)
+                .WithDescription(Miscellaneous.CheckPMForContractInfo)
+                .WithColor(Color.Green);
+
+            if(failedDMs.Any())
             {
-                EmbedBuilder finalEmbed = new EmbedBuilder()
-                    .WithTitle(Miscellaneous.WorkingDayStartTitle)
-                    .WithDescription(Miscellaneous.CheckPMForContractInfo)
-                    .WithColor(Color.Green);
+                string failedPings = string.Join(", ", failedDMs.Select(id => $"<@{id}>"));
+                finalEmbed.AddField(Miscellaneous.AttentionTitle, string.Format(Miscellaneous.OpenDMWarning, failedPings));
+            }
 
-                if(failedDMs.Any())
+            if(await Context.Channel.GetMessageAsync(component.Message.Id) is IUserMessage msg)
+            {
+                await msg.ModifyAsync(x =>
                 {
-                    string failedPings = string.Join(", ", failedDMs.Select(id => $"<@{id}>"));
-                    finalEmbed.AddField(Miscellaneous.AttentionTitle, string.Format(Miscellaneous.OpenDMWarning, failedPings));
-                }
-
-                x.Embed = finalEmbed.Build();
-                x.Components = new ComponentBuilder().Build();
-            });
+                    x.Embed = finalEmbed.Build();
+                    x.Components = new ComponentBuilder().Build();
+                });
+            }
 
             //Start the session
             await gameSessionService.StartGameSession(holder);

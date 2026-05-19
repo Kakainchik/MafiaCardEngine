@@ -117,67 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlumniManager" xml:space="preserve">
-    <value>Alumni-Menedżer</value>
+  <data name="Corporation" xml:space="preserve">
+    <value>Корпорация</value>
   </data>
-  <data name="AnticrisisManager" xml:space="preserve">
-    <value>Menedżer ds. Kryzysów</value>
+  <data name="Outsource" xml:space="preserve">
+    <value>Аутсорс</value>
   </data>
-  <data name="Auditor" xml:space="preserve">
-    <value>Audytor</value>
+  <data name="Singles" xml:space="preserve">
+    <value>Одиночки</value>
   </data>
-  <data name="Clerk" xml:space="preserve">
-    <value>Szeregowy Pracownik</value>
+  <data name="Startup" xml:space="preserve">
+    <value>Сомнительный Стартап</value>
   </data>
-  <data name="Evangelist" xml:space="preserve">
-    <value>Ewangelista</value>
-  </data>
-  <data name="GeneralDirector" xml:space="preserve">
-    <value>Prezes</value>
-  </data>
-  <data name="Hacker" xml:space="preserve">
-    <value>Haker</value>
-  </data>
-  <data name="HRManager" xml:space="preserve">
-    <value>HR-Menedżer</value>
-  </data>
-  <data name="Intern" xml:space="preserve">
-    <value>Stażysta</value>
-  </data>
-  <data name="LayoffCandidate" xml:space="preserve">
-    <value>Kandydat do Zwolnienia</value>
-  </data>
-  <data name="MasterOfCompromising" xml:space="preserve">
-    <value>Mistrz Kompromatu</value>
-  </data>
-  <data name="Outsourcer" xml:space="preserve">
-    <value>Outsourcer</value>
-  </data>
-  <data name="PoliticalStrategist" xml:space="preserve">
-    <value>Konsultant Polityczny</value>
-  </data>
-  <data name="Raider" xml:space="preserve">
-    <value>Raider</value>
-  </data>
-  <data name="ScrumMaster" xml:space="preserve">
-    <value>Scrum Master</value>
-  </data>
-  <data name="SecuritySpecialist" xml:space="preserve">
-    <value>Specjalista ds. Bezpieczeństwa</value>
-  </data>
-  <data name="ShadowDirector" xml:space="preserve">
-    <value>Szary Kardynał</value>
-  </data>
-  <data name="Shareholder" xml:space="preserve">
-    <value>Akcjonariusz</value>
-  </data>
-  <data name="Spy" xml:space="preserve">
-    <value>Szpieg</value>
-  </data>
-  <data name="StartupFounder" xml:space="preserve">
-    <value>Założyciel Startupu</value>
-  </data>
-  <data name="SystemAdministrator" xml:space="preserve">
-    <value>Administrator Systemu</value>
+  <data name="Syndicate" xml:space="preserve">
+    <value>Синдикат</value>
   </data>
 </root>

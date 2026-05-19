@@ -118,66 +118,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlumniManager" xml:space="preserve">
-    <value>Alumni-Menedżer</value>
+    <value>Alumni Менеджер</value>
   </data>
   <data name="AnticrisisManager" xml:space="preserve">
-    <value>Menedżer ds. Kryzysów</value>
+    <value>Антикризисный Менеджер</value>
   </data>
   <data name="Auditor" xml:space="preserve">
-    <value>Audytor</value>
+    <value>Аудитор</value>
   </data>
   <data name="Clerk" xml:space="preserve">
-    <value>Szeregowy Pracownik</value>
+    <value>Клерк</value>
   </data>
   <data name="Evangelist" xml:space="preserve">
-    <value>Ewangelista</value>
+    <value>Евангелист</value>
   </data>
   <data name="GeneralDirector" xml:space="preserve">
-    <value>Prezes</value>
+    <value>Генеральный Директор</value>
   </data>
   <data name="Hacker" xml:space="preserve">
-    <value>Haker</value>
+    <value>Хакер</value>
   </data>
   <data name="HRManager" xml:space="preserve">
-    <value>HR-Menedżer</value>
+    <value>HR Менджер</value>
   </data>
   <data name="Intern" xml:space="preserve">
-    <value>Stażysta</value>
+    <value>Стажёр</value>
   </data>
   <data name="LayoffCandidate" xml:space="preserve">
-    <value>Kandydat do Zwolnienia</value>
+    <value>Кандидат на Увольнение</value>
   </data>
   <data name="MasterOfCompromising" xml:space="preserve">
-    <value>Mistrz Kompromatu</value>
+    <value>Мастер Компромата</value>
   </data>
   <data name="Outsourcer" xml:space="preserve">
-    <value>Outsourcer</value>
+    <value>Аутсорсер</value>
   </data>
   <data name="PoliticalStrategist" xml:space="preserve">
-    <value>Konsultant Polityczny</value>
+    <value>Политтехнолог</value>
   </data>
   <data name="Raider" xml:space="preserve">
-    <value>Raider</value>
+    <value>Рейдер</value>
   </data>
   <data name="ScrumMaster" xml:space="preserve">
-    <value>Scrum Master</value>
+    <value>Scrum Мастер</value>
   </data>
   <data name="SecuritySpecialist" xml:space="preserve">
-    <value>Specjalista ds. Bezpieczeństwa</value>
+    <value>Специалист СБ</value>
   </data>
   <data name="ShadowDirector" xml:space="preserve">
-    <value>Szary Kardynał</value>
+    <value>Теневой Директор</value>
   </data>
   <data name="Shareholder" xml:space="preserve">
-    <value>Akcjonariusz</value>
+    <value>Акционер</value>
   </data>
   <data name="Spy" xml:space="preserve">
-    <value>Szpieg</value>
+    <value>Шпион</value>
   </data>
   <data name="StartupFounder" xml:space="preserve">
-    <value>Założyciel Startupu</value>
+    <value>Основатель Стартапа</value>
   </data>
   <data name="SystemAdministrator" xml:space="preserve">
-    <value>Administrator Systemu</value>
+    <value>Системный Администратор</value>
   </data>
 </root>
