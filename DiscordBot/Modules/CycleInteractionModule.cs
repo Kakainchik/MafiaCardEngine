@@ -47,9 +47,11 @@ namespace DiscordBot.Modules
 
             introCycle.SetPlayerReady(player);
 
+            string generalDirectorWarning = player.Role.IntoSignature().MapRole() == RoleVisual.GENERAL_DIRECTOR ? string.Empty : Miscellaneous.DontShowDocumentWarning;
+
             Embed embed = new EmbedBuilder()
                 .WithTitle(Miscellaneous.YourContractInfo)
-                .WithDescription($"{Miscellaneous.YourPositionTitle} {player.Role}\n\n{Miscellaneous.DontShowDocumentWarning}")
+                .WithDescription($"{Miscellaneous.YourPositionTitle} {player.Role.IntoSignature().MapRole().GetLocalizedName()}\n\n{generalDirectorWarning}")
                 .WithColor(Color.Default)
                 .Build();
 
@@ -276,7 +278,7 @@ namespace DiscordBot.Modules
 
             Embed embed = new EmbedBuilder()
                 .WithTitle(Miscellaneous.TerminalTitle)
-                .WithDescription($"{Miscellaneous.PositionTitle} {player.Role}\n\n{Miscellaneous.SelectTargetMessage}")
+                .WithDescription($"{Miscellaneous.PositionTitle} {player.Role.IntoSignature().MapRole().GetLocalizedName()}\n\n{Miscellaneous.SelectTargetMessage}")
                 .WithColor(Color.DarkBlue)
                 .Build();
 
@@ -301,7 +303,7 @@ namespace DiscordBot.Modules
                 case ExecutorType.TARGET:
                 {
                     //Add options based on alive players in the game
-                    IEnumerable<Player> alivePlayers = holder.Engine.Players.Where(p => p.IsAlive && p.Id != player.Id);
+                    IEnumerable<Player> alivePlayers = holder.Engine.AlivePlayers.Where(p => p.IsAlive && p.Id != player.Id);
                     List<SelectMenuOptionBuilder> options = new List<SelectMenuOptionBuilder>();
                     foreach(Player target in alivePlayers)
                     {
@@ -323,7 +325,7 @@ namespace DiscordBot.Modules
                 }
                 case ExecutorType.TARGET_TARGET:
                 {
-                    IEnumerable<Player> alivePlayers = holder.Engine.Players.Where(p => p.IsAlive && p.Id != player.Id);
+                    IEnumerable<Player> alivePlayers = holder.Engine.AlivePlayers.Where(p => p.IsAlive && p.Id != player.Id);
                     List<SelectMenuOptionBuilder> options = new List<SelectMenuOptionBuilder>();
                     foreach(Player target in alivePlayers)
                     {
@@ -352,7 +354,7 @@ namespace DiscordBot.Modules
                 }
                 case ExecutorType.TARGET_ANYTARGET:
                 {
-                    IEnumerable<Player> alivePlayers = holder.Engine.Players.Where(p => p.IsAlive);
+                    IEnumerable<Player> alivePlayers = holder.Engine.AlivePlayers.Where(p => p.IsAlive);
                     List<SelectMenuOptionBuilder> options1 = new List<SelectMenuOptionBuilder>();
                     List<SelectMenuOptionBuilder> options2 = new List<SelectMenuOptionBuilder>();
                     foreach(Player target in alivePlayers)
@@ -467,7 +469,7 @@ namespace DiscordBot.Modules
                         IRoleOwner[] targets = new IRoleOwner[selections.Length];
                         for(int i = 0; i < targets.Length; i++)
                         {
-                            IRoleOwner? target = holder.Engine.Players.FirstOrDefault(p => p.Id == selections[i]);
+                            IRoleOwner? target = holder.Engine.AlivePlayers.FirstOrDefault(p => p.Id == selections[i]);
                             targets[i] = target ?? throw new InvalidOperationException(Miscellaneous.TargetNotFoundError);
                         }
                         overtimeCycle.ConfirmAction(player, targets);

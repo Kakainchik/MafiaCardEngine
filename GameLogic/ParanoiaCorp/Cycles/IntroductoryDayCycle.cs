@@ -17,6 +17,12 @@ namespace GameLogic.ParanoiaCorp.Cycles
         {
             if(Engine != null)
             {
+                EndGameRoundHistory roundHistory = new EndGameRoundHistory()
+                {
+                    Turn = 0,
+                };
+                Engine.History.Enqueue(roundHistory);
+
                 return new OvertimeCycle(Engine);
             }
             else

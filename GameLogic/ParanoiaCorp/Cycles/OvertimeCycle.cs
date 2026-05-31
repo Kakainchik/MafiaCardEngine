@@ -13,6 +13,8 @@ namespace GameLogic.ParanoiaCorp.Cycles
         private bool actionsComfirmed = false;
         private GameEngine engine;
         private List<IAbility> abilities = new List<IAbility>();
+        private EndGameRoundHistory endGameRoundHistory;
+        private Queue<EndGameOvernightHistory> endGameOvernightHistory;
 
         protected IDictionary<Player, bool> alivePlayers;
 
@@ -20,6 +22,9 @@ namespace GameLogic.ParanoiaCorp.Cycles
         {
             this.engine = engine;
             alivePlayers = engine.AlivePlayers.ToDictionary(p => p, p => false);
+            endGameRoundHistory = this.engine.History.Peek();
+            endGameOvernightHistory = new Queue<EndGameOvernightHistory>();
+            endGameRoundHistory.OvertimeActions = endGameOvernightHistory;
         }
 
         public bool CanFinish()
@@ -59,6 +64,14 @@ namespace GameLogic.ParanoiaCorp.Cycles
             Role[] targetRoles = targets.Select(x => x.Role).ToArray();
             IAbility ability = ((IExecutor)executor.Role).GetAbility(selectAbility, targetRoles);
             abilities.Add(ability);
+
+            EndGameOvernightHistory overnightRecord = new EndGameOvernightHistory()
+            {
+                Executor = executor.Id,
+                ExecutorRoleType = executor.Role.GetType(),
+                Targets = targets.Select(t => t.Id).ToArray()
+            };
+            endGameOvernightHistory.Enqueue(overnightRecord);
         }
 
         public void SetPlayerReady(Player player)
@@ -102,7 +115,7 @@ namespace GameLogic.ParanoiaCorp.Cycles
                 }
             }
 
-            //All actions has done, clear visitors
+            //All actions has done, record and clear visitors
             for(int i = 0; i < engine.Players.Length; i++)
             {
                 engine.Players[i].Role.Visitors.Clear();

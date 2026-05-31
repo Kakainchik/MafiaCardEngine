@@ -53,13 +53,13 @@ namespace DiscordBot
             env.GeneralTextChannelId = generalText.Id;
             env.VoiceBoardChannelId = voiceBoard.Id;
 
-            RestRole syndicateScope = await guild.CreateRoleAsync(SyndicateNeutralName, color: Team.SYNDICATE.GetColor(), isHoisted: false);
-            RestRole shareholderScope = await guild.CreateRoleAsync(ShareholderNeutralName, color: Team.CORPORATION.GetColor(), isHoisted: false);
-            RestRole startupFounderScope = await guild.CreateRoleAsync(StartupFounderNeutralName, color: Team.STARTUP.GetColor(), isHoisted: false);
-            RestRole evangelistScope = await guild.CreateRoleAsync(EvangelistNeutralName, color: Team.STARTUP.GetColor(), isHoisted: false);
-            RestRole outsourceScope = await guild.CreateRoleAsync(OutsourceNeutralName, color: Team.OUTSOURCE.GetColor(), isHoisted: false);
-            RestRole alumniScope = await guild.CreateRoleAsync(AlumniNeutralName, color: Team.OUTSOURCE.GetColor(), isHoisted: false);
-            RestRole firedScope = await guild.CreateRoleAsync(FiredNeutralName, color: Color.DarkerGrey, isHoisted: false);
+            RestRole syndicateScope = await guild.CreateRoleAsync(SyndicateNeutralName, isHoisted: false);
+            RestRole shareholderScope = await guild.CreateRoleAsync(ShareholderNeutralName, isHoisted: false);
+            RestRole startupFounderScope = await guild.CreateRoleAsync(StartupFounderNeutralName, isHoisted: false);
+            RestRole evangelistScope = await guild.CreateRoleAsync(EvangelistNeutralName, isHoisted: false);
+            RestRole outsourceScope = await guild.CreateRoleAsync(OutsourceNeutralName, isHoisted: false);
+            RestRole alumniScope = await guild.CreateRoleAsync(AlumniNeutralName, isHoisted: false);
+            RestRole firedScope = await guild.CreateRoleAsync(FiredNeutralName, isHoisted: false);
 
             env.FractionRoles.Add(syndicateScope.Name, syndicateScope.Id);
             env.FractionRoles.Add(shareholderScope.Name, shareholderScope.Id);
@@ -173,7 +173,7 @@ namespace DiscordBot
 
         /// <summary>
         /// The method to call whenever the game cycle changes.
-        /// It updates permissions and sends announcements in the general text channel based on the current cycle (Director's Board or Overtime).
+        /// It updates permissions and sends announcements in the general text channel based on the current cycle.
         /// This keeps players informed about the current phase of the game and ensures they have access to the appropriate channels for discussion and coordination.
         /// </summary>
         public async Task SyncCycleWithDiscordAsync(GameHolder holder)
@@ -213,171 +213,184 @@ namespace DiscordBot
 
             if(currentCycle is IntroductoryDayCycle)
             {
-                //At the start of the game, disallow everyone to send messages in the general text channel and speak in the voice channel until the first board meeting starts
-                await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
-                await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
-
-                //Also disallow everyone to see private channels until the first board meeting starts
-                await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
-
-                MessageComponent components = new ComponentBuilder()
-                    .WithButton(Miscellaneous.ActionIntroReadyButton, "action_intro_ready", ButtonStyle.Success)
-                    .Build();
-
-                await generalText.SendMessageAsync(Miscellaneous.IntroDayMessageInfo, components: components);
+                await HandleIntroductoryCycle(guild, env, generalText, voiceBoard, denyAll);
             }
             else if(currentCycle is MorningCycle morningCycle)
             {
-                await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
-                await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
-
-                await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
-
-                // Send logs to PMs and publish public news in the general channel based on the logs
-                Queue<PostmanPresenter> postman = ActionLogFacade.ZipLogs(morningCycle.ActionLogs);
-                var postponedMessages = await ActionLogFacade.InterpretLogs(postman, guild, generalText);
-                env.PostponedMessages = postponedMessages;
-
-                //The button for the General Director
-                MessageComponent components = new ComponentBuilder()
-                    .WithButton(Miscellaneous.ActionMorningStartBoardButton, "action_morning_start_board", ButtonStyle.Danger)
-                    .Build();
-
-                await generalText.SendMessageAsync(Miscellaneous.MorningReadyMessageInfo, components: components);
+                await HandleMorningCycle(guild, env, generalText, voiceBoard, denyAll, morningCycle);
             }
             else if(currentCycle is DirectorBoardCycle boardCycle)
             {
-                //Allow everyone to send messages in the general text channel and speak in the voice channel
-                await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
-                await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Allow));
-
-                //Disallow everyone to see private channels, then allow only players of the corresponding fractions to see their channels
-                await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
-
-                string vetoRemainder = string.Format(Miscellaneous.VetoReminderMessage, holder.Engine.GeneralDirector.VetoCount);
-                EmbedBuilder embedBuilder = new EmbedBuilder()
-                    .WithTitle(Miscellaneous.BoardMeetingStartTitle)
-                    .WithDescription(vetoRemainder)
-                    .WithColor(Color.Gold);
-
-                if(boardCycle.CandidatesForFiring.Any())
-                {
-                    string playerMentions = string.Join("\n", boardCycle.CandidatesForFiring.Select(p => $"- <@{p.Id}>"));
-                    embedBuilder.AddField(Miscellaneous.CandidateForFireExistInfo, playerMentions, true);
-                }
-                else
-                {
-                    embedBuilder.AddField(Miscellaneous.NoCandidatesForFireInfo, Miscellaneous.GeneralDirectorCanSelectCandidateReminder, true);
-                }
-
-                MessageComponent components = BuildDirectorBoardComponents(guild, holder, boardCycle);
-
-                await generalText.SendMessageAsync(embed: embedBuilder.Build(), components: components);
+                await HandleBoardCycle(holder, guild, env, generalText, voiceBoard, denyAll, boardCycle);
             }
             else if(currentCycle is EveningCycle eveningCycle)
             {
-                RoleVisual firedRole = eveningCycle.Elected.Role.IntoSignature().MapRole();
-                EmbedBuilder embedBuilder = new EmbedBuilder()
-                    .WithTitle(Miscellaneous.DirectorBoardOverTitle)
-                    .WithDescription($"{string.Format(Miscellaneous.EmployeeMustRevealRoleInfo, eveningCycle.Elected.Id)}\n\n" +
-                    $"{Miscellaneous.TheirPositionTitle} {firedRole.GetTeam().GetTeamIndicator()} {firedRole.GetLocalizedName()}.")
-                    .WithColor(Color.DarkBlue);
-
-                ComponentBuilder components = new ComponentBuilder()
-                    .WithButton(Miscellaneous.ActionFinishEveningButton, "action_finish_evening", ButtonStyle.Primary);
-
-                await generalText.SendMessageAsync(embed: embedBuilder.Build(), components: components.Build());
+                await HandleEveningCycle(generalText, eveningCycle);
             }
             else if(currentCycle is OvertimeCycle)
             {
-                //Disallow everyone to send messages in the general text channel and speak in the voice channel
-                await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
-                await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
-
-                OverwritePermissions allowReadOnly = new OverwritePermissions(viewChannel: PermValue.Allow, sendMessages: PermValue.Deny);
-
-                await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, allowReadWrite, SyndicateNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, allowReadWrite, ShareholderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, allowReadOnly, StartupFounderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, allowReadWrite, EvangelistNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, allowReadWrite, OutsourceNeutralName);
-
-                //Send any postponed messages to the corresponding players via DM
-                while(env.PostponedMessages.TryPop(out var composeMessage))
-                {
-                    SocketGuildUser user = guild.GetUser(composeMessage.user);
-                    if(user != null)
-                    {
-                        await user.SendMessageAsync($"{Miscellaneous.PostMessageInfo} {composeMessage.message}");
-                    }
-                }
-
-                //Notify Anticrisis Managers about their remaining reports to write
-                IEnumerable<AnticrisisManagerRole> anticrisisManagers = holder.Engine.AlivePlayers.Where(p => p.Role is AnticrisisManagerRole)
-                    .Select(p => (AnticrisisManagerRole)p.Role);
-                foreach(AnticrisisManagerRole anticrisisManager in anticrisisManagers)
-                {
-                    SocketGuildUser user = guild.GetUser(anticrisisManager.Owner!.Id);
-                    if(user != null)
-                    {
-                        await user.SendMessageAsync(string.Format(Miscellaneous.TokenNotificationInfo, anticrisisManager.Items));
-                    }
-                }
-
-                MessageComponent components = new ComponentBuilder()
-                    .WithButton(Miscellaneous.ActionOpenTerminalButton, "action_open_terminal", ButtonStyle.Primary)
-                    .Build();
-
-                await generalText.SendMessageAsync(Miscellaneous.WorkdayOverTitle, components: components);
-
-                //Send reminder about the player's role
-                for(int i = 0; i < holder.Engine.AlivePlayers.Count; i++)
-                {
-                    Player player = holder.Engine.AlivePlayers[i];
-                    SocketGuildUser user = guild.GetUser(player.Id);
-                    if(user != null)
-                    {
-                        Embed embed = new EmbedBuilder()
-                            .WithTitle($"{Miscellaneous.YourContractInfo} {player.Role.IntoSignature().MapRole().GetLocalizedName()}")
-                            .WithDescription(player.Role.IntoSignature().MapRole().GetLocilizedDescription())
-                            .WithColor(player.Role.IntoSignature().GetTeam().GetColor())
-                            .Build();
-
-                        await user.SendMessageAsync(embed: embed);
-                    }
-                }
+                await HandleOvertimeCycle(holder, guild, env, generalText, voiceBoard, allowReadWrite);
             }
             else if(currentCycle is EndGameCycle endGameCycle)
             {
-                await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, allowReadWrite);
-                await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Allow));
-
-                //Hide private channels from everyone
-                await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, FiredNeutralName, denyAll, FiredNeutralName);
-                await ApplyFractionChannelPermissions(guild, env, AlumniNeutralName, denyAll, AlumniNeutralName);
-
-                await CleanupEnvironmentAsync(guild, env, false);
-
-                await endGameController.ProcessEndGameAsync(endGameCycle, generalText);
+                await HandleEndGameCycle(guild, env, generalText, voiceBoard, allowReadWrite, denyAll, endGameCycle);
                 return;
             }
+        }
+
+        private static async Task HandleIntroductoryCycle(SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions denyAll)
+        {
+            //At the start of the game, disallow everyone to send messages in the general text channel and speak in the voice channel until the first board meeting starts
+            await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
+
+            //Also disallow everyone to see private channels until the first board meeting starts
+            await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
+
+            MessageComponent components = new ComponentBuilder()
+                .WithButton(Miscellaneous.ActionIntroReadyButton, "action_intro_ready", ButtonStyle.Success)
+                .Build();
+
+            await generalText.SendMessageAsync(Miscellaneous.IntroDayMessageInfo, components: components);
+        }
+
+        private static async Task HandleMorningCycle(SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions denyAll, MorningCycle morningCycle)
+        {
+            await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
+
+            await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
+
+            // Send logs to PMs and publish public news in the general channel based on the logs
+            Queue<PostmanPresenter> postman = ActionLogFacade.ZipLogs(morningCycle.ActionLogs);
+            var postponedMessages = await ActionLogFacade.InterpretLogs(postman, guild, generalText);
+            env.PostponedMessages = postponedMessages;
+
+            //The button for the General Director
+            MessageComponent components = new ComponentBuilder()
+                .WithButton(Miscellaneous.ActionMorningStartBoardButton, "action_morning_start_board", ButtonStyle.Danger)
+                .Build();
+
+            await generalText.SendMessageAsync(Miscellaneous.MorningReadyMessageInfo, components: components);
+        }
+
+        private static async Task HandleBoardCycle(GameHolder holder, SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions denyAll, DirectorBoardCycle boardCycle)
+        {
+            //Allow everyone to send messages in the general text channel and speak in the voice channel
+            await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Allow));
+            await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Allow));
+
+            //Disallow everyone to see private channels, then allow only players of the corresponding fractions to see their channels
+            await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
+
+            string vetoRemainder = string.Format(Miscellaneous.VetoReminderMessage, holder.Engine.GeneralDirector.VetoCount);
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+                .WithTitle(Miscellaneous.BoardMeetingStartTitle)
+                .WithDescription(vetoRemainder)
+                .WithColor(Color.Gold);
+
+            if(boardCycle.CandidatesForFiring.Any())
+            {
+                string playerMentions = string.Join("\n", boardCycle.CandidatesForFiring.Select(p => $"- <@{p.Id}>"));
+                embedBuilder.AddField(Miscellaneous.CandidateForFireExistInfo, playerMentions, true);
+            }
+            else
+            {
+                embedBuilder.AddField(Miscellaneous.NoCandidatesForFireInfo, Miscellaneous.GeneralDirectorCanSelectCandidateReminder, true);
+            }
+
+            MessageComponent components = BuildDirectorBoardComponents(guild, holder, boardCycle);
+
+            await generalText.SendMessageAsync(embed: embedBuilder.Build(), components: components);
+        }
+
+        private static async Task HandleEveningCycle(SocketTextChannel generalText, EveningCycle eveningCycle)
+        {
+            RoleVisual firedRole = eveningCycle.Elected.Role.IntoSignature().MapRole();
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+                .WithTitle(Miscellaneous.DirectorBoardOverTitle)
+                .WithDescription($"{string.Format(Miscellaneous.EmployeeMustRevealRoleInfo, eveningCycle.Elected.Id)}\n\n" +
+                $"{Miscellaneous.TheirPositionTitle} {firedRole.GetTeam().GetTeamIndicator()} {firedRole.GetLocalizedName()}.")
+                .WithColor(Color.DarkBlue);
+
+            ComponentBuilder components = new ComponentBuilder()
+                .WithButton(Miscellaneous.ActionFinishEveningButton, "action_finish_evening", ButtonStyle.Primary);
+
+            await generalText.SendMessageAsync(embed: embedBuilder.Build(), components: components.Build());
+        }
+
+        private static async Task HandleOvertimeCycle(GameHolder holder, SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions allowReadWrite)
+        {
+            //Disallow everyone to send messages in the general text channel and speak in the voice channel
+            await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
+
+            OverwritePermissions allowReadOnly = new OverwritePermissions(viewChannel: PermValue.Allow, sendMessages: PermValue.Deny);
+
+            await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, allowReadWrite, SyndicateNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, allowReadWrite, ShareholderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, allowReadOnly, StartupFounderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, allowReadWrite, EvangelistNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, allowReadWrite, OutsourceNeutralName);
+
+            //Send any postponed messages to the corresponding players via DM
+            while(env.PostponedMessages.TryPop(out var composeMessage))
+            {
+                SocketGuildUser user = guild.GetUser(composeMessage.user);
+                if(user != null)
+                {
+                    await user.SendMessageAsync($"{Miscellaneous.PostMessageInfo} {composeMessage.message}");
+                }
+            }
+
+            //Notify Anticrisis Managers about their remaining reports to write
+            IEnumerable<AnticrisisManagerRole> anticrisisManagers = holder.Engine.AlivePlayers.Where(p => p.Role is AnticrisisManagerRole)
+                .Select(p => (AnticrisisManagerRole)p.Role);
+            foreach(AnticrisisManagerRole anticrisisManager in anticrisisManagers)
+            {
+                SocketGuildUser user = guild.GetUser(anticrisisManager.Owner!.Id);
+                if(user != null)
+                {
+                    await user.SendMessageAsync(string.Format(Miscellaneous.TokenNotificationInfo, anticrisisManager.Items));
+                }
+            }
+
+            MessageComponent components = new ComponentBuilder()
+                .WithButton(Miscellaneous.ActionOpenTerminalButton, "action_open_terminal", ButtonStyle.Primary)
+                .Build();
+
+            await generalText.SendMessageAsync(Miscellaneous.WorkdayOverTitle, components: components);
+        }
+
+        private async Task HandleEndGameCycle(SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions allowReadWrite, OverwritePermissions denyAll, EndGameCycle endGameCycle)
+        {
+            await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, allowReadWrite);
+            await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Allow));
+
+            //Hide private channels from everyone
+            await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, FiredNeutralName, denyAll, FiredNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, AlumniNeutralName, denyAll, AlumniNeutralName);
+
+            await CleanupEnvironmentAsync(guild, env, false);
+
+            await endGameController.ProcessEndGameAsync(endGameCycle, generalText);
         }
 
         /// <summary>
@@ -410,7 +423,8 @@ namespace DiscordBot
         {
             ComponentBuilder builder = new ComponentBuilder();
 
-            IEnumerable<Player> availableTargets = boardCycle.VetoUsed
+            bool canChooseAnyone = boardCycle.VetoUsed || !boardCycle.CandidatesForFiring.Any();
+            IEnumerable<Player> availableTargets = canChooseAnyone
                 ? holder.Engine.AlivePlayers
                 : boardCycle.CandidatesForFiring;
 
@@ -432,7 +446,7 @@ namespace DiscordBot
 
             builder.WithButton(Miscellaneous.FirePlayerButton, "action_director_fire", ButtonStyle.Danger);
 
-            if(!boardCycle.VetoUsed && holder.Engine.GeneralDirector.VetoCount > 0)
+            if(!boardCycle.VetoUsed || (holder.Engine.GeneralDirector.VetoCount > 0 && !boardCycle.CandidatesForFiring.Any()))
             {
                 builder.WithButton(Miscellaneous.UseVetoButton, "action_director_veto", ButtonStyle.Primary);
             }

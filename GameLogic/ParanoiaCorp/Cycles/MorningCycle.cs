@@ -39,6 +39,12 @@ namespace GameLogic.ParanoiaCorp.Cycles
             outsourcePresent = OutsourcePlayerNumber > 0;
             singlesPresent = SinglesPlayerNumber > 0;
             ActionLogs = actionLogs;
+
+            EndGameRoundHistory roundHistory = new EndGameRoundHistory()
+            {
+                Turn = engine.Day++,
+            };
+            engine.History.Enqueue(roundHistory);
         }
 
         public bool CanFinish()
@@ -62,11 +68,11 @@ namespace GameLogic.ParanoiaCorp.Cycles
             bool winnerResolved = ResolveWinner(out winner);
             if(winnerResolved)
             {
-                return new DirectorBoardCycle(engine);
+                return new EndGameCycle(engine, winner);
             }
             else
             {
-                return new EndGameCycle(engine, winner);
+                return new DirectorBoardCycle(engine);
             }
         }
 

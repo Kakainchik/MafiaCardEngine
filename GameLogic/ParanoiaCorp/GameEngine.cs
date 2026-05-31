@@ -1,9 +1,7 @@
 ﻿using GameLogic.Exceptions;
 using GameLogic.Extensions;
-using GameLogic.ParanoiaCorp.Attributes;
 using GameLogic.ParanoiaCorp.Roles;
 using GameLogic.Roles;
-using GameLogic.ParanoiaCorp.Cycles;
 using GameLogic.Cycles;
 
 namespace GameLogic.ParanoiaCorp
@@ -13,7 +11,7 @@ namespace GameLogic.ParanoiaCorp
         private const string LACK_PLAYERS_ERROR = "Too few players. Minimum is 6.";
         private const string UNIQUE_ROLES_ERROR = "There are more than one certain type unique role.";
 
-        public const int MIN_PLAYERS = 6;
+        public const int MIN_PLAYERS = 2;
 
         /// <summary>
         /// List of the roles in this game.
@@ -23,8 +21,9 @@ namespace GameLogic.ParanoiaCorp
         /// <summary>
         /// The number of the current day in the game.
         /// </summary>
-        public int Day { get; private set; }
+        public int Day { get; internal set; }
         public ICycle CurrentCycle { get; private set; }
+        public Queue<EndGameRoundHistory> History { get; }
 
         /// <summary>
         /// Indicates if the game is started.
@@ -69,17 +68,38 @@ namespace GameLogic.ParanoiaCorp
                 throw new InitializingGameException(LACK_PLAYERS_ERROR);
             }
 
+            History = new Queue<EndGameRoundHistory>();
+
             GeneralDirector = (GeneralDirectorRole)players.Single(p => p.Role is GeneralDirectorRole).Role;
             Players = players;
             CurrentCycle = initialCycle;
-        }
 
-        public event EventHandler<Team?>? GameEnded;
+            IEnumerable<AnticrisisManagerRole> anticrisisManagerRoles = players.Select(p => p.Role).OfType<AnticrisisManagerRole>();
+            int itemsCount = (int)(players.Length / 4) + 1;
+            foreach(AnticrisisManagerRole anticrisisManager in anticrisisManagerRoles)
+            {
+                anticrisisManager.Items = itemsCount;
+            }
+        }
 
         public void NextTurn()
         {
-            Day++;
             CurrentCycle = CurrentCycle.NextCycle();
         }
+    }
+
+    public record class EndGameRoundHistory
+    {
+        public int Turn { get; set; }
+        public ulong? FiredPlayer { get; set; }
+        public ulong[]? CandidatesForFiring { get; set; }
+        public Queue<EndGameOvernightHistory>? OvertimeActions { get; set; }
+    }
+
+    public record class EndGameOvernightHistory
+    {
+        public required ulong Executor { get; set; }
+        public required Type ExecutorRoleType { get; set; }
+        public required ulong[] Targets { get; set; }
     }
 }

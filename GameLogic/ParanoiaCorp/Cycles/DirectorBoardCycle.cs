@@ -17,6 +17,9 @@ namespace GameLogic.ParanoiaCorp.Cycles
         {
             this.engine = engine;
             CandidatesForFiring = engine.AlivePlayers.Where(player => !player.Role.IsAlive);
+
+            EndGameRoundHistory roundHistory = engine.History.Peek();
+            roundHistory.CandidatesForFiring = CandidatesForFiring.Select(p => p.Id).ToArray();
         }
 
         public bool CanFinish()

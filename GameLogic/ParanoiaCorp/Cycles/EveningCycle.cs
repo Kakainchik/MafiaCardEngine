@@ -12,6 +12,9 @@ namespace GameLogic.ParanoiaCorp.Cycles
         {
             this.engine = engine;
             Elected = fired;
+
+            EndGameRoundHistory roundHistory = engine.History.Peek();
+            roundHistory.FiredPlayer = Elected.Id;
         }
 
         public void Fire()

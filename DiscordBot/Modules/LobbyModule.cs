@@ -231,14 +231,17 @@ namespace DiscordBot.Modules
 
                     if(user != null)
                     {
-                        Embed dmEmbed = new EmbedBuilder()
+                        EmbedBuilder dmEmbed = new EmbedBuilder()
                             .WithTitle(Miscellaneous.YourContractInfo)
                             .WithDescription($"{Miscellaneous.PositionTitle} {roleName}\n\n{Miscellaneous.ResponsobilityTitle}\n{roleDescription}")
-                            .WithColor(roleVisual.GetColor())
-                            .WithFooter(Miscellaneous.DontShowDocumentWarning)
-                            .Build();
+                            .WithColor(roleVisual.GetColor());
 
-                        await user.SendMessageAsync(embed: dmEmbed);
+                        if(roleVisual != RoleVisual.GENERAL_DIRECTOR)
+                        {
+                            dmEmbed.WithFooter(Miscellaneous.DontShowDocumentWarning);
+                        }
+
+                        await user.SendMessageAsync(embed: dmEmbed.Build());
                     }
                 }
                 catch(Exception)

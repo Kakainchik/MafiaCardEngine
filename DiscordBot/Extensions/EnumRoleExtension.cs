@@ -82,6 +82,25 @@ namespace DiscordBot.Extensions
             }
         }
 
+        internal static string GetLocilizedBelonging(this Team team)
+        {
+            switch(team)
+            {
+                case Team.CORPORATION:
+                    return TeamNames.Corporation;
+                case Team.SYNDICATE:
+                    return TeamNames.Syndicate;
+                case Team.STARTUP:
+                    return TeamNames.Startup;
+                case Team.OUTSOURCE:
+                    return TeamNames.Outsource;
+                case Team.SINGLES:
+                    return TeamNames.Singles;
+                default:
+                    throw new ArgumentException("Invalid team", nameof(team));
+            }
+        }
+
         internal static ChatScopeAttribute[] GetChatScopes(this RoleVisual role) => role.MapRole().GetChatScopes();
 
         internal static ExecutorAttribute GetExecutorAttribute(this RoleVisual role) => role.MapRole().GetExecutorAttribute();

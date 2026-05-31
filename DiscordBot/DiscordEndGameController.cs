@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 using DiscordBot.Extensions;
 using DiscordBot.Resources;
+using GameLogic.ParanoiaCorp;
 using GameLogic.ParanoiaCorp.Cycles;
 using System.Text;
 using WebServer.Shared.ParanoiaCorp.Extensions;
@@ -10,11 +11,6 @@ namespace DiscordBot
 {
     public class DiscordEndGameController
     {
-        public DiscordEndGameController()
-        {
-            
-        }
-
         public async Task ProcessEndGameAsync(EndGameCycle cycle, SocketTextChannel generalChannel)
         {
             MessageComponent components = new ComponentBuilder()
@@ -22,12 +18,12 @@ namespace DiscordBot
                 .Build();
             await generalChannel.SendMessageAsync(components: components);
 
-            EndGameHistory history = cycle.History;
+            EndGameHistory history = cycle.EndGameHistory;
 
             Embed mainEmbed = new EmbedBuilder()
                 .WithTitle(history.Winner.HasValue ? Miscellaneous.GameOverTitle : Miscellaneous.DrawTitle)
                 .WithDescription(history.Winner.HasValue
-                    ? string.Format(Miscellaneous.WinnerFactionTitle, history.Winner.Value)
+                    ? $"{history.Winner.Value.GetTeamIndicator()} " + string.Format(Miscellaneous.WinnerFactionTitle, history.Winner.Value.GetLocilizedBelonging())
                     : Miscellaneous.DrawWinnerTitle)
                 .WithColor(history.Winner.HasValue ? Color.Gold : Color.LightGrey)
                 .Build();
@@ -41,8 +37,8 @@ namespace DiscordBot
                 EmbedBuilder roundEmbed = new EmbedBuilder()
                     .WithTitle(string.Format(Miscellaneous.TurnNumberTitle, round.Turn))
                     .WithColor(Color.Blue);
-
-                string candidatesText = round.CandidatesForFiring.Any()
+                
+                string candidatesText = round.CandidatesForFiring != null
                     ? string.Join(", ", round.CandidatesForFiring.Select(id => $"<@{id}>"))
                     : string.Empty;
 
@@ -52,7 +48,7 @@ namespace DiscordBot
 
                 roundEmbed.AddField(Miscellaneous.DirectorBoardTitle, $"{Miscellaneous.CandidatesTitle} {candidatesText}\n{Miscellaneous.FiredTitle} {firedText}");
 
-                if(round.OvertimeActions.Length > 0)
+                if(round.OvertimeActions != null && round.OvertimeActions.Count > 0)
                 {
                     StringBuilder overtimeSb = new StringBuilder();
                     foreach(EndGameOvernightHistory action in round.OvertimeActions)
@@ -61,9 +57,7 @@ namespace DiscordBot
                             ? string.Join(", ", action.Targets.Select(t => $"<@{t}>"))
                             : "None";
 
-                        string successStr = action.Success ? Miscellaneous.SuccessTitle : Miscellaneous.FailTitle;
-
-                        overtimeSb.AppendLine($"<@{action.Executor}> ({action.ExecutorRoleType.IntoSignature().MapRole().GetLocalizedName()}) selected {{ {targets} }} with {successStr}");
+                        overtimeSb.AppendLine($"<@{action.Executor}> ({action.ExecutorRoleType.IntoSignature().MapRole().GetLocalizedName()}) ----> {{ {targets} }}");
                     }
                     roundEmbed.AddField(Miscellaneous.OvertimeTitle, overtimeSb.ToString());
                 }

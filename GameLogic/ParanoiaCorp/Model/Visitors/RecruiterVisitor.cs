@@ -49,7 +49,7 @@ namespace GameLogic.ParanoiaCorp.Model.Visitors
                 }
                 Success = true;
             }
-            else if(target is SecuritySpecialistRole)
+            else if(target is SystemAdministratorRole)
             {
                 if(target.IsAlive)
                 {

@@ -4,8 +4,10 @@ using DiscordBot.Extensions;
 using DiscordBot.Resources;
 using GameLogic.Cycles.Night;
 using GameLogic.ParanoiaCorp.Attributes;
+using GameLogic.ParanoiaCorp.Cycles;
 using GameLogic.ParanoiaCorp.Extensions;
 using GameLogic.ParanoiaCorp.Roles;
+using System.Text;
 using WebServer.Shared.ParanoiaCorp.Extensions;
 using ActionType = GameLogic.Model.ActionType;
 
@@ -498,17 +500,21 @@ namespace DiscordBot.Model
         {
             if(generalChannel is null) return;
 
-            ContainerBuilder container = new ContainerBuilder()
-                .WithAccentColor(Color.LightGrey);
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+                    .WithColor(Color.LightGrey);
+
+            StringBuilder stringBuilder = new StringBuilder();
 
             foreach(string message in messages)
             {
-                container.WithTextDisplay(message);
+                stringBuilder.AppendLine("* " + message);
             }
 
-            MessageComponent messageComponent = new ComponentBuilderV2(container).Build();
+            embedBuilder.WithDescription(stringBuilder.ToString());
 
-            await generalChannel.SendMessageAsync("📉 **Publish News:**", components: messageComponent);
+            MessageComponent messageComponent = new ComponentBuilder().Build();
+
+            await generalChannel.SendMessageAsync(Miscellaneous.PublishNewsTitle, embed: embedBuilder.Build());
         }
     }
 
