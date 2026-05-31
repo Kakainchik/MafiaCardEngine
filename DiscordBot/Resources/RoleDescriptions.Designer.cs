@@ -61,9 +61,9 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can communicate overtime in the &quot;Former Colleagues Club&quot; chat (with dismissed players).
-        ///Can communicate overtime in the Outsource faction chat.
-        ///Cannot be lured to the Startup.
+        ///   Looks up a localized string similar to You can communicate overtime in the &quot;Former Colleagues Club&quot; chat (with dismissed players).
+        ///You can communicate overtime in the Outsource faction chat.
+        ///You cannot be lured to the Startup.
         ///Unique position..
         /// </summary>
         internal static string AlumniManager {
@@ -73,8 +73,8 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Submits a &quot;Critical Incompetence Memo&quot; to the Director on any target (works like a Compromising Material).
-        ///Has a limited number of memos per game. Formula: number of players / 4. Minimum 1..
+        ///   Looks up a localized string similar to You submit a &quot;Critical Incompetence Memo&quot; to the Director on any target (works like a Compromising Material).
+        ///You have a limited number of memos per game. Formula: number of players / 4. Minimum 2..
         /// </summary>
         internal static string AnticrisisManager {
             get {
@@ -83,7 +83,7 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, he investigates the activity of one employee. The next shift, it find out their exact position.
+        ///   Looks up a localized string similar to During overtime, you investigate the activity of one employee. The next shift, you find out their exact position.
         ///If the target is a Shadow Director, the system generates any existing loyal position..
         /// </summary>
         internal static string Auditor {
@@ -93,7 +93,7 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No extra-curricular duties (just sleeps at home)..
+        ///   Looks up a localized string similar to No extra-curricular duties (just sleep at home)..
         /// </summary>
         internal static string Clerk {
             get {
@@ -102,8 +102,8 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, he may communicate with other Startup Evangelists.
-        ///He doesn&apos;t know who the Startup Founder is and cannot communicate with them directly..
+        ///   Looks up a localized string similar to During overtime, you can communicate with other Startup Evangelists.
+        ///You do not know who the Startup Founder is and cannot communicate with them directly..
         /// </summary>
         internal static string Evangelist {
             get {
@@ -113,8 +113,8 @@ namespace DiscordBot.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to A mandatory, unique, open role.
-        ///Cannot be targeted. Has no overtime authority. During the day, makes sole decisions on dismissals.
-        ///Has two &quot;Veto Powers&quot; per game..
+        ///You cannot be targeted. No overtime authority. During the day, you make sole decisions on dismissals.
+        ///You have two &quot;Veto Powers&quot; per game..
         /// </summary>
         internal static string GeneralDirector {
             get {
@@ -123,7 +123,7 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, can lock the account of one target. A locked target cancels all their actions during that overtime. Cannot hack the same employee on two consecutive shifts.
+        ///   Looks up a localized string similar to During overtime, you can lock the account of one target. A locked target cancels all their actions during that overtime. You cannot hack the same employee on two consecutive shifts.
         ///Can communicate with the Syndicate during overtime..
         /// </summary>
         internal static string Hacker {
@@ -133,7 +133,7 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During each overtime, hides the personnel file of one employee (protection). If compromising information was collected on this target during this overtime, it will not be submitted to the Director in the morning.
+        ///   Looks up a localized string similar to During each overtime, you hide the personnel file of one employee (protection). If compromising information was collected on this target during this overtime, it will not be submitted to the Director in the morning.
         ///If there were more than one attempt to fire the target during this shift, the HR manager will be unable to save them from dismissal, regardless of the number of HR managers who tried to save the employee..
         /// </summary>
         internal static string HRManager {
@@ -144,7 +144,7 @@ namespace DiscordBot.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to No overtime authority.
-        ///Can be recruited by the Shadow Director to become a Spy..
+        ///You can be recruited by the Shadow Director to become a Spy..
         /// </summary>
         internal static string Intern {
             get {
@@ -153,9 +153,9 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No extra-curricular powers.
-        ///If incriminating evidence is fabricated against them during overtime, the file is mysteriously lost and doesn&apos;t appear on the Director&apos;s desk in the morning. Instead, the Candidate secretly switches to the Outsource faction and assumes the Outsourcer role.
-        ///If incriminating evidence is collected on them two or more times during a single overtime period, the player manages to switch roles, but the incriminating evidence still ends up on the Director&apos;s desk..
+        ///   Looks up a localized string similar to No overtime authority.
+        ///If incriminating evidence is fabricated against you during overtime, the file is mysteriously lost and doesn&apos;t appear on the Director&apos;s desk in the morning. Instead, you secretly switch to the Outsource faction and assume the Outsourcer role.
+        ///If incriminating evidence is collected on you two or more times during a single overtime period, you manage to switch roles, but the incriminating evidence still ends up on the Director&apos;s desk..
         /// </summary>
         internal static string LayoffCandidate {
             get {
@@ -164,9 +164,9 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to He may select one target to fabricate incriminating evidence. In the morning, this target will be placed on the Director&apos;s mandatory dismissal list.
+        ///   Looks up a localized string similar to You can select one target to fabricate incriminating evidence. In the morning, this target will be placed on the Director&apos;s mandatory dismissal list.
         ///If there are multiple Masters in the game, the target is randomly selected from among those suggested by them.
-        ///May communicate with all Syndicate members in encrypted chat during overtime..
+        ///You can communicate with all Syndicate members in encrypted chat during overtime..
         /// </summary>
         internal static string MasterOfCompromising {
             get {
@@ -175,10 +175,10 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, offers a contract to a dismissed employee, regardless of how many attempts to dismiss the employee were made during the shift.
+        ///   Looks up a localized string similar to During overtime, you offer a contract to a dismissed employee, regardless of how many attempts to dismiss the employee were made during the shift.
         ///If the selected target is dismissed during the same shift, they become an Outsourcer.
         ///If there are multiple Outsourcers, they only select one target for all. Cannot hire dismissed employees from the Outsource faction.
-        ///Chats with the Outsource faction during overtime..
+        ///You can chat with the Outsource faction during overtime..
         /// </summary>
         internal static string Outsourcer {
             get {
@@ -187,10 +187,10 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, the player can select two employees and force the first to use their job ability on the second (even if the first intended to skip a turn).
+        ///   Looks up a localized string similar to During overtime, you can select two employees and force the first to use their job ability on the second (even if the first intended to skip a turn).
         ///The first target and the second target can be the same (the employee uses the skill on themselves).
-        ///Can select themselves as the second target.
-        ///If there are multiple Masters of Compromising and the Political Consultant forces one of them to fire someone, more than one person can be fired during this shift (this Master acts outside of the Syndicate&apos;s ran [rest of string was truncated]&quot;;.
+        ///You can select yourself as the second target.
+        ///If there are multiple Masters of Compromising and the Political Consultant forces one of them to fire someone, more than one person can be fired during this shift (this Master acts outside of the Syndicate&apos;s random t [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PoliticalStrategist {
             get {
@@ -208,7 +208,7 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During the overtime, swaps the tasks of two employees. As a result, all overtime activities directed at them are redirected toward each other..
+        ///   Looks up a localized string similar to During the overtime, you swap the tasks of two employees. As a result, all overtime activities directed at them are redirected toward each other..
         /// </summary>
         internal static string ScrumMaster {
             get {
@@ -217,7 +217,7 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This role checks one employee against the database during overtime. During the same shift, their loyalty (faction) is also determined.
+        ///   Looks up a localized string similar to You check one employee against the database during overtime. During the same shift, their loyalty (faction) is also determined.
         ///If the target is a Shadow Director or Startup Founder, the system displays them as loyal to the Corporation..
         /// </summary>
         internal static string SecuritySpecialist {
@@ -227,13 +227,13 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, he can select a target for recruitment into the Syndicate. The transition occurs by morning.
+        ///   Looks up a localized string similar to During overtime, you can select a target for recruitment into the Syndicate. The transition occurs by morning.
         ///If the target is an Intern, he becomes a Spy.
         ///If the target is a System Administrator, he becomes a Hacker.
         ///Other targets remain in their positions but receive an email notification about a tempting contract (recruitment attempt).
         ///He has a golden parachute: attempting to fabricate incriminating evidence during overtime will end in failure.
         ///Cannot be recruited into the Startup.
-        ///Can communicate with t [rest of string was truncated]&quot;;.
+        ///Can communicate with  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ShadowDirector {
             get {
@@ -243,7 +243,7 @@ namespace DiscordBot.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to No overtime authority.
-        ///Has access to a private chat with other Corporation Shareholders..
+        ///You have an access to a private chat with other Corporation Shareholders..
         /// </summary>
         internal static string Shareholder {
             get {
@@ -252,8 +252,8 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, he infiltrates databases and studies the activities of a single employee. At the end of overtime, he learns the exact position of the targeted player.
-        ///He can communicate with all Syndicate members via encrypted chat during overtime..
+        ///   Looks up a localized string similar to During overtime, you infiltrate databases and studies the activities of a single employee. At the end of overtime, you learn the exact role of the targeted player.
+        ///You can communicate with all Syndicate members via encrypted chat during overtime..
         /// </summary>
         internal static string Spy {
             get {
@@ -262,8 +262,8 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, he entices one employee with stock options, luring him to the Startup.
-        ///He sees the work chat of all his Evangelists, but doesn&apos;t post there himself. He knows all the people he&apos;s lured.
+        ///   Looks up a localized string similar to During overtime, you entice one employee with stock options, luring him to the Startup.
+        ///You see the work chat of all his Evangelists, but doesn&apos;t post there yourself. You know all the people you&apos;ve lured.
         ///A unique position..
         /// </summary>
         internal static string StartupFounder {
@@ -273,8 +273,8 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to During overtime, he can block access to a single target&apos;s servers. The target cancels all their actions.
-        ///Can be recruited by the Shadow Director and become a Hacker..
+        ///   Looks up a localized string similar to During overtime, you can block access to a single target&apos;s servers. The target cancels all their actions.
+        ///You can be recruited by the Shadow Director and become a Hacker..
         /// </summary>
         internal static string SystemAdministrator {
             get {

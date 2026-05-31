@@ -423,4 +423,7 @@
   <data name="EndGameSessionDeleteTitle" xml:space="preserve">
     <value>🔒 **Игровая сессия удалена из памяти системы.** Любое взаимодействие с терминалами и кнопками заблокировано. Вы можете обсудить итоги игры здесь. Организатор может вручную удалить этот канал.</value>
   </data>
+  <data name="PublishNewsTitle" xml:space="preserve">
+    <value>📉 **Корпоративные новости:**</value>
+  </data>
 </root>

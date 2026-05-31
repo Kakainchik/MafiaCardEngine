@@ -118,77 +118,77 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlumniManager" xml:space="preserve">
-    <value>Can communicate overtime in the "Former Colleagues Club" chat (with dismissed players).
-Can communicate overtime in the Outsource faction chat.
-Cannot be lured to the Startup.
+    <value>You can communicate overtime in the "Former Colleagues Club" chat (with dismissed players).
+You can communicate overtime in the Outsource faction chat.
+You cannot be lured to the Startup.
 Unique position.</value>
   </data>
   <data name="AnticrisisManager" xml:space="preserve">
-    <value>Submits a "Critical Incompetence Memo" to the Director on any target (works like a Compromising Material).
-Has a limited number of memos per game. Formula: number of players / 4. Minimum 1.</value>
+    <value>You submit a "Critical Incompetence Memo" to the Director on any target (works like a Compromising Material).
+You have a limited number of memos per game. Formula: number of players / 4. Minimum 2.</value>
   </data>
   <data name="Auditor" xml:space="preserve">
-    <value>During overtime, he investigates the activity of one employee. The next shift, it find out their exact position.
+    <value>During overtime, you investigate the activity of one employee. The next shift, you find out their exact position.
 If the target is a Shadow Director, the system generates any existing loyal position.</value>
   </data>
   <data name="Clerk" xml:space="preserve">
-    <value>No extra-curricular duties (just sleeps at home).</value>
+    <value>No extra-curricular duties (just sleep at home).</value>
   </data>
   <data name="Evangelist" xml:space="preserve">
-    <value>During overtime, he may communicate with other Startup Evangelists.
-He doesn't know who the Startup Founder is and cannot communicate with them directly.</value>
+    <value>During overtime, you can communicate with other Startup Evangelists.
+You do not know who the Startup Founder is and cannot communicate with them directly.</value>
   </data>
   <data name="GeneralDirector" xml:space="preserve">
     <value>A mandatory, unique, open role.
-Cannot be targeted. Has no overtime authority. During the day, makes sole decisions on dismissals.
-Has two "Veto Powers" per game.</value>
+You cannot be targeted. No overtime authority. During the day, you make sole decisions on dismissals.
+You have two "Veto Powers" per game.</value>
   </data>
   <data name="Hacker" xml:space="preserve">
-    <value>During overtime, can lock the account of one target. A locked target cancels all their actions during that overtime. Cannot hack the same employee on two consecutive shifts.
+    <value>During overtime, you can lock the account of one target. A locked target cancels all their actions during that overtime. You cannot hack the same employee on two consecutive shifts.
 Can communicate with the Syndicate during overtime.</value>
   </data>
   <data name="HRManager" xml:space="preserve">
-    <value>During each overtime, hides the personnel file of one employee (protection). If compromising information was collected on this target during this overtime, it will not be submitted to the Director in the morning.
+    <value>During each overtime, you hide the personnel file of one employee (protection). If compromising information was collected on this target during this overtime, it will not be submitted to the Director in the morning.
 If there were more than one attempt to fire the target during this shift, the HR manager will be unable to save them from dismissal, regardless of the number of HR managers who tried to save the employee.</value>
   </data>
   <data name="Intern" xml:space="preserve">
     <value>No overtime authority.
-Can be recruited by the Shadow Director to become a Spy.</value>
+You can be recruited by the Shadow Director to become a Spy.</value>
   </data>
   <data name="LayoffCandidate" xml:space="preserve">
-    <value>No extra-curricular powers.
-If incriminating evidence is fabricated against them during overtime, the file is mysteriously lost and doesn't appear on the Director's desk in the morning. Instead, the Candidate secretly switches to the Outsource faction and assumes the Outsourcer role.
-If incriminating evidence is collected on them two or more times during a single overtime period, the player manages to switch roles, but the incriminating evidence still ends up on the Director's desk.</value>
+    <value>No overtime authority.
+If incriminating evidence is fabricated against you during overtime, the file is mysteriously lost and doesn't appear on the Director's desk in the morning. Instead, you secretly switch to the Outsource faction and assume the Outsourcer role.
+If incriminating evidence is collected on you two or more times during a single overtime period, you manage to switch roles, but the incriminating evidence still ends up on the Director's desk.</value>
   </data>
   <data name="MasterOfCompromising" xml:space="preserve">
-    <value>He may select one target to fabricate incriminating evidence. In the morning, this target will be placed on the Director's mandatory dismissal list.
+    <value>You can select one target to fabricate incriminating evidence. In the morning, this target will be placed on the Director's mandatory dismissal list.
 If there are multiple Masters in the game, the target is randomly selected from among those suggested by them.
-May communicate with all Syndicate members in encrypted chat during overtime.</value>
+You can communicate with all Syndicate members in encrypted chat during overtime.</value>
   </data>
   <data name="Outsourcer" xml:space="preserve">
-    <value>During overtime, offers a contract to a dismissed employee, regardless of how many attempts to dismiss the employee were made during the shift.
+    <value>During overtime, you offer a contract to a dismissed employee, regardless of how many attempts to dismiss the employee were made during the shift.
 If the selected target is dismissed during the same shift, they become an Outsourcer.
 If there are multiple Outsourcers, they only select one target for all. Cannot hire dismissed employees from the Outsource faction.
-Chats with the Outsource faction during overtime.</value>
+You can chat with the Outsource faction during overtime.</value>
   </data>
   <data name="PoliticalStrategist" xml:space="preserve">
-    <value>During overtime, the player can select two employees and force the first to use their job ability on the second (even if the first intended to skip a turn).
+    <value>During overtime, you can select two employees and force the first to use their job ability on the second (even if the first intended to skip a turn).
 The first target and the second target can be the same (the employee uses the skill on themselves).
-Can select themselves as the second target.
+You can select yourself as the second target.
 If there are multiple Masters of Compromising and the Political Consultant forces one of them to fire someone, more than one person can be fired during this shift (this Master acts outside of the Syndicate's random target selection).</value>
   </data>
   <data name="Raider" xml:space="preserve">
     <value>During overtime, either block or dismiss the target. The result is determined randomly.</value>
   </data>
   <data name="ScrumMaster" xml:space="preserve">
-    <value>During the overtime, swaps the tasks of two employees. As a result, all overtime activities directed at them are redirected toward each other.</value>
+    <value>During the overtime, you swap the tasks of two employees. As a result, all overtime activities directed at them are redirected toward each other.</value>
   </data>
   <data name="SecuritySpecialist" xml:space="preserve">
-    <value>This role checks one employee against the database during overtime. During the same shift, their loyalty (faction) is also determined.
+    <value>You check one employee against the database during overtime. During the same shift, their loyalty (faction) is also determined.
 If the target is a Shadow Director or Startup Founder, the system displays them as loyal to the Corporation.</value>
   </data>
   <data name="ShadowDirector" xml:space="preserve">
-    <value>During overtime, he can select a target for recruitment into the Syndicate. The transition occurs by morning.
+    <value>During overtime, you can select a target for recruitment into the Syndicate. The transition occurs by morning.
 If the target is an Intern, he becomes a Spy.
 If the target is a System Administrator, he becomes a Hacker.
 Other targets remain in their positions but receive an email notification about a tempting contract (recruitment attempt).
@@ -199,19 +199,19 @@ Unique position.</value>
   </data>
   <data name="Shareholder" xml:space="preserve">
     <value>No overtime authority.
-Has access to a private chat with other Corporation Shareholders.</value>
+You have an access to a private chat with other Corporation Shareholders.</value>
   </data>
   <data name="Spy" xml:space="preserve">
-    <value>During overtime, he infiltrates databases and studies the activities of a single employee. At the end of overtime, he learns the exact position of the targeted player.
-He can communicate with all Syndicate members via encrypted chat during overtime.</value>
+    <value>During overtime, you infiltrate databases and studies the activities of a single employee. At the end of overtime, you learn the exact role of the targeted player.
+You can communicate with all Syndicate members via encrypted chat during overtime.</value>
   </data>
   <data name="StartupFounder" xml:space="preserve">
-    <value>During overtime, he entices one employee with stock options, luring him to the Startup.
-He sees the work chat of all his Evangelists, but doesn't post there himself. He knows all the people he's lured.
+    <value>During overtime, you entice one employee with stock options, luring him to the Startup.
+You see the work chat of all his Evangelists, but doesn't post there yourself. You know all the people you've lured.
 A unique position.</value>
   </data>
   <data name="SystemAdministrator" xml:space="preserve">
-    <value>During overtime, he can block access to a single target's servers. The target cancels all their actions.
-Can be recruited by the Shadow Director and become a Hacker.</value>
+    <value>During overtime, you can block access to a single target's servers. The target cancels all their actions.
+You can be recruited by the Shadow Director and become a Hacker.</value>
   </data>
 </root>

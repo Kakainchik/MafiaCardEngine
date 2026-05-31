@@ -423,4 +423,7 @@
   <data name="EndGameSessionDeleteTitle" xml:space="preserve">
     <value>🔒 **The game session has been deleted from the system's memory.** Any interaction with terminals and buttons is blocked. You can discuss the game results here. The organizer can manually delete this channel.</value>
   </data>
+  <data name="PublishNewsTitle" xml:space="preserve">
+    <value>📉 **Publish News:**</value>
+  </data>
 </root>

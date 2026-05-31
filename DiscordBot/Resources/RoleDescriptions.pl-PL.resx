@@ -118,100 +118,100 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlumniManager" xml:space="preserve">
-    <value>Może komunikować sie w nadgodzinach na czacie „Klubu Byłych Kolegów” (z graczami zwolnionymi).
-Możliwość komunikacji w godzinach nadliczbowych na czacie frakcji Outsource.
-Nie można zwabić do Startupu.
-Unikalna pozycja.</value>
+    <value>Możesz komunikować się w nadgodzinach na czacie „Klubu Byłych Kolegów” (z graczami zwolnionymi).
+Możliwość komunikacji w nadgodzinach na czacie frakcji Outsource.
+Nie można Cię zwabić do Startupu.
+Unikalne stanowisko.</value>
   </data>
   <data name="AnticrisisManager" xml:space="preserve">
-    <value>Przesyła Dyrektorowi „Notatkę o Krytycznej Niekompetencji” dotyczącą dowolnego celu (działa jak Materiał Kompromitujący).
-Ma ograniczoną liczbę notatek na grę. Wzór: liczba graczy / 4. Minimum 1.</value>
+    <value>Przesyłasz Prezesowi „Notatkę o Krytycznej Niekompetencji” dotyczącą dowolnego celu (działa jak Materiał Kompromitujący).
+Masz ograniczoną liczbę notatek na grę. Wzór: liczba graczy / 4. Minimum 2.</value>
   </data>
   <data name="Auditor" xml:space="preserve">
-    <value>Analizuje działania jednego pracownika w godzinach nadliczbowych. Następna zmiana pozna jego dokładne stanowisko.
-Jeśli celem jest Dyrektor Cienia, system przypisze mu dowolne istniejące, lojalne stanowisko.</value>
+    <value>Analizujesz działania jednego pracownika w nadgodzinach. Następną zmianą poznasz jego dokładne stanowisko.
+Jeśli celem jest Szary Kardynał, system przypisze mu dowolne istniejące, lojalne stanowisko.</value>
   </data>
   <data name="Clerk" xml:space="preserve">
-    <value>Nie ma uprawnień (po prostu śpi w domu).</value>
+    <value>Nie masz uprawnień (po prostu śpisz w domu).</value>
   </data>
   <data name="Evangelist" xml:space="preserve">
-    <value>W nadgodzinach może komunikować się z innymi ewangelistami startupów.
-Nie wie, kim jest założyciel startupu i nie może się z nim bezpośrednio komunikować.</value>
+    <value>W nadgodzinach możesz komunikować się z innymi ewangelistami startupów.
+Nie wiesz, kim jest założyciel startupu i nie możesz się z nim bezpośrednio komunikować.</value>
   </data>
   <data name="GeneralDirector" xml:space="preserve">
-    <value>Obowiązkowa, unikalna, otwarta rola.
-Nie można jej przypisać do konkretnego celu. Nie ma uprawnień do gry w nadgodzinach. W ciągu dnia podejmuje samodzielne decyzje o zwolnieniach.
-Ma dwa „uprawnienia weta” na grę.</value>
+    <value>Permanentnie ustalona, unikalna, jawna rola.
+Nie można Cię wybrać jako opcja w nadgodzinach. Nie masz uprawnień do gry w nadgodzinach. W ciągu dnia podejmujesz samodzielne decyzje o zwolnieniach.
+Masz dwa „weta” na grę.</value>
   </data>
   <data name="Hacker" xml:space="preserve">
-    <value>W czasie nadgodzin można zablokować konto jednego celu. Zablokowany cel anuluje wszystkie swoje akcje w czasie nadgodzin. Nie można zhakować tego samego pracownika na dwóch kolejnych zmianach.
+    <value>W nadgodzinach możesz zablokować konto jednego pracownika. Zablokowany pracownik anuluje wszystkie swoje akcje w nadgodzinach. Nie można zhakować tego samego pracownika na dwóch kolejnych zmianach.
 Można komunikować się z Syndykatem w czasie nadgodzin.</value>
   </data>
   <data name="HRManager" xml:space="preserve">
-    <value>Podczas każdej nadgodziny ukrywa akta osobowe jednego pracownika (ochrona). Jeśli podczas nadgodziny zebrano kompromitujące informacje na temat tego celu, nie zostaną one przekazane Dyrektorowi rano.
+    <value>Podczas nadgodziny ukrywasz akta osobowe jednego pracownika (ochrona). Jeśli podczas nadgodziny zebrano kompromitujące informacje na temat tego pracownika, nie zostaną one przekazane Prezesowi rano.
 Jeśli podczas tej zmiany doszło do więcej niż jednej próby zwolnienia celu, HR nie będzie mógł go uratować przed zwolnieniem, niezależnie od liczby HR-ów, którzy próbowali go uratować.</value>
   </data>
   <data name="Intern" xml:space="preserve">
-    <value>Nie ma uprawnień.
-Może zostać zwabiony przez Dyrektora Cienia, aby został Szpiegiem.</value>
+    <value>Nie masz uprawnień.
+Możesz zostać zwabiony przez Szarego Kardynału, aby zostać Szpiegiem.</value>
   </data>
   <data name="LayoffCandidate" xml:space="preserve">
-    <value>Nie ma uprawnień.
-Jeśli w trakcie nadgodzin zostaną sfabrykowane obciążające dowody przeciwko niemu, akta w tajemniczy sposób giną i rano nie pojawiają się na biurku Dyrektora. Zamiast tego Kandydat potajemnie przechodzi do frakcji Outsourcerów i przyjmuje rolę Outsourcera.
-Jeśli obciążające dowody zostaną zebrane na niego dwa lub więcej razy w trakcie jednej nadgodziny, graczowi udaje się zmienić rolę, ale obciążające dowody i tak lądują na biurku Dyrektora.</value>
+    <value>Nie masz uprawnień.
+Jeśli w trakcie nadgodzin zostaną sfabrykowane obciążające dowody przeciwko Ciebie, akta w tajemniczy sposób giną i rano nie pojawiają się na biurku Prezesa. Zamiast tego potajemnie przechodzisz do frakcji Outsourcerów i przyjmujesz rolę Outsourcera.
+Jeśli obciążające dowody zostaną zebrane na Ciebie dwa lub więcej razy w trakcie jednej nadgodziny, udaje się zmienić rolę, ale obciążające dowody i tak lądują na biurku Prezesa.</value>
   </data>
   <data name="MasterOfCompromising" xml:space="preserve">
-    <value>Może wybrać jeden cel, aby sfabrykować obciążające dowody. Rano ten cel zostanie umieszczony na liście Dyrektora do obowiązkowego zwolnienia.
+    <value>Możesz wybrać jeden cel, aby sfabrykować obciążające dowody. Rano ten cel zostanie umieszczony na liście Dyrektora do obowiązkowego zwolnienia.
 Jeśli w grze jest wielu Mistrzów, cel jest wybierany losowo spośród zaproponowanych przez nich.
-Może komunikować się ze wszystkimi członkami Syndykatu na zaszyfrowanym czacie w trakcie dogrywki.</value>
+Możesz komunikować się ze wszystkimi członkami Syndykatu na zaszyfrowanym czacie w trakcie dogrywki.</value>
   </data>
   <data name="Outsourcer" xml:space="preserve">
-    <value>W nadgodzinach oferuje umowę zwolnionemu pracownikowi, niezależnie od liczby prób zwolnienia pracownika podjętych podczas zmiany.
+    <value>W nadgodzinach oferujesz umowę zwolnionemu pracownikowi, niezależnie od liczby decyzji o zwolnieniu pracownika podjętych podczas zmiany.
 Jeśli wybrany cel zostanie zwolniony podczas tej samej zmiany, staje się on outsourcerem.
 Jeśli jest wielu outsourcerów, wybierają oni tylko jeden cel dla wszystkich. Nie można zatrudniać zwolnionych pracowników z frakcji outsourcerów.
-Czatuje z frakcją outsourcerów podczas nadgodzin.</value>
+Masz dostęp do czatu z frakcją outsourcerów podczas nadgodzin.</value>
   </data>
   <data name="PoliticalStrategist" xml:space="preserve">
-    <value>Może wybrać dwóch pracowników i zmusić pierwszego do użycia uprawnień na drugim (nawet jeśli pierwszy zamierzał pominąć turę).
-Pierwszy i drugi cel mogą być tym samym (pracownik używa uprawnienia na sobie).
-Może wybrać siebie jako drugi cel.
+    <value>Możesz wybrać dwóch pracowników i zmusić pierwszego do wykonania czynności na drugim (nawet jeśli pierwszy zamierzał pominąć turę).
+Pierwszy i drugi cel mogą być tym samym jako opcja do wyboru (pracownik używa uprawnienia na sobie).
+Możesz wybrać siebie jako drugi cel.
 Jeśli jest wielu Mistrzów Kompromitacji, a Konsultant Polityczny zmusi jednego z nich do zwolnienia kogoś, podczas tej zmiany może zostać zwolnionych więcej niż jedna osoba (ten Mistrz działa poza losowym wyborem celu przez Syndykat).</value>
   </data>
   <data name="Raider" xml:space="preserve">
-    <value>Może wybrać jeden cel, aby sfabrykować obciążające dowody albo zablokować. Wynik jest ustalany losowo.</value>
+    <value>Możesz wybrać jeden cel, aby sfabrykować obciążające dowody albo go zablokować. Wynik jest ustalany losowo.</value>
   </data>
   <data name="ScrumMaster" xml:space="preserve">
-    <value>W nadgodzinach zamienia się zadaniami dwóch pracowników. W rezultacie wszystkie zadania w nadgodzinach, do których są przypisani, są przekierowywane na siebie nawzajem.</value>
+    <value>W nadgodzinach zamieniasz się zadaniami z dwoma pracownikami. W rezultacie wszystkie zadania w nadgodzinach, do których są przypisani, są wymieniane między sobą.</value>
   </data>
   <data name="SecuritySpecialist" xml:space="preserve">
-    <value>Weryfikuje jednego pracownika w bazie danych podczas nadgodzin. Podczas tej samej zmiany określana jest również jego lojalność (frakcja).
-Jeśli celem jest Dyrektor ds. Cienia lub Założyciel Startupu, system wyświetla go jako lojalnego wobec korporacji.</value>
+    <value>Weryfikujesz jednego pracownika w bazie danych podczas nadgodzin. Podczas tej samej zmiany określana jest również jego lojalność (frakcja).
+Jeśli celem jest Szary Kardynał lub Założyciel Startupu, system wyświetla go jako lojalnego wobec korporacji.</value>
   </data>
   <data name="ShadowDirector" xml:space="preserve">
-    <value>W nadgodzinach może wybrać cel rekrutacji do Syndykatu. Przejście następuje rano.
-Jeśli celem jest stażysta, staje się szpiegiem.
-Jeśli celem jest administrator systemu, staje się hakerem.
+    <value>W nadgodzinach możesz wybrać cel rekrutacji do Syndykatu. Przejście następuje rano.
+Jeśli celem jest stażysta, to staje się Szpiegiem.
+Jeśli celem jest administrator systemu, to staje się Hakerem.
 Inni kandydaci pozostają na swoich stanowiskach, ale otrzymują powiadomienie e-mail o kuszącym kontrakcie (próba rekrutacji).
-Ma złotą spadochron: próba sfabrykowania obciążających dowodów w godzinach nadliczbowych zakończy się niepowodzeniem.
-Nie można go zrekrutować do Startupu.
-Możliwość komunikacji z Syndykatem w godzinach nadliczbowych.
+Masz złoty spadochron: próba sfabrykowania obciążających dowodów w nadgodzinach zakończy się niepowodzeniem.
+Nie można Cię zrekrutować do Startupu.
+Możliwość komunikacji z Syndykatem w nadgodzinach pracy.
 Unikalne stanowisko.</value>
   </data>
   <data name="Shareholder" xml:space="preserve">
-    <value>Nie ma uprawnień.
-Ma dostęp do prywatnego czatu z innymi akcjonariuszami spółki.</value>
+    <value>Nie masz uprawnień.
+Masz dostęp do prywatnego czatu z innymi akcjonariuszami korporacji.</value>
   </data>
   <data name="Spy" xml:space="preserve">
-    <value>W nadgodzinach infiltruje bazy danych i analizuje działania pojedynczego pracownika. Pod koniec godzin nadliczbowych poznaje dokładną lokalizację wybranego gracza.
-W nadgodzinach może komunikować się ze wszystkimi członkami Syndykatu za pośrednictwem szyfrowanego czatu.</value>
+    <value>W nadgodzinach infiltrujesz bazy danych i analizujesz działania pojedynczego pracownika. Pod koniec godzin nadliczbowych poznajesz dokładną rolę wybranego gracza.
+W nadgodzinach możesz komunikować się ze wszystkimi członkami Syndykatu za pośrednictwem szyfrowanego czatu.</value>
   </data>
   <data name="StartupFounder" xml:space="preserve">
-    <value>W nadgodzinach kusi jednego pracownika opcjami na akcje, wabiąc go do Startupu.
-Widzi rozmowy na czacie służbowym wszystkich swoich Ewangelistów, ale sam tam nie pisze. Zna wszystkich, których zwabił.
+    <value>W nadgodzinach przekonujesz jednego pracownika, biorąc go do Startupu.
+Widzisz rozmowy na czacie służbowym wszystkich swoich Ewangelistów, ale sam tam nie piszesz. Znasz wszystkich, których zwabił.
 Unikalne stanowisko.</value>
   </data>
   <data name="SystemAdministrator" xml:space="preserve">
-    <value>W nadgodzinach może zablokować dostęp do serwerów pojedynczego celu. Cel anuluje wszystkie swoje akcje.
-Może zostać zwabiony przez Dyrektora Cienia i stać się hakerem.</value>
+    <value>W nadgodzinach możesz zablokować dostęp do serwerów pojedynczego celu. Cel anuluje wszystkie swoje akcje.
+Możesz zostać zwabiony przez Dyrektora Cienia i stać się hakerem.</value>
   </data>
 </root>

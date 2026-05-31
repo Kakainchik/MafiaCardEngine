@@ -664,6 +664,15 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 📉 **Publish News:**.
+        /// </summary>
+        internal static string PublishNewsTitle {
+            get {
+                return ResourceManager.GetString("PublishNewsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         internal static string ReadyButton {

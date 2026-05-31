@@ -423,4 +423,7 @@
   <data name="EndGameSessionDeleteTitle" xml:space="preserve">
     <value>🔒 **Sesja gry została usunięta z pamięci systemu.** Wszelka interakcja z terminalami i przyciskami jest zablokowana. Wyniki gry można omówić tutaj. Organizator może ręcznie usunąć ten kanał.</value>
   </data>
+  <data name="PublishNewsTitle" xml:space="preserve">
+    <value>📉 **Korporacyjne Wiadomości:**</value>
+  </data>
 </root>
