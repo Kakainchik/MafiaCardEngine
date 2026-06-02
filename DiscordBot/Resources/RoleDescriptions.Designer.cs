@@ -144,7 +144,7 @@ namespace DiscordBot.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to No overtime authority.
-        ///You can be recruited by the Shadow Director to become a Spy..
+        ///You can be recruited by the Shadow Director to become a Master of Compromising..
         /// </summary>
         internal static string Intern {
             get {
