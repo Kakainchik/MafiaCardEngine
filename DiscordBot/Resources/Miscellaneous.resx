@@ -426,4 +426,7 @@
   <data name="PublishNewsTitle" xml:space="preserve">
     <value>📉 **Publish News:**</value>
   </data>
+  <data name="HostNameTitle" xml:space="preserve">
+    <value>Host:</value>
+  </data>
 </root>

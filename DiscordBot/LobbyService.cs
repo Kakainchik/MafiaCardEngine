@@ -1,4 +1,5 @@
-﻿using DiscordBot.Model;
+﻿using DiscordBot.Extensions;
+using DiscordBot.Model;
 using GameLogic.ParanoiaCorp;
 using System.Collections.Concurrent;
 
@@ -8,9 +9,20 @@ namespace DiscordBot
     {
         private readonly ConcurrentDictionary<ulong, LobbySession> activeLobbies = new();
 
-        public LobbySession CreateLobby(ulong hostId, ulong channelId)
+        public LobbySession CreateLobby(ulong hostId, ulong channelId, LobbyMode mode)
         {
-            LobbySession lobby = new LobbySession(hostId, channelId);
+            LobbySession lobby;
+            switch(mode)
+            {
+                case LobbyMode.Normal:
+                    lobby = new LobbySession(hostId, channelId, mode);
+                    break;
+                case LobbyMode.Admin:
+                    lobby = new AdminLobbySession(hostId, channelId, mode);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mode), $"Unsupported lobby mode: {mode}");
+            }
             return lobby;
         }
 
@@ -47,7 +59,10 @@ namespace DiscordBot
                 return (false, "There must be exactly one General Director in the game.");
             }
 
-            //Check for at least two fractions present
+            if(lobby.SelectedRolesPool.Keys.Select(role => role.GetTeam()).Distinct().Count() < 2)
+            {
+                return (false, "There must be at least two different fractions in the game.");
+            }
 
             return (true, string.Empty);
         }

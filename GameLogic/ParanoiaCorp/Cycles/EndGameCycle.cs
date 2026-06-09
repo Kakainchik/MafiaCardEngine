@@ -27,9 +27,9 @@ namespace GameLogic.ParanoiaCorp.Cycles
         }
     }
 
-    public record struct EndGameHistory
+    public record class EndGameHistory
     {
-        public Team? Winner { get; init; }
-        public Queue<EndGameRoundHistory> Rounds { get; init; }
+        public Team? Winner { get; set; }
+        public required Queue<EndGameRoundHistory> Rounds { get; set; }
     }
 }

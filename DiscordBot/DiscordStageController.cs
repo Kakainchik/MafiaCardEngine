@@ -6,11 +6,13 @@ using DiscordBot.Model;
 using DiscordBot.Resources;
 using GameLogic;
 using GameLogic.Cycles;
+using GameLogic.Interfaces;
 using GameLogic.ParanoiaCorp.Attributes;
 using GameLogic.ParanoiaCorp.Cycles;
 using GameLogic.ParanoiaCorp.Extensions;
 using GameLogic.ParanoiaCorp.Roles;
 using System.Collections.Concurrent;
+using System.Numerics;
 using WebServer.Shared.ParanoiaCorp.Extensions;
 
 namespace DiscordBot
@@ -53,21 +55,82 @@ namespace DiscordBot
             env.GeneralTextChannelId = generalText.Id;
             env.VoiceBoardChannelId = voiceBoard.Id;
 
-            RestRole syndicateScope = await guild.CreateRoleAsync(SyndicateNeutralName, isHoisted: false);
-            RestRole shareholderScope = await guild.CreateRoleAsync(ShareholderNeutralName, isHoisted: false);
-            RestRole startupFounderScope = await guild.CreateRoleAsync(StartupFounderNeutralName, isHoisted: false);
-            RestRole evangelistScope = await guild.CreateRoleAsync(EvangelistNeutralName, isHoisted: false);
-            RestRole outsourceScope = await guild.CreateRoleAsync(OutsourceNeutralName, isHoisted: false);
-            RestRole alumniScope = await guild.CreateRoleAsync(AlumniNeutralName, isHoisted: false);
-            RestRole firedScope = await guild.CreateRoleAsync(FiredNeutralName, isHoisted: false);
+            RestRole syndicateScopeRole;
+            if(env.FractionRoles.ContainsKey(SyndicateNeutralName))
+            {
+                syndicateScopeRole = await guild.GetRoleAsync(env.FractionRoles[SyndicateNeutralName]);
+            }
+            else
+            {
+                syndicateScopeRole = await guild.CreateRoleAsync(SyndicateNeutralName, isHoisted: false);
+                env.FractionRoles.Add(syndicateScopeRole.Name, syndicateScopeRole.Id);
+            }
 
-            env.FractionRoles.Add(syndicateScope.Name, syndicateScope.Id);
-            env.FractionRoles.Add(shareholderScope.Name, shareholderScope.Id);
-            env.FractionRoles.Add(startupFounderScope.Name, startupFounderScope.Id);
-            env.FractionRoles.Add(evangelistScope.Name, evangelistScope.Id);
-            env.FractionRoles.Add(outsourceScope.Name, outsourceScope.Id);
-            env.FractionRoles.Add(alumniScope.Name, alumniScope.Id);
-            env.FractionRoles.Add(firedScope.Name, firedScope.Id);
+            RestRole shareholderScopeRole;
+            if(env.FractionRoles.ContainsKey(ShareholderNeutralName))
+            {
+                shareholderScopeRole = await guild.GetRoleAsync(env.FractionRoles[ShareholderNeutralName]);
+            }
+            else
+            {
+                shareholderScopeRole = await guild.CreateRoleAsync(ShareholderNeutralName, isHoisted: false);
+                env.FractionRoles.Add(shareholderScopeRole.Name, shareholderScopeRole.Id);
+            }
+
+            RestRole startupFounderScopeRole;
+            if(env.FractionRoles.ContainsKey(StartupFounderNeutralName))
+            {
+                startupFounderScopeRole = await guild.GetRoleAsync(env.FractionRoles[StartupFounderNeutralName]);
+            }
+            else
+            {
+                startupFounderScopeRole = await guild.CreateRoleAsync(StartupFounderNeutralName, isHoisted: false);
+                env.FractionRoles.Add(startupFounderScopeRole.Name, startupFounderScopeRole.Id);
+            }
+
+            RestRole evangelistScopeRole;
+            if(env.FractionRoles.ContainsKey(EvangelistNeutralName))
+            {
+                evangelistScopeRole = await guild.GetRoleAsync(env.FractionRoles[EvangelistNeutralName]);
+            }
+            else
+            {
+                evangelistScopeRole = await guild.CreateRoleAsync(EvangelistNeutralName, isHoisted: false);
+                env.FractionRoles.Add(evangelistScopeRole.Name, evangelistScopeRole.Id);
+            }
+
+            RestRole outsourceScopeRole;
+            if(env.FractionRoles.ContainsKey(OutsourceNeutralName))
+            {
+                outsourceScopeRole = await guild.GetRoleAsync(env.FractionRoles[OutsourceNeutralName]);
+            }
+            else
+            {
+                outsourceScopeRole = await guild.CreateRoleAsync(OutsourceNeutralName, isHoisted: false);
+                env.FractionRoles.Add(outsourceScopeRole.Name, outsourceScopeRole.Id);
+            }
+
+            RestRole alumniScopeRole;
+            if(env.FractionRoles.ContainsKey(AlumniNeutralName))
+            {
+                alumniScopeRole = await guild.GetRoleAsync(env.FractionRoles[AlumniNeutralName]);
+            }
+            else
+            {
+                alumniScopeRole = await guild.CreateRoleAsync(AlumniNeutralName, isHoisted: false);
+                env.FractionRoles.Add(alumniScopeRole.Name, alumniScopeRole.Id);
+            }
+
+            RestRole firedScopeRole;
+            if(env.FractionRoles.ContainsKey(FiredNeutralName))
+            {
+                firedScopeRole = await guild.GetRoleAsync(env.FractionRoles[FiredNeutralName]);
+            }
+            else
+            {
+                firedScopeRole = await guild.CreateRoleAsync(FiredNeutralName, isHoisted: false);
+                env.FractionRoles.Add(firedScopeRole.Name, firedScopeRole.Id);
+            }
 
             foreach(Player player in holder.Engine.Players)
             {
@@ -81,22 +144,22 @@ namespace DiscordBot
                     switch(chatScopeAttrs[i].Scope)
                     {
                         case ChatScope.SYNDICATE:
-                            await discordUser.AddRoleAsync(syndicateScope);
+                            await discordUser.AddRoleAsync(syndicateScopeRole);
                             break;
                         case ChatScope.SHAREHOLDER:
-                            await discordUser.AddRoleAsync(shareholderScope);
+                            await discordUser.AddRoleAsync(shareholderScopeRole);
                             break;
                         case ChatScope.STARTUP when chatScopeAttrs[i].CanWrite:
-                            await discordUser.AddRoleAsync(evangelistScope);
+                            await discordUser.AddRoleAsync(evangelistScopeRole);
                             break;
                         case ChatScope.STARTUP when !chatScopeAttrs[i].CanWrite:
-                            await discordUser.AddRoleAsync(startupFounderScope);
+                            await discordUser.AddRoleAsync(startupFounderScopeRole);
                             break;
                         case ChatScope.OUTSOURCE:
-                            await discordUser.AddRoleAsync(outsourceScope);
+                            await discordUser.AddRoleAsync(outsourceScopeRole);
                             break;
                         case ChatScope.FIRED when chatScopeAttrs[i].CanWrite:
-                            await discordUser.AddRoleAsync(firedScope);
+                            await discordUser.AddRoleAsync(firedScopeRole);
                             break;
                     }
                 }
@@ -109,7 +172,7 @@ namespace DiscordBot
                 x.CategoryId = category.Id;
                 x.PermissionOverwrites = new[] {
                     new Overwrite(guild.EveryoneRole.Id, PermissionTarget.Role, denyEveryone),
-                    new Overwrite(shareholderScope.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
+                    new Overwrite(shareholderScopeRole.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
                 };
             });
 
@@ -118,7 +181,7 @@ namespace DiscordBot
                 x.CategoryId = category.Id;
                 x.PermissionOverwrites = new[] {
                     new Overwrite(guild.EveryoneRole.Id, PermissionTarget.Role, denyEveryone),
-                    new Overwrite(syndicateScope.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
+                    new Overwrite(syndicateScopeRole.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
                 };
             });
 
@@ -127,7 +190,7 @@ namespace DiscordBot
                 x.CategoryId = category.Id;
                 x.PermissionOverwrites = new[] {
                     new Overwrite(guild.EveryoneRole.Id, PermissionTarget.Role, denyEveryone),
-                    new Overwrite(startupFounderScope.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow, sendMessages: PermValue.Deny))
+                    new Overwrite(startupFounderScopeRole.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow, sendMessages: PermValue.Deny))
                 };
             });
 
@@ -136,7 +199,7 @@ namespace DiscordBot
                 x.CategoryId = category.Id;
                 x.PermissionOverwrites = new[] {
                     new Overwrite(guild.EveryoneRole.Id, PermissionTarget.Role, denyEveryone),
-                    new Overwrite(evangelistScope.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
+                    new Overwrite(evangelistScopeRole.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
                 };
             });
 
@@ -145,7 +208,7 @@ namespace DiscordBot
                 x.CategoryId = category.Id;
                 x.PermissionOverwrites = new[] {
                     new Overwrite(guild.EveryoneRole.Id, PermissionTarget.Role, denyEveryone),
-                    new Overwrite(outsourceScope.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
+                    new Overwrite(outsourceScopeRole.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow))
                 };
             });
 
@@ -154,19 +217,19 @@ namespace DiscordBot
                 x.CategoryId = category.Id;
                 x.PermissionOverwrites = new[] {
                     new Overwrite(guild.EveryoneRole.Id, PermissionTarget.Role, denyEveryone),
-                    new Overwrite(firedScope.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow, sendMessages: PermValue.Allow))
+                    new Overwrite(firedScopeRole.Id, PermissionTarget.Role, new OverwritePermissions(viewChannel: PermValue.Allow, sendMessages: PermValue.Allow))
                 };
             });
 
             //Fired players should not have access to the general text channel and voice channel, so we set that up here at the start
-            await generalText.AddPermissionOverwriteAsync(firedScope, new OverwritePermissions(sendMessages: PermValue.Deny));
-            await voiceBoard.AddPermissionOverwriteAsync(firedScope, new OverwritePermissions(speak: PermValue.Deny));
+            await generalText.AddPermissionOverwriteAsync(firedScopeRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            await voiceBoard.AddPermissionOverwriteAsync(firedScopeRole, new OverwritePermissions(speak: PermValue.Deny));
 
-            env.PrivateChannels.Add(shareholderScope.Name, shareholderChannel.Id);
-            env.PrivateChannels.Add(syndicateScope.Name, syndicateChannel.Id);
-            env.PrivateChannels.Add(evangelistScope.Name, evangelistChannel.Id);
-            env.PrivateChannels.Add(outsourceScope.Name, outsourceChannel.Id);
-            env.PrivateChannels.Add(firedScope.Name, firedChannel.Id);
+            env.PrivateChannels.Add(shareholderScopeRole.Name, shareholderChannel.Id);
+            env.PrivateChannels.Add(syndicateScopeRole.Name, syndicateChannel.Id);
+            env.PrivateChannels.Add(evangelistScopeRole.Name, evangelistChannel.Id);
+            env.PrivateChannels.Add(outsourceScopeRole.Name, outsourceChannel.Id);
+            env.PrivateChannels.Add(firedScopeRole.Name, firedChannel.Id);
 
             environments[guild.Id] = env;
         }
@@ -217,7 +280,7 @@ namespace DiscordBot
             }
             else if(currentCycle is MorningCycle morningCycle)
             {
-                await HandleMorningCycle(guild, env, generalText, voiceBoard, denyAll, morningCycle);
+                await HandleMorningCycle(holder, guild, env, generalText, voiceBoard, denyAll, morningCycle);
             }
             else if(currentCycle is DirectorBoardCycle boardCycle)
             {
@@ -258,17 +321,8 @@ namespace DiscordBot
             await generalText.SendMessageAsync(Miscellaneous.IntroDayMessageInfo, components: components);
         }
 
-        private static async Task HandleMorningCycle(SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions denyAll, MorningCycle morningCycle)
+        private static async Task HandleMorningCycle(GameHolder holder, SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions denyAll, MorningCycle morningCycle)
         {
-            await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
-            await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
-
-            await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
-            await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
-            await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
-            await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
-            await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
-
             // Send logs to PMs and publish public news in the general channel based on the logs
             Queue<PostmanPresenter> postman = ActionLogFacade.ZipLogs(morningCycle.ActionLogs);
             var postponedMessages = await ActionLogFacade.InterpretLogs(postman, guild, generalText);
@@ -280,6 +334,49 @@ namespace DiscordBot
                 .Build();
 
             await generalText.SendMessageAsync(Miscellaneous.MorningReadyMessageInfo, components: components);
+
+            IEnumerable<ulong> roleChanges = morningCycle.ActionLogs.Where(action =>
+                action.Success
+                && (action.Action == GameLogic.Model.ActionType.RECRUIT || action.Action == GameLogic.Model.ActionType.RESSURECT)
+                && action.Target.Owner is not null)
+                .Select(action => action.Target.Owner!.Id);
+            IEnumerable<Player> desiredPlayers = holder.Engine.AlivePlayers.Join(roleChanges, player => player.Id, id => id, (player, id) => player);
+            foreach(Player player in desiredPlayers)
+            {
+                if(!player.IsAlive) continue;
+
+                SocketGuildUser discordUser = guild.GetUser(player.Id);
+                if(discordUser == null) continue;
+
+                await discordUser.RemoveRolesAsync(env.FractionRoles.Values);
+
+                ChatScopeAttribute[] chatScopeAttrs = player.Role.GetChatScopeAttributes();
+
+                for(int i = 0; i < chatScopeAttrs.Length; i++)
+                {
+                    switch(chatScopeAttrs[i].Scope)
+                    {
+                        case ChatScope.SYNDICATE:
+                            await discordUser.AddRoleAsync(env.FractionRoles[SyndicateNeutralName]);
+                            break;
+                        case ChatScope.STARTUP when chatScopeAttrs[i].CanWrite:
+                            await discordUser.AddRoleAsync(env.FractionRoles[EvangelistNeutralName]);
+                            break;
+                        case ChatScope.OUTSOURCE:
+                            await discordUser.AddRoleAsync(env.FractionRoles[OutsourceNeutralName]);
+                            break;
+                    }
+                }
+            }
+
+            await generalText.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(sendMessages: PermValue.Deny));
+            await voiceBoard.AddPermissionOverwriteAsync(guild.EveryoneRole, new OverwritePermissions(speak: PermValue.Deny));
+
+            await ApplyFractionChannelPermissions(guild, env, SyndicateNeutralName, denyAll, SyndicateNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, ShareholderNeutralName, denyAll, ShareholderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, StartupFounderNeutralName, denyAll, StartupFounderNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, EvangelistNeutralName, denyAll, EvangelistNeutralName);
+            await ApplyFractionChannelPermissions(guild, env, OutsourceNeutralName, denyAll, OutsourceNeutralName);
         }
 
         private static async Task HandleBoardCycle(GameHolder holder, SocketGuild guild, DiscordSessionEnvironment env, SocketTextChannel generalText, SocketVoiceChannel voiceBoard, OverwritePermissions denyAll, DirectorBoardCycle boardCycle)
@@ -410,7 +507,7 @@ namespace DiscordBot
                 await category.DeleteAsync();
             }
 
-            foreach(ulong roleId in env.ManagedRoles)
+            foreach(ulong roleId in env.FractionRoles.Values)
             {
                 SocketRole role = guild.GetRole(roleId);
                 if(role != null) await role.DeleteAsync();

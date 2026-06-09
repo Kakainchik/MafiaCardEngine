@@ -19,6 +19,9 @@ namespace DiscordBot
             this.stageController = stageController;
         }
 
+        /// <summary>
+        /// Creates a new game session for the specified guild using the provided lobby. The role cards will be assigned randomly based on the selected roles pool in the lobby.
+        /// </summary>
         public GameHolder CreateGameSession(SocketGuild guild, LobbySession lobby)
         {
             if(activeGameSessions.ContainsKey(guild.Id))
@@ -37,16 +40,49 @@ namespace DiscordBot
             }
 
             RoleVisual[] roleCards = unorderedRoles.ToArray();
-            Random random = new Random();
-            random.Shuffle(roleCards);
+            Random.Shared.Shuffle(roleCards);
             unorderedRoles.Clear();
 
             Player[] logicPlayers = new Player[lobby.Players.Count];
             int index = 0;
             foreach(ulong playerId in lobby.Players)
             {
-                //MapRole() is used here to convert RoleVisual to RoleSignature, and MakeGameRole() is used to convert to the type used in the game logic.
                 logicPlayers[index] = new Player(playerId, roleCards[index].MapRole().MakeGameRole());
+                index++;
+            }
+
+            IntroductoryDayCycle initialCycle = new IntroductoryDayCycle();
+            GameEngine engine = new GameEngine(logicPlayers, initialCycle);
+            GameHolder holder = new GameHolder(guild, engine);
+
+            initialCycle.Engine = engine;
+
+            activeGameSessions[guild.Id] = holder;
+            return holder;
+        }
+
+        /// <summary>
+        /// Creates a new game session for the specified guild using the provided lobby. The role cards are provided manually.
+        /// </summary>
+        public GameHolder CreateGameSession(SocketGuild guild, LobbySession lobby, IReadOnlyDictionary<ulong, RoleVisual> roleCards)
+        {
+            if(activeGameSessions.ContainsKey(guild.Id))
+            {
+                throw new ArgumentException("A game session is already active for this guild. " +
+                    "Please abandon the existing session before creating a new one.", nameof(guild));
+            }
+
+            if(roleCards.Count != lobby.Players.Count)
+            {
+                throw new ArgumentException("The number of role cards must match the number of players in the lobby.",
+                    nameof(roleCards));
+            }
+
+            Player[] logicPlayers = new Player[lobby.Players.Count];
+            int index = 0;
+            foreach(ulong playerId in lobby.Players)
+            {
+                logicPlayers[index] = new Player(playerId, roleCards[playerId].MapRole().MakeGameRole());
                 index++;
             }
 

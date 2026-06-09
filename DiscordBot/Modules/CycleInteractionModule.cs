@@ -82,7 +82,6 @@ namespace DiscordBot.Modules
             morningCycle.SetDirectorReady();
 
             await RespondAsync(Miscellaneous.YouOpenBoardMessage, ephemeral: true);
-
             await gameSessionService.TryFinishCycle(holder);
         }
 
@@ -359,8 +358,7 @@ namespace DiscordBot.Modules
                     List<SelectMenuOptionBuilder> options2 = new List<SelectMenuOptionBuilder>();
                     foreach(Player target in alivePlayers)
                     {
-                        SocketGuildUser targetUser = Context.Guild.GetUser(target.Id);
-                        string targetName = targetUser?.Username ?? $"Employee {target.Id}";
+                        string targetName = $"<@{target.Id}>";
                         if(target.Id != player.Id)
                         {
                             options1.Add(new SelectMenuOptionBuilder(targetName, target.Id.ToString()));
@@ -472,7 +470,11 @@ namespace DiscordBot.Modules
                             IRoleOwner? target = holder.Engine.AlivePlayers.FirstOrDefault(p => p.Id == selections[i]);
                             targets[i] = target ?? throw new InvalidOperationException(Miscellaneous.TargetNotFoundError);
                         }
-                        overtimeCycle.ConfirmAction(player, targets);
+
+                        lock(holder.LockObject)
+                        {
+                            overtimeCycle.ConfirmAction(player, targets);
+                        }
                     }
                 }
                 catch(Exception ex)

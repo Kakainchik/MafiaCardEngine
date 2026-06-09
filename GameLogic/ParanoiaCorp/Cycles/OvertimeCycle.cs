@@ -64,14 +64,6 @@ namespace GameLogic.ParanoiaCorp.Cycles
             Role[] targetRoles = targets.Select(x => x.Role).ToArray();
             IAbility ability = ((IExecutor)executor.Role).GetAbility(selectAbility, targetRoles);
             abilities.Add(ability);
-
-            EndGameOvernightHistory overnightRecord = new EndGameOvernightHistory()
-            {
-                Executor = executor.Id,
-                ExecutorRoleType = executor.Role.GetType(),
-                Targets = targets.Select(t => t.Id).ToArray()
-            };
-            endGameOvernightHistory.Enqueue(overnightRecord);
         }
 
         public void SetPlayerReady(Player player)
@@ -96,6 +88,17 @@ namespace GameLogic.ParanoiaCorp.Cycles
             IEnumerable<Role> aliveRoles = engine.AlivePlayers.Select(a => a.Role);
             for(int i = 0; i < abilities.Count; i++)
             {
+                if(abilities[i].Holder.Owner != null)
+                {
+                    EndGameOvernightHistory overnightRecord = new EndGameOvernightHistory()
+                    {
+                        Executor = abilities[i].Holder.Owner!.Id,
+                        ExecutorRoleType = abilities[i].Holder.Owner!.Role.GetType(),
+                        Targets = abilities[i].Targets.Select(t => t.Owner!.Id).ToArray()
+                    };
+                    endGameOvernightHistory.Enqueue(overnightRecord);
+                }
+
                 abilities[i].Condition(ref abilities, aliveRoles);
             }
 

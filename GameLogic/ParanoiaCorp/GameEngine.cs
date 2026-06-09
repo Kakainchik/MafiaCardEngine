@@ -88,7 +88,7 @@ namespace GameLogic.ParanoiaCorp
         }
     }
 
-    public record class EndGameRoundHistory
+    public class EndGameRoundHistory
     {
         public int Turn { get; set; }
         public ulong? FiredPlayer { get; set; }

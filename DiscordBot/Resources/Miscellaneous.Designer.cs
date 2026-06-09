@@ -421,6 +421,15 @@ namespace DiscordBot.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host:.
+        /// </summary>
+        internal static string HostNameTitle {
+            get {
+                return ResourceManager.GetString("HostNameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 👋 **Welcome to Paranoia Corp!** The introductory day is starting. Introductory Day is about to begin. Please collect your job badge and confirm your attendance..
         /// </summary>
         internal static string IntroDayMessageInfo {

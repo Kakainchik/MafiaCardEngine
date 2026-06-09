@@ -32,7 +32,7 @@ namespace DiscordBot
 
             List<Embed> roundEmbeds = new List<Embed>();
 
-            foreach(EndGameRoundHistory round in history.Rounds)
+            while(history.Rounds.TryDequeue(out EndGameRoundHistory? round))
             {
                 EmbedBuilder roundEmbed = new EmbedBuilder()
                     .WithTitle(string.Format(Miscellaneous.TurnNumberTitle, round.Turn))

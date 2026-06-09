@@ -7,6 +7,9 @@ namespace GameLogic
     {
         #region Properties
 
+        public bool IsAlive { get; set; }
+        public int Votes => Voters.Count;
+
         /// <summary>
         /// Unique id of player.
         /// </summary>
@@ -17,9 +20,6 @@ namespace GameLogic
         public IVotable? VoteTarget { get; set; }
         public ICollection<IVoter> Voters { get; set; }
         public ITarget? DeathReason { get; private set; }
-
-        public bool IsAlive { get; set; }
-        public int Votes => Voters.Count;
 
         #endregion
 
