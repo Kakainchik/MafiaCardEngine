@@ -52,22 +52,29 @@ namespace WebServer.Controllers.ParanoiaCorp
         }
 
         [HttpPost("room/{roomId:int}/role")]
-        public IActionResult UpdateRolePool([FromRoute] int roomId, [FromBody] UpdateRolePoolRequest req)
+        public async Task<IActionResult> UpdateRolePool([FromRoute] int roomId, [FromBody] UpdateRolePoolRequest req)
         {
             if (!Enum.TryParse<ParanoiaRoleSignature>(req.Role, true, out var roleSig))
             {
                 return BadRequest(new { error = $"Invalid role signature: {req.Role}" });
             }
 
-            lobbyService.SetRole(roomId, roleSig, req.Count);
+            await lobbyService.SetRoleAsync(roomId, GetCurrentUserId(), roleSig, req.Count);
             return Ok(lobbyService.GetLobby(roomId));
         }
 
         [HttpPost("room/{roomId:int}/clear_roles")]
-        public IActionResult ClearRolePool([FromRoute] int roomId)
+        public async Task<IActionResult> ClearRolePool([FromRoute] int roomId)
         {
-            lobbyService.ClearRoles(roomId);
+            await lobbyService.ClearRolesAsync(roomId, GetCurrentUserId());
             return Ok(lobbyService.GetLobby(roomId));
+        }
+
+        [HttpPost("room/{roomId:int}/end")]
+        public IActionResult EndSession([FromRoute] int roomId)
+        {
+            lobbyService.EndSession(roomId, GetCurrentUserId());
+            return Ok(new { success = true });
         }
 
         [HttpPost("room/{roomId:int}/start")]
@@ -142,7 +149,7 @@ namespace WebServer.Controllers.ParanoiaCorp
                     await session.HandleDirectorSelectCandidateAsync(userId, req.CandidateId.Value);
                     break;
                 case "director_fire":
-                    await session.HandleDirectorFireAsync(userId);
+                    await session.HandleDirectorFireAsync(userId, req.CandidateId);
                     break;
                 case "director_veto":
                     await session.HandleDirectorUseVetoAsync(userId);

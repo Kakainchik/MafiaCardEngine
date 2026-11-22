@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter</value></resheader>
+  <data name="StatusActive" xml:space="preserve"><value>В строю</value></data>
+  <data name="StatusDismissed" xml:space="preserve"><value>Уволен</value></data>
+  <data name="StatusShortlisted" xml:space="preserve"><value>Кандидат на увольнение</value></data>
+  <data name="BoardPhaseTitle" xml:space="preserve"><value>Совет Директоров</value></data>
+  <data name="BoardDirectiveDirector" xml:space="preserve"><value>Обсуждение открыто. Выберите кандидата из шорт-листа, примените Вето или помилуйте.</value></data>
+  <data name="BoardDirectivePlayer" xml:space="preserve"><value>Слово предоставлено коллегам. Ожидание решения Генерального Директора об увольнении.</value></data>
+  <data name="ChatBoardroomLabel" xml:space="preserve"><value>Зал Заседаний</value></data>
+  <data name="ChatSyndicateLabel" xml:space="preserve"><value>Канал Синдиката</value></data>
+  <data name="ChatShareholderLabel" xml:space="preserve"><value>Канал Акционеров</value></data>
+  <data name="ChatStartupLabel" xml:space="preserve"><value>Канал Стартапа</value></data>
+  <data name="ChatOutsourceLabel" xml:space="preserve"><value>Канал Аутсорса</value></data>
+  <data name="ChatFiredLabel" xml:space="preserve"><value>Клуб Бывших Коллег</value></data>
+</root>

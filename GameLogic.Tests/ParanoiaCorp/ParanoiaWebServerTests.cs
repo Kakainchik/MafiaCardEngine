@@ -17,6 +17,8 @@ namespace GameLogic.Tests.ParanoiaCorp
         {
             var roles = ParanoiaRoleCatalogue.GetAllRoles();
             Assert.AreEqual(21, roles.Count);
+            Assert.IsFalse(ParanoiaRoleCatalogue.GetRoleInfo(ParanoiaRoleSignature.MASTER_OF_COMPROMISING)?.IsUnique);
+            Assert.IsTrue(ParanoiaRoleCatalogue.GetRoleInfo(ParanoiaRoleSignature.GENERAL_DIRECTOR)?.IsUnique);
 
             foreach (var r in roles)
             {
@@ -91,6 +93,61 @@ namespace GameLogic.Tests.ParanoiaCorp
             var syndicateMessages = session.GetChatHistory(300, "SYNDICATE");
             Assert.AreEqual(1, syndicateMessages.Count);
             Assert.AreEqual("Breach prepared.", syndicateMessages[0].Content);
+        }
+
+        [TestMethod]
+        public async Task DirectorCanSelectAndFireEmployeeAtBoardMeeting()
+        {
+            var director = new PlayerDomain("Director", new RGB(0, 0, 0), new Player(100, new GeneralDirectorRole()));
+            var sysadmin = new PlayerDomain("Alice", new RGB(0, 0, 0), new Player(200, new SystemAdministratorRole()));
+            var hacker = new PlayerDomain("Bob", new RGB(0, 0, 0), new Player(300, new HackerRole()));
+            var clerk = new PlayerDomain("Carol", new RGB(0, 0, 0), new Player(400, new ClerkRole()));
+            var spy = new PlayerDomain("Dave", new RGB(0, 0, 0), new Player(500, new SpyRole()));
+            var startup = new PlayerDomain("Eve", new RGB(0, 0, 0), new Player(600, new StartupFounderRole()));
+            var session = new ParanoiaGameSession(42, new[] { director, sysadmin, hacker, clerk, spy, startup }, null!);
+
+            foreach (ulong id in new ulong[] { 100, 200, 300, 400, 500, 600 })
+            {
+                await session.HandleIntroReadyAsync(id);
+            }
+
+            foreach (ulong id in new ulong[] { 100, 200, 300, 400, 500, 600 })
+            {
+                await session.HandleOvertimeReadyAsync(id);
+            }
+
+            await session.HandleDirectorStartBoardAsync(100);
+            var boardView = session.GetPlayerView(100);
+            Assert.AreEqual("BoardMeeting", boardView.Phase);
+
+            await session.HandleDirectorUseVetoAsync(100);
+            await session.HandleDirectorSelectCandidateAsync(100, 200);
+            await session.HandleDirectorFireAsync(100, 200);
+
+            var eveningView = session.GetPlayerView(100);
+            Assert.AreEqual("Evening", eveningView.Phase);
+            Assert.IsNotNull(eveningView.Evening);
+            Assert.AreEqual(200UL, eveningView.Evening.DismissedEmployeeId);
+
+            await session.HandleEveningFinishAsync(100);
+            var overtimeView = session.GetPlayerView(100);
+            Assert.AreEqual("Overtime", overtimeView.Phase);
+
+            var firedView = session.GetPlayerView(200);
+            Assert.IsFalse(firedView.Self.IsAlive);
+
+            await session.HandleOvertimeReadyAsync(100);
+            var directorViewAfterReady = session.GetPlayerView(100);
+            Assert.IsTrue(directorViewAfterReady.Roster.Single(p => p.Id == 200).IsReady);
+            Assert.IsFalse(directorViewAfterReady.Roster.Single(p => p.Id == 300).IsReady);
+
+            foreach (ulong id in new ulong[] { 300, 400, 500, 600 })
+            {
+                await session.HandleOvertimeReadyAsync(id);
+            }
+
+            var morningView = session.GetPlayerView(100);
+            Assert.AreEqual("Morning", morningView.Phase);
         }
     }
 }

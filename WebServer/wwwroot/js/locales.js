@@ -116,6 +116,16 @@ const Locales = {
     confirmVetoDialog: 'CONFIRM STATUTORY VETO EXERCISE',
     confirmVetoPrompt: 'Using a Veto will expend 1 of your 2 available Veto Powers and reset current dismissal nominations.',
     confirmVeto: 'Exercise Statutory Veto',
+    selectedForDismissal: 'Selected for dismissal',
+    nominatedForDismissal: 'Nominated for dismissal',
+    directorExecutivePowers: "GENERAL DIRECTOR'S EXECUTIVE POWERS",
+    selectEmployeeDismissal: 'Select Employee for Dismissal',
+    chooseCandidate: '-- Choose Candidate to Terminate --',
+    vetoActive: 'VETO ACTIVE',
+    noMorningNews: 'No morning news issued.',
+    noConfidentialReports: 'No confidential reports issued to your terminal this morning.',
+    confidentialMemo: 'Confidential Memo',
+    selectCandidatePrompt: 'Please select a candidate to terminate from the dropdown.',
 
     // Evening
     dismissalOrderTitle: 'Executive Termination Order',
@@ -244,6 +254,16 @@ const Locales = {
     confirmVetoDialog: 'ПОДТВЕРЖДЕНИЕ ПРАВА ВЕТО',
     confirmVetoPrompt: 'Применение вето израсходует 1 из 2 доступных прав и сбросит текущие номинации на увольнение.',
     confirmVeto: 'Использовать Право Вето',
+    selectedForDismissal: 'Выбран для увольнения',
+    nominatedForDismissal: 'Кандидат на увольнение',
+    directorExecutivePowers: 'ПОЛНОМОЧИЯ ГЕНЕРАЛЬНОГО ДИРЕКТОРА',
+    selectEmployeeDismissal: 'Выберите сотрудника для увольнения',
+    chooseCandidate: '-- Выберите кандидата для увольнения --',
+    vetoActive: 'ВЕТО АКТИВНО',
+    noMorningNews: 'Утренних новостей нет.',
+    noConfidentialReports: 'Конфиденциальные доклады вам сегодня не направлялись.',
+    confidentialMemo: 'Конфиденциальная записка',
+    selectCandidatePrompt: 'Пожалуйста, выберите кандидата для увольнения в списке.',
 
     // Evening
     dismissalOrderTitle: 'Приказ об Увольнении',

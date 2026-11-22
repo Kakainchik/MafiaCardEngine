@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using WebServer.Hubs;
 using WebServer.Model.Game;
+using WebServer.Model.Room;
 using WebServer.Shared.HubObjects;
 using WebServer.Shared.ParanoiaCorp.Extensions;
 using WebServer.Shared.ParanoiaCorp.GameObjects;
+using WebServer.Resources;
 using Team = GameLogic.ParanoiaCorp.Attributes.Team;
 using ChatScope = GameLogic.ParanoiaCorp.Attributes.ChatScope;
 using ChatScopeAttribute = GameLogic.ParanoiaCorp.Attributes.ChatScopeAttribute;
@@ -25,6 +27,7 @@ namespace WebServer.Model.ParanoiaCorp
     {
         private readonly object syncRoot = new();
         private readonly IHubContext<LobbyHub> hubContext;
+        private readonly IWaitRoomRepository? waitRoomRepository;
 
         public int RoomId { get; }
         public GameEngine Engine { get; }
@@ -41,12 +44,14 @@ namespace WebServer.Model.ParanoiaCorp
 
         private ulong? directorSelectedCandidate;
         private EveningCycle? currentEveningCycle;
+        private bool lobbyCleanedUp;
 
-        public ParanoiaGameSession(int roomId, PlayerDomain[] players, IHubContext<LobbyHub> hubContext)
+        public ParanoiaGameSession(int roomId, PlayerDomain[] players, IHubContext<LobbyHub> hubContext, IWaitRoomRepository? waitRoomRepository = null)
         {
             RoomId = roomId;
             Players = players;
             this.hubContext = hubContext;
+            this.waitRoomRepository = waitRoomRepository;
 
             var logicPlayers = players.Select(p => p.GameRepresentation).ToArray();
             var initialCycle = new IntroductoryDayCycle();
@@ -137,13 +142,13 @@ namespace WebServer.Model.ParanoiaCorp
                     RoleSignature pSig = rep.Role.IntoSignature();
                     RoleInfoDTO? pInfo = ParanoiaRoleCatalogue.GetRoleInfo(pSig);
 
-                    string statusEn = rep.IsAlive ? "Active" : "Dismissed";
-                    string statusRu = rep.IsAlive ? "В строю" : "Уволен";
+                    string statusEn = rep.IsAlive ? ParanoiaMessages.Get("StatusActive", false) : ParanoiaMessages.Get("StatusDismissed", false);
+                    string statusRu = rep.IsAlive ? ParanoiaMessages.Get("StatusActive", true) : ParanoiaMessages.Get("StatusDismissed", true);
 
                     if (Engine.CurrentCycle is DirectorBoardCycle dbc && dbc.CandidatesForFiring.Any(c => c.Id == rep.Id))
                     {
-                        statusEn = "Shortlisted for Dismissal";
-                        statusRu = "Кандидат на увольнение";
+                        statusEn = ParanoiaMessages.Get("StatusShortlisted", false);
+                        statusRu = ParanoiaMessages.Get("StatusShortlisted", true);
                     }
 
                     view.Roster.Add(new PlayerRosterDTO
@@ -222,18 +227,19 @@ namespace WebServer.Model.ParanoiaCorp
                 else if (cycle is DirectorBoardCycle boardCycle)
                 {
                     view.Phase = "BoardMeeting";
-                    view.PhaseTitleEn = "Board Meeting";
-                    view.PhaseTitleRu = "Совет Директоров";
+                    view.PhaseTitleEn = ParanoiaMessages.Get("BoardPhaseTitle", false);
+                    view.PhaseTitleRu = ParanoiaMessages.Get("BoardPhaseTitle", true);
 
                     bool isDirector = player.Role is GeneralDirectorRole;
                     var candidates = boardCycle.CandidatesForFiring.ToList();
+                    var eligibleForFiring = boardCycle.EligibleForFiring.ToList();
 
                     view.DirectiveEn = isDirector
-                        ? "Conducted debate. Select a candidate from the shortlist to dismiss, exercise Veto, or adjourn without dismissal."
-                        : "Floor is open for general discussion. Awaiting the General Director's final dismissal ruling.";
+                        ? ParanoiaMessages.Get("BoardDirectiveDirector", false)
+                        : ParanoiaMessages.Get("BoardDirectivePlayer", false);
                     view.DirectiveRu = isDirector
-                        ? "Обсуждение открыто. Выберите кандидата из шорт-листа на увольнение, примените Вето или помилуйте."
-                        : "Слово предоставлено коллегам. Ожидание решения Генерального Директора об увольнении.";
+                        ? ParanoiaMessages.Get("BoardDirectiveDirector", true)
+                        : ParanoiaMessages.Get("BoardDirectivePlayer", true);
 
                     view.BoardMeeting = new BoardMeetingDTO
                     {
@@ -242,7 +248,7 @@ namespace WebServer.Model.ParanoiaCorp
                         VetoUsed = boardCycle.VetoUsed,
                         CanSkipTurn = boardCycle.CanSkipTurn,
                         SelectedCandidate = directorSelectedCandidate,
-                        CandidatesForFiring = candidates.Select(c =>
+                        CandidatesForFiring = eligibleForFiring.Select(c =>
                         {
                             var pDomain = Players.FirstOrDefault(p => p.Id == c.Id);
                             return new TargetOptionDTO
@@ -306,6 +312,40 @@ namespace WebServer.Model.ParanoiaCorp
                         WinnerTitleEn = winEn,
                         WinnerTitleRu = winRu,
                         WinnerColor = winColor,
+                        TurnHistory = endGameCycle.EndGameHistory.Rounds.Select(round =>
+                        {
+                            string? firedName = round.FiredPlayer.HasValue
+                                ? Players.FirstOrDefault(p => p.Id == round.FiredPlayer.Value)?.Nickname
+                                : null;
+
+                            var candidates = round.CandidatesForFiring?
+                                .Select(id => Players.FirstOrDefault(p => p.Id == id)?.Nickname)
+                                .Where(name => !string.IsNullOrWhiteSpace(name))
+                                .Select(name => name!)
+                                .ToList() ?? new List<string>();
+
+                            var overtimeActions = round.OvertimeActions?
+                                .Select(action =>
+                                {
+                                    string executor = Players.FirstOrDefault(p => p.Id == action.Executor)?.Nickname ?? $"Employee #{action.Executor}";
+                                    var targets = action.Targets
+                                        .Select(id => Players.FirstOrDefault(p => p.Id == id)?.Nickname)
+                                        .Where(name => !string.IsNullOrWhiteSpace(name))
+                                        .Select(name => name!);
+                                    string targetText = targets.Any() ? string.Join(", ", targets) : "no targets";
+                                    return $"{executor}: {targetText}";
+                                })
+                                .ToList() ?? new List<string>();
+
+                            return new RoundHistoryDTO
+                            {
+                                Turn = round.Turn,
+                                FiredPlayerId = round.FiredPlayer,
+                                FiredPlayerName = firedName,
+                                CandidatesForFiring = candidates,
+                                OvertimeActionsSummary = overtimeActions
+                            };
+                        }).ToList(),
                         PersonnelRegister = Players.Select(p =>
                         {
                             RoleSignature pSig = p.GameRepresentation.Role.IntoSignature();
@@ -349,6 +389,11 @@ namespace WebServer.Model.ParanoiaCorp
             }
             if (Engine.CurrentCycle is OvertimeCycle)
             {
+                Player? player = Engine.Players.FirstOrDefault(p => p.Id == userId);
+                if (player == null || !player.IsAlive || player.Role is GeneralDirectorRole)
+                {
+                    return true;
+                }
                 return overtimeReadyStatus.TryGetValue(userId, out bool r) && r;
             }
             return true;
@@ -471,6 +516,7 @@ namespace WebServer.Model.ParanoiaCorp
         {
             var scopes = new List<ChatScopeInfoDTO>();
             bool isAlive = player.IsAlive;
+            bool isOvertime = Engine.CurrentCycle is OvertimeCycle;
             RoleSignature sig = player.Role.IntoSignature();
             ChatScopeAttribute[] attrs = sig.GetChatScopes();
 
@@ -479,8 +525,8 @@ namespace WebServer.Model.ParanoiaCorp
             scopes.Add(new ChatScopeInfoDTO
             {
                 Scope = "PUBLIC",
-                LabelEn = "Boardroom",
-                LabelRu = "Зал Заседаний",
+                LabelEn = ParanoiaMessages.Get("ChatBoardroomLabel", false),
+                LabelRu = ParanoiaMessages.Get("ChatBoardroomLabel", true),
                 AudienceBadgeEn = "ALL EMPLOYEES",
                 AudienceBadgeRu = "ОБЩЕЕ СОБРАНИЕ",
                 CanWrite = publicCanWrite,
@@ -493,11 +539,11 @@ namespace WebServer.Model.ParanoiaCorp
                 scopes.Add(new ChatScopeInfoDTO
                 {
                     Scope = "SYNDICATE",
-                    LabelEn = "Syndicate Frequency",
-                    LabelRu = "Канал Синдиката",
+                    LabelEn = ParanoiaMessages.Get("ChatSyndicateLabel", false),
+                    LabelRu = ParanoiaMessages.Get("ChatSyndicateLabel", true),
                     AudienceBadgeEn = "SYNDICATE ONLY (RESTRICTED)",
                     AudienceBadgeRu = "ТОЛЬКО СИНДИКАТ (СОВ. СЕКРЕТНО)",
-                    CanWrite = isAlive,
+                    CanWrite = isAlive && isOvertime,
                     Color = "#b91c1c"
                 });
             }
@@ -508,11 +554,11 @@ namespace WebServer.Model.ParanoiaCorp
                 scopes.Add(new ChatScopeInfoDTO
                 {
                     Scope = "SHAREHOLDER",
-                    LabelEn = "Shareholder Hotline",
-                    LabelRu = "Канал Акционеров",
+                    LabelEn = ParanoiaMessages.Get("ChatShareholderLabel", false),
+                    LabelRu = ParanoiaMessages.Get("ChatShareholderLabel", true),
                     AudienceBadgeEn = "BOARD OF INVESTORS",
                     AudienceBadgeRu = "СОВЕТ АКЦИОНЕРОВ",
-                    CanWrite = isAlive,
+                    CanWrite = isAlive && isOvertime,
                     Color = "#ca8a04"
                 });
             }
@@ -524,8 +570,8 @@ namespace WebServer.Model.ParanoiaCorp
                 scopes.Add(new ChatScopeInfoDTO
                 {
                     Scope = "STARTUP",
-                    LabelEn = "Startup Channel",
-                    LabelRu = "Канал Стартапа",
+                    LabelEn = ParanoiaMessages.Get("ChatStartupLabel", false),
+                    LabelRu = ParanoiaMessages.Get("ChatStartupLabel", true),
                     AudienceBadgeEn = "STARTUP SURVEILLANCE (MONITORING ONLY)",
                     AudienceBadgeRu = "ПРОСЛУШКА СТАРТАПА (ТОЛЬКО ЧТЕНИЕ)",
                     CanWrite = false,
@@ -537,11 +583,11 @@ namespace WebServer.Model.ParanoiaCorp
                 scopes.Add(new ChatScopeInfoDTO
                 {
                     Scope = "STARTUP",
-                    LabelEn = "Startup Channel",
-                    LabelRu = "Канал Стартапа",
+                    LabelEn = ParanoiaMessages.Get("ChatStartupLabel", false),
+                    LabelRu = ParanoiaMessages.Get("ChatStartupLabel", true),
                     AudienceBadgeEn = "STARTUP FOUNDATION",
                     AudienceBadgeRu = "КОМАНДА СТАРТАПА",
-                    CanWrite = isAlive,
+                    CanWrite = isAlive && isOvertime,
                     Color = "#4d7c0f"
                 });
             }
@@ -552,11 +598,11 @@ namespace WebServer.Model.ParanoiaCorp
                 scopes.Add(new ChatScopeInfoDTO
                 {
                     Scope = "OUTSOURCE",
-                    LabelEn = "Outsource Frequency",
-                    LabelRu = "Канал Аутсорса",
+                    LabelEn = ParanoiaMessages.Get("ChatOutsourceLabel", false),
+                    LabelRu = ParanoiaMessages.Get("ChatOutsourceLabel", true),
                     AudienceBadgeEn = "CONTRACTOR NETWORK",
                     AudienceBadgeRu = "СЕТЬ ПОДРЯДЧИКОВ",
-                    CanWrite = isAlive,
+                    CanWrite = isAlive && isOvertime,
                     Color = "#b45309"
                 });
             }
@@ -568,8 +614,8 @@ namespace WebServer.Model.ParanoiaCorp
                 scopes.Add(new ChatScopeInfoDTO
                 {
                     Scope = "FIRED",
-                    LabelEn = "Club of Former Colleagues",
-                    LabelRu = "Клуб Бывших Коллег",
+                    LabelEn = ParanoiaMessages.Get("ChatFiredLabel", false),
+                    LabelRu = ParanoiaMessages.Get("ChatFiredLabel", true),
                     AudienceBadgeEn = "DISMISSED PERSONNEL LOUNGE",
                     AudienceBadgeRu = "ЛОЖА УВОЛЕННЫХ СОТРУДНИКОВ",
                     CanWrite = true,
@@ -622,6 +668,7 @@ namespace WebServer.Model.ParanoiaCorp
                 if (Engine.CurrentCycle is not OvertimeCycle overtime) return;
                 Player? p = Engine.Players.FirstOrDefault(x => x.Id == userId);
                 if (p == null || !p.IsAlive) return;
+                if (p.Role is GeneralDirectorRole) return;
 
                 if (isSkip || targets == null || targets.Length == 0)
                 {
@@ -664,6 +711,7 @@ namespace WebServer.Model.ParanoiaCorp
                 if (Engine.CurrentCycle is not OvertimeCycle overtime) return;
                 Player? p = Engine.Players.FirstOrDefault(x => x.Id == userId);
                 if (p == null || !p.IsAlive) return;
+                if (p.Role is GeneralDirectorRole) return;
 
                 overtime.SetPlayerReady(p);
                 overtimeReadyStatus[userId] = true;
@@ -703,23 +751,6 @@ namespace WebServer.Model.ParanoiaCorp
                     kvp.Value.Clear();
                 }
             }
-
-            // Notify Anticrisis Managers about their remaining items
-            var acms = Engine.AlivePlayers.Where(p => p.Role is AnticrisisManagerRole);
-            foreach (var acm in acms)
-            {
-                var role = (AnticrisisManagerRole)acm.Role;
-                if (!playerPrivateReports.ContainsKey(acm.Id))
-                {
-                    playerPrivateReports[acm.Id] = new List<ReportItemDTO>();
-                }
-                playerPrivateReports[acm.Id].Add(new ReportItemDTO
-                {
-                    MessageEn = $"Anticrisis Management budget status: You have {role.Items} Critical Incompetence Memos remaining.",
-                    MessageRu = $"Статус антикризисного бюджета: У вас осталось {role.Items} служебных записок на увольнение.",
-                    Timestamp = DateTime.UtcNow.ToString("HH:mm:ss")
-                });
-            }
         }
 
         private void ProcessMorningCycle()
@@ -727,6 +758,7 @@ namespace WebServer.Model.ParanoiaCorp
             if (Engine.CurrentCycle is not MorningCycle morning) return;
 
             currentMorningNews.Clear();
+            playerPrivateReports.Clear();
 
             // Interpret logs using pure ParanoiaLogFacade
             var facadeResult = ParanoiaLogFacade.ProcessMorningLogs(morning.ActionLogs, Engine, Engine.Day);
@@ -785,7 +817,11 @@ namespace WebServer.Model.ParanoiaCorp
                 Player? p = Engine.Players.FirstOrDefault(x => x.Id == userId);
                 if (p == null || p.Role is not GeneralDirectorRole) return;
 
+                Player? candidate = board.EligibleForFiring.FirstOrDefault(c => c.Id == candidateId);
+                if (candidate == null) return;
+
                 directorSelectedCandidate = candidateId;
+                board.ChooseCandidate(candidate);
             }
 
             await BroadcastStateUpdateAsync();
@@ -816,7 +852,7 @@ namespace WebServer.Model.ParanoiaCorp
             await BroadcastStateUpdateAsync();
         }
 
-        public async Task HandleDirectorFireAsync(ulong userId)
+        public async Task HandleDirectorFireAsync(ulong userId, ulong? candidateId = null)
         {
             lock (syncRoot)
             {
@@ -824,9 +860,10 @@ namespace WebServer.Model.ParanoiaCorp
                 Player? p = Engine.Players.FirstOrDefault(x => x.Id == userId);
                 if (p == null || p.Role is not GeneralDirectorRole) return;
 
-                if (!directorSelectedCandidate.HasValue) return;
+                ulong? selectedId = candidateId ?? directorSelectedCandidate;
+                if (!selectedId.HasValue) return;
 
-                Player? target = Engine.Players.FirstOrDefault(x => x.Id == directorSelectedCandidate.Value);
+                Player? target = board.EligibleForFiring.FirstOrDefault(x => x.Id == selectedId.Value);
                 if (target == null) return;
 
                 board.ChooseCandidate(target);
@@ -889,17 +926,10 @@ namespace WebServer.Model.ParanoiaCorp
                     Category = "DISMISSAL"
                 });
 
-                // Check winner
-                var morning = new MorningCycle(Engine, Array.Empty<ActionLog>());
-                if (morning.ResolveWinner(out Team? winner))
-                {
-                    Engine.NextTurn();
-                }
-                else
-                {
-                    Engine.NextTurn(); // Advances to OvertimeCycle
-                    PrepareOvertimeCycle();
-                }
+                // The engine's EveningCycle correctly advances to the next OvertimeCycle.
+                // Do not recreate or advance a separate MorningCycle here.
+                Engine.NextTurn();
+                PrepareOvertimeCycle();
             }
 
             await BroadcastStateUpdateAsync();
@@ -974,6 +1004,11 @@ namespace WebServer.Model.ParanoiaCorp
         public async Task BroadcastStateUpdateAsync()
         {
             if (hubContext == null) return;
+            if (!lobbyCleanedUp && Engine.CurrentCycle is EndGameCycle)
+            {
+                lobbyCleanedUp = true;
+                waitRoomRepository?.DeleteRoom(RoomId);
+            }
             string groupName = LobbyHubConstants.MapGroupName(RoomId);
             // Notify clients to refresh state
             await hubContext.Clients.Group(groupName).SendAsync("ParanoiaStateChanged", RoomId);

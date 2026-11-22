@@ -1,4 +1,5 @@
 ﻿using GameLogic.Cycles;
+using GameLogic.ParanoiaCorp.Roles;
 
 namespace GameLogic.ParanoiaCorp.Cycles
 {
@@ -10,6 +11,10 @@ namespace GameLogic.ParanoiaCorp.Cycles
 
         public bool VetoUsed { get; private set; }
         public IEnumerable<Player> CandidatesForFiring { get; }
+        public IEnumerable<Player> EligibleForFiring =>
+            VetoUsed
+                ? engine.AlivePlayers.Where(player => player.Role is not GeneralDirectorRole)
+                : CandidatesForFiring;
 
         public bool CanSkipTurn => !CandidatesForFiring.Any() || VetoUsed;
 

@@ -233,7 +233,7 @@ namespace WebServer.Model.ParanoiaCorp
                 TeamNameRu = "Синдикат",
                 FactionIndicator = "🕵️",
                 FactionColor = "#b91c1c", // Brick Red
-                IsUnique = true,
+                IsUnique = false,
                 ExecutorType = "TARGET_ANYTARGET"
             });
 
@@ -341,9 +341,9 @@ namespace WebServer.Model.ParanoiaCorp
                 NameEn = "Raider",
                 NameRu = "Рейдер",
                 DescriptionEn = "Ruthless independent corporate raider preparing a hostile takeover. Launches aggressive attacks to dismantle employees and send them to the dismissal shortlist.",
-                DescriptionRu = "Хищный независимый рейдер, готовящий недружественное поглощение. Сверхурочно организует рейдерскую атаку на 1 сотрудника, отправляя в шорт-лист увольнений.",
+                DescriptionRu = "Хищный независимый рейдер, готовящий недружественное поглощение.",
                 AbilityEn = "Launch hostile raid to eliminate 1 employee overnight.",
-                AbilityRu = "Провести рейдерскую атаку и выставить 1 сотрудника на увольнение.",
+                AbilityRu = "В сверхурочные применяет к цели либо блокировку, либо увольнение. Результат определяется случайно.",
                 Team = 4,
                 TeamName = "Independent",
                 TeamNameRu = "Независимые",

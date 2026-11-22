@@ -132,6 +132,12 @@ const API = {
     });
   },
 
+  async endParanoiaSession(roomId) {
+    return await this.request(`/api/paranoia/room/${roomId}/end`, {
+      method: 'POST'
+    });
+  },
+
   async startParanoiaGame(roomId) {
     return await this.request(`/api/paranoia/room/${roomId}/start`, {
       method: 'POST'

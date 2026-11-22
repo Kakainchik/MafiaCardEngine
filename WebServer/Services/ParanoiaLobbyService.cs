@@ -17,10 +17,11 @@ namespace WebServer.Services
     public interface IParanoiaLobbyService
     {
         ParanoiaRoomDTO GetLobby(int roomId);
-        void SetRole(int roomId, ParanoiaRoleSignature role, int count);
-        void ClearRoles(int roomId);
+        Task SetRoleAsync(int roomId, ulong userId, ParanoiaRoleSignature role, int count);
+        Task ClearRolesAsync(int roomId, ulong userId);
         (bool IsValid, List<string> Errors) ValidateLobby(int roomId);
         Task<ParanoiaGameSession> StartGameAsync(int roomId, ulong hostId);
+        void EndSession(int roomId, ulong userId);
     }
 
     public class ParanoiaLobbyService : IParanoiaLobbyService
@@ -75,14 +76,50 @@ namespace WebServer.Services
             };
         }
 
-        public void SetRole(int roomId, ParanoiaRoleSignature role, int count)
+        public async Task SetRoleAsync(int roomId, ulong userId, ParanoiaRoleSignature role, int count)
         {
+            WaitRoomDomain? room = roomRepository.GetRoom(roomId);
+            if (room == null || room.Host.Id != userId)
+            {
+                throw new UnauthorizedAccessException("Only the convening host may configure the role pool.");
+            }
             roomRepository.SetParanoiaRole(roomId, role, count);
+            await BroadcastLobbyUpdateAsync(roomId);
         }
 
-        public void ClearRoles(int roomId)
+        public async Task ClearRolesAsync(int roomId, ulong userId)
         {
+            WaitRoomDomain? room = roomRepository.GetRoom(roomId);
+            if (room == null || room.Host.Id != userId)
+            {
+                throw new UnauthorizedAccessException("Only the convening host may configure the role pool.");
+            }
             roomRepository.ClearParanoiaRoles(roomId);
+            await BroadcastLobbyUpdateAsync(roomId);
+        }
+
+        private async Task BroadcastLobbyUpdateAsync(int roomId)
+        {
+            await hubContext.Clients.Group(LobbyHubConstants.MapGroupName(roomId))
+                .SendAsync("ParanoiaRoomUpdated", roomId);
+        }
+
+        public void EndSession(int roomId, ulong userId)
+        {
+            var game = gameRepository.GetGame(roomId);
+            if (game == null)
+            {
+                roomRepository.DeleteRoom(roomId);
+                return;
+            }
+
+            if (!game.Players.Any(p => p.Id == userId))
+            {
+                throw new UnauthorizedAccessException("Only a participant may close the session.");
+            }
+
+            roomRepository.DeleteRoom(roomId);
+            gameRepository.RemoveGame(roomId);
         }
 
         public (bool IsValid, List<string> Errors) ValidateLobby(int roomId)
@@ -171,7 +208,7 @@ namespace WebServer.Services
                 domains[i] = new PlayerDomain(username, colors[i], logicPlayer);
             }
 
-            var session = new ParanoiaGameSession(roomId, domains, hubContext);
+            var session = new ParanoiaGameSession(roomId, domains, hubContext, roomRepository);
             gameRepository.AddGame(roomId, session);
 
             // Notify all players in lobby that game has started

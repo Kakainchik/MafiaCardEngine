@@ -732,9 +732,11 @@ const App = {
             </p>
             <div class="action-buttons-row">
               <span></span>
-              <button class="btn-primary" id="btn-overtime-ready" ${action?.isReady ? 'disabled style="opacity:0.6;"' : ''}>
-                ${action?.isReady ? Locales.t('statusReady') : Locales.t('confirmReadiness')}
-              </button>
+              ${!self.isGeneralDirector ? `
+                <button class="btn-primary" id="btn-overtime-ready" ${action?.isReady ? 'disabled style="opacity:0.6;"' : ''}>
+                  ${action?.isReady ? Locales.t('statusReady') : Locales.t('confirmReadiness')}
+                </button>
+              ` : ''}
             </div>
           </div>
         </div>
@@ -921,7 +923,11 @@ const App = {
                 ${candidates.map(c => `
                   <div style="background: var(--vermilion-surface); border: 1px solid var(--vermilion-border); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; border-radius: var(--radius-sm);">
                     <span style="font-weight: 700; color: var(--vermilion);">${c.name}</span>
-                    <span class="badge-tag badge-dismissed">NOMINATED FOR DISMISSAL</span>
+                    ${bm.selectedCandidate === c.id ? `
+                      <span class="badge-tag badge-dismissed">${Locales.t('selectedForDismissal')}</span>
+                    ` : `
+                      <span class="badge-tag badge-dismissed">${Locales.t('nominatedForDismissal')}</span>
+                    `}
                   </div>
                 `).join('')}
               </div>
@@ -932,23 +938,58 @@ const App = {
             `}
           </div>
 
+          <!-- Morning memos remain available during the board meeting -->
+          <div style="margin-top: 14px;">
+            <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; margin-bottom: 6px;">
+              ${Locales.t('morningNewsTitle')}
+            </div>
+            <div style="background: var(--paper-ivory-light); border: 1px solid var(--paper-rule); padding: 12px 16px;">
+              ${(gs.publicNews || []).map(n => `
+                <div class="feed-item">
+                  <div class="feed-item-header">
+                    <span class="feed-category">${n.category}</span>
+                    <span class="feed-timestamp">${n.timestamp}</span>
+                  </div>
+                  <p class="feed-message">${isEn ? n.messageEn : n.messageRu}</p>
+                </div>
+              `).join('') || `<span style="font-size:12px;color:var(--ink-muted);">${Locales.t('noMorningNews')}</span>`}
+            </div>
+          </div>
+
+          <div style="margin-top: 10px;">
+            <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; margin-bottom: 6px;">
+              ${Locales.t('confidentialReportsTitle')}
+            </div>
+            <div style="background:#fdfbf7;border:1px solid var(--paper-rule);padding:12px 16px;">
+              ${(gs.confidentialReports || []).length ? (gs.confidentialReports || []).map(r => `
+                <div class="feed-item">
+                  <div class="feed-item-header">
+                    <span class="feed-category">${Locales.t('confidentialMemo')}</span>
+                    <span class="feed-timestamp">${r.timestamp}</span>
+                  </div>
+                  <p class="feed-message">${isEn ? r.messageEn : r.messageRu}</p>
+                </div>
+              `).join('') : `<span style="font-size:12px;color:var(--ink-muted);">${Locales.t('noConfidentialReports')}</span>`}
+            </div>
+          </div>
+
           <!-- General Director Controls Panel -->
           ${isDirector ? `
             <div class="action-box" style="border: 2px solid var(--vermilion); background: #fffbfb;">
               <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #fecdd3; padding-bottom: 8px;">
                 <span style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--vermilion); letter-spacing: 0.08em;">
-                  GENERAL DIRECTOR'S EXECUTIVE POWERS
+                  ${Locales.t('directorExecutivePowers')}
                 </span>
                 <span style="font-family: var(--font-mono); font-size: 12px; font-weight: bold; color: var(--vermilion);">
-                  ${Locales.t('remainingVetoes')}: ${bm.vetoCount} / 2 ${bm.vetoUsed ? '(VETO ACTIVE)' : ''}
+                  ${Locales.t('remainingVetoes')}: ${bm.vetoCount} / 2 ${bm.vetoUsed ? `(${Locales.t('vetoActive')})` : ''}
                 </span>
               </div>
 
               <!-- Candidate Selection -->
               <div class="selector-group">
-                <label class="selector-label">Select Employee for Dismissal:</label>
+                <label class="selector-label">${Locales.t('selectEmployeeDismissal')}</label>
                 <select class="form-select" id="select-director-candidate">
-                  <option value="">-- Choose Candidate to Terminate --</option>
+                  <option value="">${Locales.t('chooseCandidate')}</option>
                   ${(bm.vetoUsed || !hasCandidates ? gs.roster.filter(p => p.isAlive && p.id !== gs.self.id) : candidates).map(c => `
                     <option value="${c.id}" ${this.state.directorSelectedCandidate == c.id ? 'selected' : ''}>
                       ${c.username || c.name}
@@ -1093,6 +1134,37 @@ const App = {
               </tbody>
             </table>
           </div>
+
+          <!-- Chronological Turn History -->
+          ${eg.turnHistory?.length ? `
+            <div style="margin-top: 16px;">
+              <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--ink-black); margin-bottom: 8px;">
+                ${Locales.t('turnHistoryTitle')}
+              </div>
+              <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+                <thead>
+                  <tr style="background: var(--paper-ivory-aged); border-bottom: 2px solid var(--paper-rule-dark);">
+                    <th style="padding: 8px 12px;">TURN</th>
+                    <th style="padding: 8px 12px;">BOARD ACTIONS</th>
+                    <th style="padding: 8px 12px;">OVERTIME ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${eg.turnHistory.map(round => `
+                    <tr style="border-bottom: 1px solid var(--paper-rule);">
+                      <td style="padding: 8px 12px; font-weight: 700;">${round.turn}</td>
+                      <td style="padding: 8px 12px;">
+                        ${round.firedPlayerName ? `Dismissed: ${round.firedPlayerName}` : (round.candidatesForFiring?.length ? `Candidates: ${round.candidatesForFiring.join(', ')}` : 'No dismissal action')}
+                      </td>
+                      <td style="padding: 8px 12px;">
+                        ${round.overtimeActionsSummary?.length ? round.overtimeActionsSummary.join('<br>') : 'No overnight actions'}
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          ` : ''}
 
           <div style="display: flex; justify-content: center; margin-top: 18px;">
             <button class="btn-primary" id="btn-end-game-hall">
@@ -1577,14 +1649,22 @@ const App = {
     });
 
     // Game screen: Board Meeting Controls
-    document.getElementById('select-director-candidate')?.addEventListener('change', (e) => {
+    document.getElementById('select-director-candidate')?.addEventListener('change', async (e) => {
       const val = e.target.value ? parseInt(e.target.value, 10) : null;
       this.state.directorSelectedCandidate = val;
+      if (val) {
+        try {
+          await API.submitAction(this.state.roomId, 'director_select', [], val);
+          await this.refreshGameState();
+        } catch (err) {
+          this.showToast(err.message, true);
+        }
+      }
     });
 
     document.getElementById('btn-director-fire')?.addEventListener('click', () => {
       if (!this.state.directorSelectedCandidate) {
-        this.showToast('Please select a candidate to terminate from the dropdown.', true);
+        this.showToast(Locales.t('selectCandidatePrompt'), true);
         return;
       }
       this.openModal('confirmFire');
@@ -1635,7 +1715,12 @@ const App = {
     });
 
     // Game screen: End Game Return
-    document.getElementById('btn-end-game-hall')?.addEventListener('click', () => {
+    document.getElementById('btn-end-game-hall')?.addEventListener('click', async () => {
+      try {
+        await API.endParanoiaSession(this.state.roomId);
+      } catch (e) {
+        this.showToast(e.message, true);
+      }
       this.showHall();
     });
 

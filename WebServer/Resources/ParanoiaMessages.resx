@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter</value></resheader>
+  <data name="StatusActive" xml:space="preserve"><value>Active</value></data>
+  <data name="StatusDismissed" xml:space="preserve"><value>Dismissed</value></data>
+  <data name="StatusShortlisted" xml:space="preserve"><value>Shortlisted for Dismissal</value></data>
+  <data name="BoardPhaseTitle" xml:space="preserve"><value>Board Meeting</value></data>
+  <data name="BoardDirectiveDirector" xml:space="preserve"><value>Debate is open. Select a candidate from the shortlist, exercise Veto, or adjourn without dismissal.</value></data>
+  <data name="BoardDirectivePlayer" xml:space="preserve"><value>Floor is open for discussion. Awaiting the General Director's final dismissal ruling.</value></data>
+  <data name="ChatBoardroomLabel" xml:space="preserve"><value>Boardroom</value></data>
+  <data name="ChatSyndicateLabel" xml:space="preserve"><value>Syndicate Frequency</value></data>
+  <data name="ChatShareholderLabel" xml:space="preserve"><value>Shareholder Hotline</value></data>
+  <data name="ChatStartupLabel" xml:space="preserve"><value>Startup Channel</value></data>
+  <data name="ChatOutsourceLabel" xml:space="preserve"><value>Outsource Frequency</value></data>
+  <data name="ChatFiredLabel" xml:space="preserve"><value>Club of Former Colleagues</value></data>
+</root>

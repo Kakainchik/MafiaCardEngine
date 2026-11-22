@@ -61,7 +61,7 @@ namespace WebServer.Hubs
                     {
                         Presenter = LobbyHubConstants.ServerPresenter(context.Presenter.RoomId)
                     };
-                    await SendOtherCommand!.ExecuteAsync(result);
+                    await SendAllCommand!.ExecuteAsync(result);
                     break;
                 }
                 case WaitingRoomSeatsChangeContext wrscc:
@@ -71,7 +71,7 @@ namespace WebServer.Hubs
                     {
                         Presenter = LobbyHubConstants.ServerPresenter(context.Presenter.RoomId)
                     };
-                    await SendOtherCommand!.ExecuteAsync(result);
+                    await SendAllCommand!.ExecuteAsync(result);
                     break;
                 }
                 case KickPlayerContext kpc:

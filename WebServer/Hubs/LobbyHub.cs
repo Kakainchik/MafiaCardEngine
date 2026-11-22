@@ -278,13 +278,13 @@ namespace WebServer.Hubs
             }
         }
 
-        public async Task SubmitDirectorFire(int roomId)
+        public async Task SubmitDirectorFire(int roomId, ulong candidateId)
         {
             UserDTO user = UnboxClaims();
             var session = paranoiaGameRepository.GetGame(roomId);
             if (session != null)
             {
-                await session.HandleDirectorFireAsync(user.Id);
+                await session.HandleDirectorFireAsync(user.Id, candidateId);
             }
         }
 

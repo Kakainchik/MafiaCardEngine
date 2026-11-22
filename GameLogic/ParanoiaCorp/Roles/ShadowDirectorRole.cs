@@ -12,7 +12,7 @@ namespace GameLogic.ParanoiaCorp.Roles
     /// <summary>
     /// Shadow Director role. Belongs to <see cref="Team.SYNDICATE">Syndicate</see>.
     /// During overtime, he can select a target for recruitment into the Syndicate <see cref="InternRole">Intern</see> and <see cref="SecuritySpecialistRole">Security Specialist</see>.
-    /// Cannot be killed at night.
+    /// Cannot be compromised at night.
     /// Is Unique.
     /// </summary>
     [Unique]
