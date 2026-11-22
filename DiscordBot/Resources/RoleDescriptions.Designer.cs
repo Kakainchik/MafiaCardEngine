@@ -19,7 +19,7 @@ namespace DiscordBot.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RoleDescriptions {
@@ -190,7 +190,7 @@ namespace DiscordBot.Resources {
         ///   Looks up a localized string similar to During overtime, you can select two employees and force the first to use their job ability on the second (even if the first intended to skip a turn).
         ///The first target and the second target can be the same (the employee uses the skill on themselves).
         ///You can select yourself as the second target.
-        ///If there are multiple Masters of Compromising and the Political Consultant forces one of them to fire someone, more than one person can be fired during this shift (this Master acts outside of the Syndicate&apos;s random t [rest of string was truncated]&quot;;.
+        ///If there are multiple Masters of Compromising and the Political Consultant forces one of them to fire someone, more than one person can be fired during this shift (this Master acts outside of the Syndicate&apos;s rando [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PoliticalStrategist {
             get {
@@ -228,12 +228,11 @@ namespace DiscordBot.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to During overtime, you can select a target for recruitment into the Syndicate. The transition occurs by morning.
-        ///If the target is an Intern, he becomes a Spy.
+        ///If the target is an Intern, he becomes a Master of Compromitation.
         ///If the target is a System Administrator, he becomes a Hacker.
         ///Other targets remain in their positions but receive an email notification about a tempting contract (recruitment attempt).
         ///He has a golden parachute: attempting to fabricate incriminating evidence during overtime will end in failure.
-        ///Cannot be recruited into the Startup.
-        ///Can communicate with  [rest of string was truncated]&quot;;.
+        ///Cannot be recruited into the Star [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ShadowDirector {
             get {

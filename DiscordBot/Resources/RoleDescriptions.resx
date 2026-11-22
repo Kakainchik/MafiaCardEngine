@@ -189,7 +189,7 @@ If the target is a Shadow Director or Startup Founder, the system displays them 
   </data>
   <data name="ShadowDirector" xml:space="preserve">
     <value>During overtime, you can select a target for recruitment into the Syndicate. The transition occurs by morning.
-If the target is an Intern, he becomes a Spy.
+If the target is an Intern, he becomes a Master of Compromitation.
 If the target is a System Administrator, he becomes a Hacker.
 Other targets remain in their positions but receive an email notification about a tempting contract (recruitment attempt).
 He has a golden parachute: attempting to fabricate incriminating evidence during overtime will end in failure.

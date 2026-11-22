@@ -76,7 +76,7 @@ namespace GameLogic.ParanoiaCorp.Model.Visitors
             {
                 if(target.IsAlive)
                 {
-                    target.Owner?.ChangeRole(new CultistRole());
+                    target.Owner?.ChangeRole(new EvangelistRole());
                 }
                 Success = true;
             }
