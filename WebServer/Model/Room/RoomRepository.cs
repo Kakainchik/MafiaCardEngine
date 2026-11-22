@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using WebServer.Shared.GameObjects;
 
 namespace WebServer.Model.Room
@@ -171,6 +171,34 @@ namespace WebServer.Model.Room
             {
                 rooms[roomId].Roles[role] = amount;
             }
+        }
+
+        public IReadOnlyDictionary<WebServer.Shared.ParanoiaCorp.GameObjects.RoleSignature, int> GetParanoiaRoles(int roomId)
+        {
+            return rooms[roomId].ParanoiaRoles.AsReadOnly();
+        }
+
+        public void SetParanoiaRole(int roomId, WebServer.Shared.ParanoiaCorp.GameObjects.RoleSignature role, int amount)
+        {
+            if(amount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount), "The amount of role cannot be less than zero.");
+            }
+
+            if(amount == 0)
+            {
+                rooms[roomId].ParanoiaRoles.Remove(role);
+            }
+            else
+            {
+                rooms[roomId].ParanoiaRoles[role] = amount;
+            }
+        }
+
+        public void ClearParanoiaRoles(int roomId)
+        {
+            rooms[roomId].ParanoiaRoles.Clear();
+            rooms[roomId].ParanoiaRoles[WebServer.Shared.ParanoiaCorp.GameObjects.RoleSignature.GENERAL_DIRECTOR] = 1;
         }
 
         public void SetMaxSeats(int roomId, int max)

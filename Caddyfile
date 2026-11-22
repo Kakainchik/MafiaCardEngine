@@ -1,0 +1,7 @@
+# Replace `your-domain.com` with your actual VPS domain or sub-domain:
+# Example: paranoia.mycompany.com {
+#
+:80 {
+    # Proxy all HTTP and WebSocket requests to the Paranoia Corp server
+    reverse_proxy paranoiacorp-server:8080
+}

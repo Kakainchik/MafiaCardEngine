@@ -1,4 +1,5 @@
-﻿using WebServer.Shared.GameObjects;
+using WebServer.Shared.GameObjects;
+using ParanoiaRoleSignature = WebServer.Shared.ParanoiaCorp.GameObjects.RoleSignature;
 
 namespace WebServer.Model.Room
 {
@@ -20,6 +21,9 @@ namespace WebServer.Model.Room
         void SetReadiness(int roomId, ulong playerId, bool value);
         IReadOnlyDictionary<RoleSignature, int> GetRoles(int roomId);
         void SetRole(int roomId, RoleSignature role, int amount);
+        IReadOnlyDictionary<ParanoiaRoleSignature, int> GetParanoiaRoles(int roomId);
+        void SetParanoiaRole(int roomId, ParanoiaRoleSignature role, int amount);
+        void ClearParanoiaRoles(int roomId);
         void SetMaxSeats(int roomId, int max);
         void DeleteRoom(int roomId);
     }

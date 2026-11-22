@@ -1,0 +1,954 @@
+/* Paranoia Corp - Mid-Century Corporate Noir Stylesheet */
+
+:root {
+  /* Shell Colors */
+  --shell-charcoal-dark: #121518;
+  --shell-charcoal: #16191d;
+  --shell-charcoal-light: #20252b;
+  --shell-petrol-dark: #0a1419;
+  --shell-petrol: #0f1d24;
+  --shell-petrol-light: #162a34;
+  --shell-border: #29343c;
+  --shell-border-subtle: #1e272e;
+  --shell-text-muted: #8b99a4;
+  --shell-text-light: #d6dee4;
+
+  /* Document Surfaces (Warm Ivory & Ink) */
+  --paper-ivory-light: #fdfbf7;
+  --paper-ivory: #f7f4ec;
+  --paper-ivory-aged: #eee8db;
+  --paper-rule: #d5cbba;
+  --paper-rule-dark: #b8ac97;
+  --ink-black: #161a1d;
+  --ink-charcoal: #2b3237;
+  --ink-muted: #5e6b75;
+
+  /* Restrained Vermilion (Dismissals & Irreversible Decisions) */
+  --vermilion: #b91c1c;
+  --vermilion-dark: #881337;
+  --vermilion-light: #ef4444;
+  --vermilion-surface: #fff1f2;
+  --vermilion-border: #fecdd3;
+
+  /* Factions */
+  --faction-corp: #0d9488;       /* Teal */
+  --faction-syndicate: #b91c1c;  /* Brick Red */
+  --faction-startup: #4d7c0f;    /* Olive Green */
+  --faction-outsource: #b45309;  /* Ochre */
+  --faction-singles: #701a75;    /* Plum */
+
+  /* Typography */
+  --font-heading: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Spacing & Transitions */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --transition-fast: 0.15s ease-out;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--shell-charcoal-dark);
+  color: var(--shell-text-light);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus outline for accessibility */
+:focus-visible {
+  outline: 2px solid var(--paper-ivory);
+  outline-offset: 2px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--shell-charcoal);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--shell-border);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--shell-text-muted);
+}
+
+/* Main Application Shell */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(circle at 50% 15%, var(--shell-petrol) 0%, var(--shell-charcoal-dark) 100%);
+}
+
+/* Header */
+.portal-header {
+  height: 58px;
+  min-height: 58px;
+  background: var(--shell-petrol-dark);
+  border-bottom: 2px solid var(--shell-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  z-index: 20;
+}
+
+.portal-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.portal-seal {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--paper-ivory);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.portal-seal-icon {
+  width: 26px;
+  height: 26px;
+  background: var(--paper-ivory);
+  color: var(--shell-charcoal-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 13px;
+  border-radius: var(--radius-sm);
+}
+
+.portal-clearance-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--shell-charcoal-light);
+  color: var(--shell-text-muted);
+  border: 1px solid var(--shell-border);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Top Live Status Bar */
+.portal-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.status-badge-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--shell-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.status-value {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--paper-ivory);
+  letter-spacing: 0.06em;
+}
+
+.status-directive-box {
+  background: var(--shell-charcoal);
+  border: 1px solid var(--shell-border);
+  padding: 4px 12px;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.status-directive-text {
+  font-size: 11px;
+  color: #fef08a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Header Controls */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-utility {
+  background: var(--shell-charcoal);
+  border: 1px solid var(--shell-border);
+  color: var(--shell-text-light);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-utility:hover {
+  background: var(--shell-charcoal-light);
+  border-color: var(--paper-rule-dark);
+}
+
+.btn-lang {
+  font-weight: bold;
+}
+
+/* Main Layout View Container */
+.main-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 3-Column Desktop Grid */
+.game-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 340px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Side Column: Personnel Roster (Left) */
+.roster-column {
+  background: var(--shell-charcoal);
+  border-right: 2px solid var(--shell-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.column-header {
+  height: 42px;
+  background: var(--shell-petrol-dark);
+  border-bottom: 1px solid var(--shell-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.column-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--paper-ivory);
+  text-transform: uppercase;
+}
+
+.roster-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.roster-card {
+  background: var(--shell-charcoal-light);
+  border: 1px solid var(--shell-border);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  transition: border-color var(--transition-fast);
+}
+
+.roster-card.is-self {
+  border-left: 3px solid #38bdf8;
+}
+
+.roster-card.is-dismissed {
+  opacity: 0.6;
+  border-left: 3px solid var(--vermilion);
+  background: #191415;
+}
+
+.roster-card.is-candidate {
+  border: 1px dashed var(--vermilion);
+  background: #241416;
+}
+
+.roster-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.roster-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--paper-ivory);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.roster-badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-ready {
+  background: #14532d;
+  color: #86efac;
+}
+
+.badge-pending {
+  background: #713f12;
+  color: #fde047;
+}
+
+.badge-dismissed {
+  background: #7f1d1d;
+  color: #fca5a5;
+  font-weight: bold;
+}
+
+.roster-role-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.roster-faction-marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Center Column: Executive Workspace */
+.workspace-column {
+  background: radial-gradient(circle at 50% 20%, var(--shell-petrol) 0%, var(--shell-charcoal) 100%);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 24px 32px;
+  align-items: center;
+}
+
+.workspace-card {
+  width: 100%;
+  max-width: 780px;
+  background: var(--paper-ivory);
+  color: var(--ink-black);
+  border: 1px solid var(--paper-rule-dark);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+/* Authentic Paper Texture & Memo Elements */
+.paper-memo-header {
+  background: var(--paper-ivory-aged);
+  border-bottom: 2px solid var(--paper-rule-dark);
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.memo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.memo-dept {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-black);
+  text-transform: uppercase;
+}
+
+.memo-docket {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-muted);
+}
+
+.paper-memo-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Stamped Notices */
+.stamp {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 2px dashed;
+  display: inline-block;
+  transform: rotate(-2deg);
+}
+
+.stamp-vermilion {
+  color: var(--vermilion);
+  border-color: var(--vermilion);
+}
+
+.stamp-teal {
+  color: var(--faction-corp);
+  border-color: var(--faction-corp);
+}
+
+.stamp-ochre {
+  color: var(--faction-outsource);
+  border-color: var(--faction-outsource);
+}
+
+/* Overtime Action Panel */
+.action-box {
+  background: var(--paper-ivory-light);
+  border: 1px solid var(--paper-rule);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.selector-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selector-label {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-black);
+}
+
+.form-select, .form-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid var(--paper-rule-dark);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-black);
+  border-radius: var(--radius-sm);
+}
+
+.form-select:focus, .form-input:focus {
+  border-color: var(--shell-petrol);
+  outline: none;
+}
+
+.action-review-card {
+  background: #fdfbf7;
+  border-left: 3px solid var(--faction-corp);
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--ink-charcoal);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.action-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Primary Button Types */
+.btn-primary {
+  background: var(--shell-petrol);
+  color: var(--paper-ivory);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 1px solid var(--shell-border);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.btn-primary:hover {
+  background: var(--shell-petrol-light);
+}
+
+.btn-vermilion {
+  background: var(--vermilion);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 1px solid var(--vermilion-dark);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+.btn-vermilion:hover {
+  background: #991b1b;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink-black);
+  border: 1px solid var(--paper-rule-dark);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 9px 16px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+.btn-secondary:hover {
+  background: var(--paper-rule);
+}
+
+/* News Wire & Memoranda Items */
+.feed-item {
+  border-bottom: 1px solid var(--paper-rule);
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.feed-item:last-child {
+  border-bottom: none;
+}
+
+.feed-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feed-timestamp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-muted);
+}
+
+.feed-category {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: bold;
+  padding: 1px 4px;
+  background: #e2e8f0;
+  color: #334155;
+  border-radius: 2px;
+}
+
+.feed-message {
+  font-size: 13px;
+  color: var(--ink-charcoal);
+  line-height: 1.45;
+}
+
+/* Side Column: Scoped Communications & Reports (Right) */
+.comms-column {
+  background: var(--shell-charcoal);
+  border-left: 2px solid var(--shell-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.comms-tabs-bar {
+  display: flex;
+  background: var(--shell-petrol-dark);
+  border-bottom: 1px solid var(--shell-border);
+  overflow-x: auto;
+}
+
+.comms-tab {
+  padding: 10px 12px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--shell-text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+.comms-tab:hover {
+  color: var(--paper-ivory);
+}
+.comms-tab.active {
+  color: var(--paper-ivory);
+  border-bottom-color: var(--faction-corp);
+  background: var(--shell-charcoal);
+}
+
+.audience-header-label {
+  padding: 6px 12px;
+  background: var(--shell-charcoal-dark);
+  border-bottom: 1px solid var(--shell-border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--shell-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: 0.06em;
+}
+
+.chat-messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-message-bubble {
+  background: var(--shell-charcoal-light);
+  border: 1px solid var(--shell-border);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.chat-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-sender {
+  font-size: 11px;
+  font-weight: bold;
+  color: #94a3b8;
+}
+
+.chat-time {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--shell-text-muted);
+}
+
+.chat-text {
+  font-size: 12px;
+  color: var(--shell-text-light);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.chat-input-bar {
+  padding: 10px;
+  background: var(--shell-charcoal-dark);
+  border-top: 1px solid var(--shell-border);
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  background: var(--shell-charcoal);
+  border: 1px solid var(--shell-border);
+  color: var(--shell-text-light);
+  padding: 6px 10px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+}
+.chat-input:focus {
+  border-color: var(--paper-rule-dark);
+  outline: none;
+}
+
+.chat-send-btn {
+  background: var(--shell-petrol-light);
+  border: 1px solid var(--shell-border);
+  color: var(--paper-ivory);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+/* Role Dossier View */
+.dossier-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  background: var(--paper-ivory);
+  border: 1px solid var(--paper-rule-dark);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+.dossier-portrait-frame {
+  background: var(--shell-charcoal-dark);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid var(--paper-rule-dark);
+}
+
+.dossier-details {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--ink-black);
+}
+
+.dossier-title-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--ink-black);
+  padding-bottom: 6px;
+}
+
+.dossier-role-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dossier-faction-tag {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+}
+
+.dossier-section-header {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.dossier-text {
+  font-size: 13px;
+  color: var(--ink-charcoal);
+  line-height: 1.5;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 14, 18, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.modal-dialog {
+  background: var(--paper-ivory);
+  border: 2px solid var(--paper-rule-dark);
+  color: var(--ink-black);
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-dialog.modal-vermilion {
+  border-color: var(--vermilion);
+}
+
+.modal-header {
+  background: var(--paper-ivory-aged);
+  border-bottom: 2px solid var(--paper-rule-dark);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-footer {
+  background: var(--paper-ivory-aged);
+  border-top: 1px solid var(--paper-rule-dark);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Mobile Tabs Navigation */
+.mobile-nav-bar {
+  display: none;
+  height: 48px;
+  background: var(--shell-petrol-dark);
+  border-top: 1px solid var(--shell-border);
+}
+
+.mobile-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--shell-text-muted);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.mobile-tab-btn.active {
+  color: var(--paper-ivory);
+  background: var(--shell-charcoal);
+  border-top: 2px solid var(--faction-corp);
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 960px) {
+  .game-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .roster-column, .comms-column, .workspace-column {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .view-active-workspace .workspace-column {
+    display: flex;
+  }
+
+  .view-active-roster .roster-column {
+    display: flex;
+  }
+
+  .view-active-comms .comms-column {
+    display: flex;
+  }
+
+  .mobile-nav-bar {
+    display: flex;
+  }
+
+  .status-directive-box {
+    display: none;
+  }
+
+  .workspace-column {
+    padding: 14px;
+  }
+
+  .dossier-card {
+    grid-template-columns: 1fr;
+  }
+}

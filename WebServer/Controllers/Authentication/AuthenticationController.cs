@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Model.User;
 using WebServer.Services;
@@ -55,6 +55,40 @@ namespace WebServer.Controllers.Authentication
             SetTokenCookie(response.RefreshToken);
 
             return Ok(response);
+        }
+
+        [HttpPost("guest")]
+        public async Task<IActionResult> GuestLogin([FromBody] WebServer.Model.ParanoiaCorp.GuestLoginDTO? dto)
+        {
+            string baseName = string.IsNullOrWhiteSpace(dto?.Username) ? "Employee" : dto.Username.Trim();
+            string finalName = baseName;
+            string guestPassword = "ParanoiaCorpGuestPassword2026!";
+
+            int attempts = 0;
+            while (attempts < 10)
+            {
+                bool created = await userService.CreateUser(new CreateUserDTO(finalName, guestPassword));
+                if (created) break;
+                attempts++;
+                finalName = $"{baseName}_{Random.Shared.Next(100, 9999)}";
+            }
+
+            try
+            {
+                JwtDTO jwt = await tokenService.Authenticate(new AuthenticateUserDTO(finalName, guestPassword));
+                AuthenticationResponse response = new AuthenticationResponse(jwt.Id, jwt.Username, jwt.JwtToken, jwt.RefreshToken);
+                SetTokenCookie(response.RefreshToken);
+                return Ok(response);
+            }
+            catch
+            {
+                finalName = $"{baseName}_{Random.Shared.Next(10000, 99999)}";
+                await userService.CreateUser(new CreateUserDTO(finalName, guestPassword));
+                JwtDTO jwt = await tokenService.Authenticate(new AuthenticateUserDTO(finalName, guestPassword));
+                AuthenticationResponse response = new AuthenticationResponse(jwt.Id, jwt.Username, jwt.JwtToken, jwt.RefreshToken);
+                SetTokenCookie(response.RefreshToken);
+                return Ok(response);
+            }
         }
 
         [HttpPost("refresh_token")]

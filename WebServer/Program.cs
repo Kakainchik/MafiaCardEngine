@@ -1,55 +1,50 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Npgsql;
-using System.Diagnostics;
 using System.Text;
 using WebServer.Hubs;
 using WebServer.Model;
 using WebServer.Model.Game;
+using WebServer.Model.ParanoiaCorp;
 using WebServer.Model.Room;
 using WebServer.Model.User;
 using WebServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Configure JWT
+// Configure JWT
 IConfigurationSection jwtSection = builder.Configuration.GetSection("Jwt");
-JwtSettings? jwtSettings = jwtSection.Get<JwtSettings>();
-string? jwtSecret = builder.Configuration["UserAuth:JwtSecret"];
-
-if(jwtSettings is not null
-    && jwtSecret is not null)
+JwtSettings jwtSettings = jwtSection.Get<JwtSettings>() ?? new JwtSettings
 {
-    jwtSettings.Secret = jwtSecret;
-    builder.Services.Configure<JwtSettings>(jwt =>
-    {
-        jwt.Secret = jwtSecret;
-        jwt.Issuer = jwtSettings.Issuer;
-        jwt.Audience = jwtSettings.Audience;
-        jwt.RefreshTokenTTL = jwtSettings.RefreshTokenTTL;
-    });
-}
-else
+    Issuer = "MafiaCardOSDebug",
+    Audience = "MafiaCardClientDebug",
+    RefreshTokenTTL = 7
+};
+
+string jwtSecret = builder.Configuration["UserAuth:JwtSecret"]
+    ?? builder.Configuration["Jwt:Secret"]
+    ?? Environment.GetEnvironmentVariable("JWT_SECRET")
+    ?? "ParanoiaCorpSecureMidCenturyNoirJwtSecretKey2026!#";
+
+jwtSettings.Secret = jwtSecret;
+builder.Services.Configure<JwtSettings>(jwt =>
 {
-    Console.Error.WriteLine($"[jwtSettings]: {jwtSettings}");
-    throw new NullReferenceException("JWT Secret is not installed!");
-}
+    jwt.Secret = jwtSecret;
+    jwt.Issuer = jwtSettings.Issuer;
+    jwt.Audience = jwtSettings.Audience;
+    jwt.RefreshTokenTTL = jwtSettings.RefreshTokenTTL;
+});
 
-// Add services to the container.
-
-//Logging
+// Logging
 builder.Services.AddLogging(log =>
 {
     log.AddDebug();
     log.AddConsole();
 });
 
-//Authentication
+// Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -57,9 +52,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = jwtSection["Issuer"],
+            ValidIssuer = jwtSettings.Issuer,
             ValidateAudience = true,
-            ValidAudience = jwtSection["Audience"],
+            ValidAudience = jwtSettings.Audience,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = ssk,
             ValidateLifetime = true
@@ -70,28 +65,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             OnMessageReceived = delegate (MessageReceivedContext context)
             {
                 StringValues accessToken = context.Request.Query["accessToken"];
-
-                //If the request is for hubs
                 PathString path = context.HttpContext.Request.Path;
-                if(!string.IsNullOrEmpty(accessToken) &&
-                    path.StartsWithSegments("/hub"))
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hub"))
                 {
-                    //Read the token out of the query string
                     context.Token = accessToken;
                 }
-
                 return Task.CompletedTask;
             }
         };
     });
 builder.Services.AddAuthorization();
 
-//Exception handler
+// Exception handler
 builder.Services.AddExceptionHandler(options =>
 {
     options.ExceptionHandler = async delegate (HttpContext context)
     {
-        switch(context.Features.Get<IExceptionHandlerPathFeature>()?.Error)
+        switch (context.Features.Get<IExceptionHandlerPathFeature>()?.Error)
         {
             case BadHttpRequestException ex:
                 context.Response.StatusCode = ex.StatusCode;
@@ -110,17 +100,29 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Configure DB Context
-//var sqlBuilder = new NpgsqlConnectionStringBuilder(builder.Configuration["UserAuth:DefaultConnection"]);
-var sqlBuilder = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("DefaultConnection"));
+// Configure DB Context with dynamic provider selection: SQLite, PostgreSQL, or SQL Server
+string? defaultConn = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? Environment.GetEnvironmentVariable("DATABASE_URL")
+    ?? builder.Configuration["UserAuth:DefaultConnection"];
 
-//builder.Services.AddDbContext<AuthContext>(options => options.UseNpgsql(sqlBuilder.ConnectionString));
-builder.Services.AddDbContext<AuthContext>(options => options.UseSqlServer(sqlBuilder.ConnectionString));
+if (string.IsNullOrEmpty(defaultConn) || defaultConn.Contains(".db") || defaultConn.StartsWith("Data Source=", StringComparison.OrdinalIgnoreCase))
+{
+    string sqliteConn = string.IsNullOrEmpty(defaultConn) ? "Data Source=paranoiacorp.db" : defaultConn;
+    builder.Services.AddDbContext<AuthContext>(options => options.UseSqlite(sqliteConn));
+}
+else if (defaultConn.Contains("Port=") || defaultConn.Contains("Host=") || defaultConn.Contains("Username=") || defaultConn.StartsWith("postgres", StringComparison.OrdinalIgnoreCase))
+{
+    builder.Services.AddDbContext<AuthContext>(options => options.UseNpgsql(defaultConn));
+}
+else
+{
+    builder.Services.AddDbContext<AuthContext>(options => options.UseSqlServer(defaultConn));
+}
 
-//Configure SignalR
+// Configure SignalR
 builder.Services.AddSignalR();
 
-//Add custom services
+// Add custom services
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IJwtService, JwtService>();
@@ -132,26 +134,34 @@ builder.Services.AddSingleton<IGameRepository, GameRepository>();
 builder.Services.AddSingleton<IContextManager, ContextManager>();
 builder.Services.AddSingleton<RequestManager>();
 
+// Paranoia Corp services
+builder.Services.AddSingleton<IParanoiaGameRepository, ParanoiaGameRepository>();
+builder.Services.AddTransient<IParanoiaLobbyService, ParanoiaLobbyService>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if(app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-//Middlewares
-app.UseHttpsRedirection();
 app.UseExceptionHandler();
 app.UseRouting();
+
+// Serve Web UI static files
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<LobbyHub>("hub/lobby", options => options.CloseOnAuthenticationExpiration = false);
 
-app.Run();
+// Fallback to index.html for Single Page Application
+app.MapFallbackToFile("index.html");
 
-Console.WriteLine("[*] The app has ran successfully!");
+app.Run();
+Console.WriteLine("[*] Paranoia Corp Server is running.");
